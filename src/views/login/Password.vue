@@ -8,41 +8,13 @@
             <img src="@/assets/static/skd-logo.png" alt="" />
           </div>
           <a-form :model="form" @submit="handleSubmit" @submit.prevent>
-            <div class="">用户名</div>
+            <div class="">邮箱</div>
             <a-form-item>
-              <a-input v-model:value="form.username" placeholder="用户名">
+              <a-input v-model:value="form.email" placeholder="邮箱">
                 <template v-slot:prefix>
-                  <UserOutlined style="color: rgba(0, 0, 0, 0.25)" />
+                  <MailOutlined style="color: rgba(0, 0, 0, 0.25)" />
                 </template>
               </a-input>
-            </a-form-item>
-            <div class="">密码</div>
-            <a-form-item>
-              <a-input
-                v-model:value="form.password"
-                type="password"
-                placeholder="密码"
-              >
-                <template v-slot:prefix>
-                  <LockOutlined style="color: rgba(0, 0, 0, 0.25)" />
-                </template>
-              </a-input>
-            </a-form-item>
-            <div class="">验证码</div>
-            <a-form-item>
-              <div class="code-container">
-                <div class="code-input">
-                  <a-input v-model:value="form.code" placeholder="验证码">
-                    <template v-slot:prefix>
-                      <SafetyOutlined style="color: rgba(0, 0, 0, 0.25)" />
-                    </template>
-                  </a-input>
-                </div>
-                <div class="code-img">
-                  <img :src="codeImg" alt="" />
-                  <SyncOutlined @click="refreshCode()" />
-                </div>
-              </div>
             </a-form-item>
             <a-form-item>
               <div class="btn-container">
@@ -50,14 +22,10 @@
                   <a-button
                     type="primary"
                     html-type="submit"
-                    :disabled="form.username === '' || form.password === ''"
+                    :disabled="form.email === ''"
                   >
-                    登录
+                    下一步
                   </a-button>
-                </div>
-                <div class="btn-link" @click="goToRegister()">注册</div>
-                <div class="btn-link" @click="goToFindPassword()">
-                  忘记密码?
                 </div>
               </div>
             </a-form-item>
@@ -65,43 +33,26 @@
         </div>
       </a-col>
     </a-row>
-    <!-- <div class="login-container-tips">
-      基于vue{{ dependencies['vue'] }}
-      + ant-design-vue
-      {{ dependencies['ant-design-vue'] }}开发
-    </div> -->
   </div>
 </template>
 <script>
   import { dependencies, devDependencies } from '*/package.json'
   import { mapActions, mapGetters } from 'vuex'
-  import {
-    UserOutlined,
-    LockOutlined,
-    SafetyOutlined,
-    SyncOutlined,
-  } from '@ant-design/icons-vue'
+  import { MailOutlined } from '@ant-design/icons-vue'
 
   export default {
-    name: 'Login',
+    name: 'FindPassword',
     components: {
-      UserOutlined,
-      LockOutlined,
-      SafetyOutlined,
-      SyncOutlined,
+      MailOutlined,
     },
     data() {
       return {
         form: {
-          username: '',
-          password: '',
-          code: '',
-          uuid: '',
+          email: '',
         },
         redirect: undefined,
         dependencies: dependencies,
         devDependencies: devDependencies,
-        codeImg: '',
       }
     },
     computed: {
@@ -119,41 +70,29 @@
       },
     },
     mounted() {
-      this.form.username = 'admin'
-      this.form.password = 'admin123'
-      this.getAuthCode((res) => {
-        this.codeImg = 'data:image/gif;base64,' + res.img
-        this.form.uuid = res.uuid
-      })
-      /*  setTimeout(() => {
-        this.handleSubmit()
-      }, 3000) */
+      if (window.history && window.history.pushState) {
+        history.pushState(null, null, document.URL)
+        window.addEventListener('popstate', this.goBack, false)
+      }
+    },
+    unmounted() {
+      window.removeEventListener('popstate', this.goBack, false)
     },
     methods: {
       ...mapActions({
-        login: 'user/login',
-        getAuthCode: 'user/getAuthCode',
+        findPassWord: 'user/findPassWord',
       }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'
           ? '/'
           : this.redirect
       },
+      goBack() {
+        this.$router.go(-1)
+      },
       async handleSubmit() {
-        await this.login(this.form)
-        await this.$router.push(this.handleRoute())
-      },
-      refreshCode() {
-        this.getAuthCode((res) => {
-          this.codeImg = 'data:image/gif;base64,' + res.img
-          this.form.uuid = res.uuid
-        })
-      },
-      goToRegister() {
-        this.$router.push({ path: '/register' })
-      },
-      goToFindPassword() {
-        this.$router.push({ path: '/findPassword' })
+        await this.findPassWord(this.form)
+        this.$emit('')
       },
     },
   }
@@ -162,6 +101,7 @@
   .login-container {
     width: 100%;
     height: 100vh;
+    // background: url('~@/assets/login_images/login_background.png');
     background-size: cover;
     &-form {
       width: calc(100% - 40px);
@@ -227,17 +167,6 @@
           height: 32px;
           margin-right: 10px;
         }
-      }
-    }
-    .btn-container {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      .btn-link {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        text-decoration: underline;
-        cursor: pointer;
       }
     }
   }

@@ -4,7 +4,20 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/login',
-    component: () => import('@/views/login'),
+    name: 'login',
+    component: () => import('@/views/login/index'),
+    hidden: true,
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/login/register'),
+    hidden: true,
+  },
+  {
+    path: '/findPassword',
+    name: 'findPassword',
+    component: () => import('@/views/login/findPassword'),
     hidden: true,
   },
   {
