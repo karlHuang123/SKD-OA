@@ -149,7 +149,19 @@
         this.$router.go(-1)
       },
       async handleSubmit() {
-        await this.register(this.form)
+        await this.register({
+          userInfo: this.form,
+          callback: (res) => {
+            if (res.code === 200) {
+              this.$router.replace({
+                path: '/please-confirmed',
+                params: {
+                  info: `为了您的账号安全，请前往${this.form.email}进行验证`,
+                },
+              })
+            }
+          },
+        })
       },
       refreshCode() {
         this.getAuthCode((res) => {

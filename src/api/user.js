@@ -9,6 +9,28 @@ export async function login(data) {
   })
 }
 
+export async function register(data) {
+  return request({
+    url: '/register',
+    method: 'post',
+    data,
+  })
+}
+
+export async function confirmed(uuid) {
+  return request({
+    url: `/register/confirm/${uuid}`,
+    method: 'get',
+  })
+}
+
+export async function forgetPassword(email) {
+  return request({
+    url: `register/reset?email=${email}`,
+    method: 'post',
+  })
+}
+
 export async function getAuthCode() {
   return request({
     url: '/captchaImage',
@@ -45,13 +67,6 @@ export function getUserList(pageNum, pageSize) {
 export function logout() {
   return request({
     url: '/logout',
-    method: 'post',
-  })
-}
-
-export function register() {
-  return request({
-    url: '/register',
     method: 'post',
   })
 }

@@ -80,7 +80,7 @@
     },
     methods: {
       ...mapActions({
-        findPassWord: 'user/findPassWord',
+        forgetPassword: 'user/forgetPassword',
       }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'
@@ -91,8 +91,20 @@
         this.$router.go(-1)
       },
       async handleSubmit() {
-        await this.findPassWord(this.form)
-        this.$emit('')
+        await this.forgetPassword({
+          email: this.form.email,
+          callback: (res) => {
+            console.log(res)
+            if (res.code === 200) {
+              this.$router.push({
+                path: '/please-confirmed',
+                params: {
+                  info: `重置密码链接已发送，请前往${this.form.email}进行验证`,
+                },
+              })
+            }
+          },
+        })
       },
     },
   }

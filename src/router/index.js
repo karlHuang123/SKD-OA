@@ -15,9 +15,9 @@ export const constantRoutes = [
     hidden: true,
   },
   {
-    path: '/findPassword',
-    name: 'findPassword',
-    component: () => import('@/views/login/findPassword'),
+    path: '/find-password',
+    name: 'find-password',
+    component: () => import('@/views/login/Password'),
     hidden: true,
   },
   {
