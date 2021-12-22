@@ -14,9 +14,8 @@ import {
 
 router.beforeEach(async (to, from, next) => {
   let hasToken = store.getters['user/accessToken']
-
   if (!loginInterception) hasToken = true
-
+  console.log(to)
   if (hasToken) {
     if (to.path === '/login') {
       next({ path: '/' })

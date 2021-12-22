@@ -195,7 +195,7 @@
       text-align: center;
     }
     &-logo-container {
-      width: 322px;
+      // width: 322px;
       height: 84px;
       margin-bottom: 77px;
       img {

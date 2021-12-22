@@ -8,13 +8,49 @@
             <img src="@/assets/static/skd-logo.png" alt="" />
           </div>
           <a-form :model="form" @submit="handleSubmit" @submit.prevent>
+            <div class="">用户名</div>
+            <a-form-item>
+              <a-input v-model:value="form.username" placeholder="用户名">
+                <template v-slot:prefix>
+                  <UserOutlined style="color: rgba(0, 0, 0, 0.25)" />
+                </template>
+              </a-input>
+            </a-form-item>
             <div class="">邮箱</div>
             <a-form-item>
               <a-input v-model:value="form.email" placeholder="邮箱">
                 <template v-slot:prefix>
-                  <MailOutlined style="color: rgba(0, 0, 0, 0.25)" />
+                  <UserOutlined style="color: rgba(0, 0, 0, 0.25)" />
                 </template>
               </a-input>
+            </a-form-item>
+            <div class="">密码</div>
+            <a-form-item>
+              <a-input
+                v-model:value="form.password"
+                type="password"
+                placeholder="密码"
+              >
+                <template v-slot:prefix>
+                  <LockOutlined style="color: rgba(0, 0, 0, 0.25)" />
+                </template>
+              </a-input>
+            </a-form-item>
+            <div class="">验证码</div>
+            <a-form-item>
+              <div class="code-container">
+                <div class="code-input">
+                  <a-input v-model:value="form.code" placeholder="验证码">
+                    <template v-slot:prefix>
+                      <SafetyOutlined style="color: rgba(0, 0, 0, 0.25)" />
+                    </template>
+                  </a-input>
+                </div>
+                <div class="code-img">
+                  <img :src="codeImg" alt="" />
+                  <SyncOutlined @click="refreshCode()" />
+                </div>
+              </div>
             </a-form-item>
             <a-form-item>
               <div class="btn-container">
@@ -22,9 +58,13 @@
                   <a-button
                     type="primary"
                     html-type="submit"
-                    :disabled="form.email === ''"
+                    :disabled="
+                      form.username === '' ||
+                      form.password === '' ||
+                      form.email === ''
+                    "
                   >
-                    下一步
+                    重置
                   </a-button>
                 </div>
               </div>
@@ -38,20 +78,34 @@
 <script>
   import { dependencies, devDependencies } from '*/package.json'
   import { mapActions, mapGetters } from 'vuex'
-  import { MailOutlined } from '@ant-design/icons-vue'
+  import {
+    UserOutlined,
+    LockOutlined,
+    SafetyOutlined,
+    SyncOutlined,
+  } from '@ant-design/icons-vue'
 
   export default {
-    name: 'FindPassword',
+    name: 'Reset',
     components: {
-      MailOutlined,
+      UserOutlined,
+      LockOutlined,
+      SafetyOutlined,
+      SyncOutlined,
     },
     data() {
       return {
         form: {
+          username: '',
+          password: '',
           email: '',
+          code: '',
+          uuid: '',
         },
+        redirect: undefined,
         dependencies: dependencies,
         devDependencies: devDependencies,
+        codeImg: '',
       }
     },
     computed: {
@@ -60,7 +114,19 @@
         title: 'settings/title',
       }),
     },
+    watch: {
+      $route: {
+        handler(route) {
+          this.redirect = (route.query && route.query.redirect) || '/'
+        },
+        immediate: true,
+      },
+    },
     mounted() {
+      this.getAuthCode((res) => {
+        this.codeImg = 'data:image/gif;base64,' + res.img
+        this.form.uuid = res.uuid
+      })
       if (window.history && window.history.pushState) {
         history.pushState(null, null, document.URL)
         window.addEventListener('popstate', this.goBack, false)
@@ -71,14 +137,25 @@
     },
     methods: {
       ...mapActions({
-        findPassWord: 'user/findPassWord',
+        register: 'user/register',
+        getAuthCode: 'user/getAuthCode',
       }),
+      handleRoute() {
+        return this.redirect === '/404' || this.redirect === '/403'
+          ? '/'
+          : this.redirect
+      },
       goBack() {
         this.$router.go(-1)
       },
       async handleSubmit() {
-        await this.findPassWord(this.form)
-        this.$emit('')
+        await this.register(this.form)
+      },
+      refreshCode() {
+        this.getAuthCode((res) => {
+          this.codeImg = 'data:image/gif;base64,' + res.img
+          this.form.uuid = res.uuid
+        })
       },
     },
   }

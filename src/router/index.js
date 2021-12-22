@@ -15,9 +15,15 @@ export const constantRoutes = [
     hidden: true,
   },
   {
-    path: '/findPassword',
-    name: 'findPassword',
-    component: () => import('@/views/login/findPassword'),
+    path: '/reset',
+    name: 'reset',
+    component: () => import('@/views/login/reset'),
+    hidden: true,
+  },
+  {
+    path: '/password',
+    name: 'password',
+    component: () => import('@/views/login/Password'),
     hidden: true,
   },
   {

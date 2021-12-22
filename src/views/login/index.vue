@@ -55,10 +55,8 @@
                     登录
                   </a-button>
                 </div>
-                <div class="btn-link" @click="goToRegister()">注册</div>
-                <div class="btn-link" @click="goToFindPassword()">
-                  忘记密码?
-                </div>
+                <div class="btn-link" @click="goTo('/register')">注册</div>
+                <div class="btn-link" @click="goTo('/password')">忘记密码?</div>
               </div>
             </a-form-item>
           </a-form>
@@ -149,11 +147,8 @@
           this.form.uuid = res.uuid
         })
       },
-      goToRegister() {
-        this.$router.push({ path: '/register' })
-      },
-      goToFindPassword() {
-        this.$router.push({ path: '/findPassword' })
+      goTo(url) {
+        this.$router.push(url)
       },
     },
   }
@@ -191,7 +186,7 @@
       text-align: center;
     }
     &-logo-container {
-      width: 322px;
+      // width: 322px;
       height: 84px;
       margin-bottom: 77px;
       img {
