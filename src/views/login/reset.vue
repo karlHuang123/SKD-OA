@@ -8,49 +8,24 @@
             <img src="@/assets/static/skd-logo.png" alt="" />
           </div>
           <a-form :model="form" @submit="handleSubmit" @submit.prevent>
-            <div class="">用户名</div>
+            <div class="">新密码</div>
             <a-form-item>
-              <a-input v-model:value="form.username" placeholder="用户名">
-                <template v-slot:prefix>
-                  <UserOutlined style="color: rgba(0, 0, 0, 0.25)" />
-                </template>
-              </a-input>
-            </a-form-item>
-            <div class="">邮箱</div>
-            <a-form-item>
-              <a-input v-model:value="form.email" placeholder="邮箱">
-                <template v-slot:prefix>
-                  <UserOutlined style="color: rgba(0, 0, 0, 0.25)" />
-                </template>
-              </a-input>
-            </a-form-item>
-            <div class="">密码</div>
-            <a-form-item>
-              <a-input
-                v-model:value="form.password"
-                type="password"
-                placeholder="密码"
-              >
+              <a-input v-model:value="form.newPassword" placeholder="新密码">
                 <template v-slot:prefix>
                   <LockOutlined style="color: rgba(0, 0, 0, 0.25)" />
                 </template>
               </a-input>
             </a-form-item>
-            <div class="">验证码</div>
+            <div class="">确认密码</div>
             <a-form-item>
-              <div class="code-container">
-                <div class="code-input">
-                  <a-input v-model:value="form.code" placeholder="验证码">
-                    <template v-slot:prefix>
-                      <SafetyOutlined style="color: rgba(0, 0, 0, 0.25)" />
-                    </template>
-                  </a-input>
-                </div>
-                <div class="code-img">
-                  <img :src="codeImg" alt="" />
-                  <SyncOutlined @click="refreshCode()" />
-                </div>
-              </div>
+              <a-input
+                v-model:value="form.confirmPassword"
+                placeholder="确认密码"
+              >
+                <template v-slot:prefix>
+                  <LockOutlined style="color: rgba(0, 0, 0, 0.25)" />
+                </template>
+              </a-input>
             </a-form-item>
             <a-form-item>
               <div class="btn-container">
@@ -59,9 +34,7 @@
                     type="primary"
                     html-type="submit"
                     :disabled="
-                      form.username === '' ||
-                      form.password === '' ||
-                      form.email === ''
+                      form.newPassword === '' || form.confirmPassword === ''
                     "
                   >
                     重置
@@ -78,29 +51,18 @@
 <script>
   import { dependencies, devDependencies } from '*/package.json'
   import { mapActions, mapGetters } from 'vuex'
-  import {
-    UserOutlined,
-    LockOutlined,
-    SafetyOutlined,
-    SyncOutlined,
-  } from '@ant-design/icons-vue'
+  import { LockOutlined } from '@ant-design/icons-vue'
 
   export default {
     name: 'Reset',
     components: {
-      UserOutlined,
       LockOutlined,
-      SafetyOutlined,
-      SyncOutlined,
     },
     data() {
       return {
         form: {
-          username: '',
-          password: '',
-          email: '',
-          code: '',
-          uuid: '',
+          confirmPassword: '',
+          newPassword: '',
         },
         redirect: undefined,
         dependencies: dependencies,
@@ -137,8 +99,7 @@
     },
     methods: {
       ...mapActions({
-        register: 'user/register',
-        getAuthCode: 'user/getAuthCode',
+        resetPassword: 'user/resetPassword',
       }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'
@@ -149,13 +110,11 @@
         this.$router.go(-1)
       },
       async handleSubmit() {
-        await this.register(this.form)
-      },
-      refreshCode() {
-        this.getAuthCode((res) => {
-          this.codeImg = 'data:image/gif;base64,' + res.img
-          this.form.uuid = res.uuid
-        })
+        if (this.form.newPassword === this.form.confirmPassword) {
+          await this.resetPassword(this.form)
+        } else {
+          this.$message.error('密码不一致，请重新输入！')
+        }
       },
     },
   }

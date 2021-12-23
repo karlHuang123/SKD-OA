@@ -154,7 +154,7 @@
           callback: (res) => {
             if (res.code === 200) {
               this.$router.replace({
-                path: '/please-confirmed',
+                name: 'please-confirmed',
                 params: {
                   info: `为了您的账号安全，请前往${this.form.email}进行验证`,
                 },

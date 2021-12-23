@@ -8,6 +8,7 @@ import {
   register,
   confirmed,
   forgetPassword,
+  confirmedResetPassword,
   logout,
   getAuthCode,
   getUserList,
@@ -139,6 +140,14 @@ const actions = {
   // 忘记密码，申请重置
   async forgetPassword({ state }, body) {
     const res = await forgetPassword(body.email)
+    console.log(state.accessToken)
+    if (res) {
+      body.callback && body.callback(res)
+    }
+  },
+  // 重置密码
+  async confirmedResetPassword({ state }, body) {
+    const res = await confirmedResetPassword(body.code, body.password)
     console.log(state.accessToken)
     if (res) {
       body.callback && body.callback(res)

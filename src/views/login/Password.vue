@@ -82,8 +82,8 @@
           callback: (res) => {
             console.log(res)
             if (res.code === 200) {
-              this.$router.push({
-                path: '/please-confirmed',
+              this.$router.replace({
+                name: 'please-confirmed',
                 params: {
                   info: `重置密码链接已发送，请前往${this.form.email}进行验证`,
                 },

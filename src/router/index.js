@@ -21,9 +21,15 @@ export const constantRoutes = [
     hidden: true,
   },
   {
-    path: '/reset',
-    name: 'reset',
+    path: '/reset-password',
+    name: 'reset-password',
     component: () => import('@/views/login/reset'),
+    hidden: true,
+  },
+  {
+    path: '/please-confirmed',
+    name: 'please-confirmed',
+    component: () => import('@/views/login/please-confirmed'),
     hidden: true,
   },
   {

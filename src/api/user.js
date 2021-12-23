@@ -24,6 +24,13 @@ export async function confirmed(uuid) {
   })
 }
 
+export async function confirmedResetPassword(code, password) {
+  return request({
+    url: `/register/reset/finish/${code}?${password}`,
+    method: 'get',
+  })
+}
+
 export async function forgetPassword(email) {
   return request({
     url: `register/reset?email=${email}`,

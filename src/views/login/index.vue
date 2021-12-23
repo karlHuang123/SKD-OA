@@ -59,6 +59,7 @@
                 <div class="btn-link" @click="goTo('/find-password')">
                   忘记密码?
                 </div>
+                <!-- <div @click="testConfirm()">测试</div> -->
               </div>
             </a-form-item>
           </a-form>
@@ -157,6 +158,14 @@
       },
       goTo(url) {
         this.$router.push({ path: url })
+      },
+      testConfirm() {
+        this.$router.replace({
+          name: 'please-confirmed',
+          params: {
+            info: `为了您的账号安全，请前往${this.form.username}进行验证`,
+          },
+        })
       },
     },
   }
