@@ -8,7 +8,7 @@
             <img src="@/assets/static/skd-logo.png" alt="" />
           </div>
           <a-form :model="form" @submit="handleSubmit" @submit.prevent>
-            <div class="">新密码</div>
+            <div class="">请设置您的新密码</div>
             <a-form-item>
               <a-input v-model:value="form.newPassword" placeholder="新密码">
                 <template v-slot:prefix>
@@ -37,7 +37,7 @@
                       form.newPassword === '' || form.confirmPassword === ''
                     "
                   >
-                    重置
+                    下一步
                   </a-button>
                 </div>
               </div>
@@ -52,6 +52,7 @@
   import { dependencies, devDependencies } from '*/package.json'
   import { mapActions, mapGetters } from 'vuex'
   import { LockOutlined } from '@ant-design/icons-vue'
+  import { message } from 'ant-design-vue'
 
   export default {
     name: 'Reset',
@@ -68,6 +69,7 @@
         dependencies: dependencies,
         devDependencies: devDependencies,
         codeImg: '',
+        uuidForConfirmReset: '',
       }
     },
     computed: {
@@ -85,36 +87,46 @@
       },
     },
     mounted() {
-      this.getAuthCode((res) => {
-        this.codeImg = 'data:image/gif;base64,' + res.img
-        this.form.uuid = res.uuid
-      })
-      if (window.history && window.history.pushState) {
-        history.pushState(null, null, document.URL)
-        window.addEventListener('popstate', this.goBack, false)
+      const uuidForConfirm = this.$route.query.uuid
+      if (uuidForConfirm && uuidForConfirm !== '') {
+        // TO DO 处理邮箱点击进入的情况
+        this.uuidForConfirmReset = uuidForConfirm
+        this.initConfirmedRegister(uuidForConfirm)
       }
-    },
-    unmounted() {
-      window.removeEventListener('popstate', this.goBack, false)
     },
     methods: {
       ...mapActions({
         resetPassword: 'user/resetPassword',
+        confirmedResetPassword: 'user/confirmedResetPassword',
       }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'
           ? '/'
           : this.redirect
       },
-      goBack() {
-        this.$router.go(-1)
-      },
       async handleSubmit() {
         if (this.form.newPassword === this.form.confirmPassword) {
-          await this.resetPassword(this.form)
+          await this.resetPassword({
+            uuid: this.uuidForConfirmReset,
+            password: this.form.newPassword,
+            callback: (res) => {
+              if (res) {
+                this.$router.push({ path: '/login' })
+              }
+            },
+          })
         } else {
-          this.$message.error('密码不一致，请重新输入！')
+          message.error('密码不一致，请重新输入！')
         }
+      },
+      initConfirmedResetPassword(uuid) {
+        this.confirmedResetPassword({
+          uuid: uuid,
+          callback: (res) => {
+            console.log(res)
+            message.success('请输入并确认新密码。')
+          },
+        })
       },
     },
   }

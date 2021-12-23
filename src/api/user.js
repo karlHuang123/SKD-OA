@@ -17,16 +17,23 @@ export async function register(data) {
   })
 }
 
-export async function confirmed(uuid) {
+export async function confirmedRegister(uuid) {
   return request({
     url: `/register/confirm/${uuid}`,
     method: 'get',
   })
 }
 
-export async function confirmedResetPassword(code, password) {
+export async function resetPassword(uuid, password) {
   return request({
-    url: `/register/reset/finish/${code}?${password}`,
+    url: `/register/reset/finish/${uuid}?password=${password}`,
+    method: 'get',
+  })
+}
+
+export async function confirmedResetPassword(uuid) {
+  return request({
+    url: `/register/reset/confirm/${uuid}`,
     method: 'get',
   })
 }

@@ -61,7 +61,8 @@
                     :disabled="
                       form.username === '' ||
                       form.password === '' ||
-                      form.email === ''
+                      form.email === '' ||
+                      form.code === ''
                     "
                   >
                     注册

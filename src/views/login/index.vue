@@ -50,7 +50,11 @@
                   <a-button
                     type="primary"
                     html-type="submit"
-                    :disabled="form.username === '' || form.password === ''"
+                    :disabled="
+                      form.username === '' ||
+                      form.password === '' ||
+                      form.code === ''
+                    "
                   >
                     登录
                   </a-button>
@@ -82,6 +86,7 @@
     SafetyOutlined,
     SyncOutlined,
   } from '@ant-design/icons-vue'
+  import { message } from 'ant-design-vue'
 
   export default {
     name: 'Login',
@@ -126,10 +131,10 @@
         this.codeImg = 'data:image/gif;base64,' + res.img
         this.form.uuid = res.uuid
       })
-      const uuid = decodeURIComponent(this.$route.query.uuid)
-      if (uuid && uuid !== '') {
+      const uuidForConfirm = this.$route.query.uuid
+      if (uuidForConfirm && uuidForConfirm !== '') {
         // TO DO 处理邮箱点击进入的情况
-        console.log(uuid)
+        this.initConfirmedRegister(uuidForConfirm)
       }
       /*  setTimeout(() => {
         this.handleSubmit()
@@ -139,7 +144,7 @@
       ...mapActions({
         login: 'user/login',
         getAuthCode: 'user/getAuthCode',
-        confirmed: 'user/confirmed',
+        confirmedRegister: 'user/confirmedRegister',
       }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'
@@ -158,6 +163,15 @@
       },
       goTo(url) {
         this.$router.push({ path: url })
+      },
+      initConfirmedRegister(uuid) {
+        this.confirmedRegister({
+          uuid: uuid,
+          callback: (res) => {
+            console.log(res)
+            message.success('注册成功，请输入用户名和密码登录。')
+          },
+        })
       },
       testConfirm() {
         this.$router.replace({
