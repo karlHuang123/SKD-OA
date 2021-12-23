@@ -114,7 +114,6 @@
         pageNum: 1,
         pageSize: 10,
         callback: (res) => {
-          console.log(res)
           this.userListJson = JSON.stringify(res)
         },
       })

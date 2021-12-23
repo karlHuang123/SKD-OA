@@ -56,7 +56,9 @@
                   </a-button>
                 </div>
                 <div class="btn-link" @click="goTo('/register')">注册</div>
-                <div class="btn-link" @click="goTo('/password')">忘记密码?</div>
+                <div class="btn-link" @click="goTo('/find-password')">
+                  忘记密码?
+                </div>
               </div>
             </a-form-item>
           </a-form>
@@ -123,6 +125,11 @@
         this.codeImg = 'data:image/gif;base64,' + res.img
         this.form.uuid = res.uuid
       })
+      const uuid = decodeURIComponent(this.$route.query.uuid)
+      if (uuid && uuid !== '') {
+        // TO DO 处理邮箱点击进入的情况
+        console.log(uuid)
+      }
       /*  setTimeout(() => {
         this.handleSubmit()
       }, 3000) */
@@ -131,6 +138,7 @@
       ...mapActions({
         login: 'user/login',
         getAuthCode: 'user/getAuthCode',
+        confirmed: 'user/confirmed',
       }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'
@@ -148,7 +156,7 @@
         })
       },
       goTo(url) {
-        this.$router.push(url)
+        this.$router.push({ path: url })
       },
     },
   }

@@ -71,14 +71,26 @@
     },
     methods: {
       ...mapActions({
-        findPassWord: 'user/findPassWord',
+        forgetPassword: 'user/forgetPassword',
       }),
       goBack() {
         this.$router.go(-1)
       },
       async handleSubmit() {
-        await this.findPassWord(this.form)
-        this.$emit('')
+        await this.forgetPassword({
+          email: this.form.email,
+          callback: (res) => {
+            console.log(res)
+            if (res.code === 200) {
+              this.$router.push({
+                path: '/please-confirmed',
+                params: {
+                  info: `重置密码链接已发送，请前往${this.form.email}进行验证`,
+                },
+              })
+            }
+          },
+        })
       },
     },
   }

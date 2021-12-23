@@ -5,6 +5,9 @@
 import {
   getUserInfo,
   login,
+  register,
+  confirmed,
+  forgetPassword,
   logout,
   getAuthCode,
   getUserList,
@@ -109,11 +112,36 @@ const actions = {
       message.error(`登录接口异常，未正确返回${tokenName}...`)
     }
   },
+  // 获取验证码接口
   async getAuthCode({ commit }, callback) {
     const res = await getAuthCode()
     if (res) {
       commit('setAuthCode', res.uuid)
       callback(res)
+    }
+  },
+  // 注册接口
+  async register({ commit }, body) {
+    const res = await register(body.userInfo)
+    if (res) {
+      commit('setAuthCode', res.uuid)
+      body.callback && body.callback(res)
+    }
+  },
+  // 确认注册邮箱链接，注册成功
+  async confirmed({ state }, body) {
+    const res = await confirmed(body.uuid)
+    console.log(state.accessToken)
+    if (res) {
+      body.callback && body.callback(res)
+    }
+  },
+  // 忘记密码，申请重置
+  async forgetPassword({ state }, body) {
+    const res = await forgetPassword(body.email)
+    console.log(state.accessToken)
+    if (res) {
+      body.callback && body.callback(res)
     }
   },
   /**

@@ -37,8 +37,8 @@ const setting = {
   routesWhiteList: [
     '/login',
     '/register',
-    '/password',
-    '/reset',
+    '/find-password',
+    'reset-password',
     '/callback',
     '/404',
     '/403',
