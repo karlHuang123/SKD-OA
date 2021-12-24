@@ -13,7 +13,6 @@ import {
   getAuthCode,
   getUserList,
 } from '@/api/user'
-// import { login, logout, getAuthCode, getUserList } from '@/api/user'
 import {
   getAccessToken,
   removeAccessToken,
@@ -94,6 +93,7 @@ const actions = {
     sessionStorage.setItem('token', res.token)
     if (res.token) {
       commit('setAccessToken', res.token)
+      commit('setUsername', userInfo.username)
       const hour = new Date().getHours()
       const thisTime =
         hour < 8
@@ -178,20 +178,19 @@ const actions = {
   },
   async getUserInfoMock({ commit, dispatch }) {
     const data = {
-      roles: ['admin', 'editor'],
-      ability: ['READ'],
-      username: 'test',
+      roles: ['TEACHER'],
+      ability: ['READ', 'EDIT', 'WRITE'],
       'avatar|1': [
         'https://i.gtimg.cn/club/item/face/img/2/15922_100.gif',
         'https://i.gtimg.cn/club/item/face/img/8/15918_100.gif',
       ],
     }
-    let { username, avatar, roles, ability } = data
-    if (username && roles && Array.isArray(roles)) {
+    let { avatar, roles, ability } = data
+    if (roles && Array.isArray(roles)) {
       dispatch('acl/setRole', roles, { root: true })
       if (ability && ability.length > 0)
         dispatch('acl/setAbility', ability, { root: true })
-      commit('setUsername', username)
+      // commit('setUsername', username)
       commit('setAvatar', avatar)
     } else {
       message.error('用户信息接口异常')

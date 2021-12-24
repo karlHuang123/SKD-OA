@@ -85,6 +85,8 @@
     SyncOutlined,
   } from '@ant-design/icons-vue'
 
+  import { message } from 'ant-design-vue'
+
   export default {
     name: 'Register',
     components: {
@@ -159,6 +161,8 @@
                   info: `为了您的账号安全，请前往${this.form.email}进行验证`,
                 },
               })
+            } else {
+              message.error(res.msg)
             }
           },
         })

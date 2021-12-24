@@ -54,6 +54,7 @@ export const asyncRoutes = [
       title: '首页',
       icon: 'home-4-line',
       affix: true,
+      permission: ['TEACHER', 'MANAGER'],
     },
     children: [
       {
@@ -64,6 +65,7 @@ export const asyncRoutes = [
           title: '首页',
           icon: 'home-4-line',
           affix: true,
+          permission: ['TEACHER', 'MANAGER'],
         },
       },
     ],
@@ -76,6 +78,7 @@ export const asyncRoutes = [
     meta: {
       title: '组件',
       icon: 'apps-line',
+      permission: ['TEACHER', 'MANAGER'],
     },
     children: [
       {
@@ -85,6 +88,7 @@ export const asyncRoutes = [
         meta: {
           title: '表格',
           icon: 'table-2',
+          permission: ['MANAGER'],
         },
       },
       {
@@ -94,6 +98,7 @@ export const asyncRoutes = [
         meta: {
           title: '图标',
           icon: 'remixicon-line',
+          permission: ['TEACHER', 'MANAGER'],
         },
       },
     ],
@@ -105,6 +110,7 @@ export const asyncRoutes = [
     meta: {
       title: '动态路由测试',
       icon: 'test-tube-line',
+      permission: ['TEACHER', 'MANAGER'],
     },
     children: [
       {
@@ -114,6 +120,7 @@ export const asyncRoutes = [
         meta: {
           title: '动态路由测试',
           icon: 'test-tube-line',
+          permission: ['TEACHER', 'MANAGER'],
         },
       },
     ],
@@ -126,6 +133,7 @@ export const asyncRoutes = [
     meta: {
       title: '错误页',
       icon: 'error-warning-line',
+      permission: ['TEACHER', 'MANAGER'],
     },
     children: [
       {
@@ -135,6 +143,7 @@ export const asyncRoutes = [
         meta: {
           title: '403',
           icon: 'error-warning-line',
+          permission: ['TEACHER', 'MANAGER'],
         },
       },
       {
@@ -144,6 +153,7 @@ export const asyncRoutes = [
         meta: {
           title: '404',
           icon: 'error-warning-line',
+          permission: ['MANAGER'],
         },
       },
     ],

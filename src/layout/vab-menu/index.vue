@@ -1,7 +1,7 @@
 <template>
   <component
     :is="menuComponent"
-    v-if="!item.hidden"
+    v-if="!item.hidden && checkPermission(item.meta)"
     :item="item"
     :route-children="routeChildren"
   >
@@ -10,6 +10,7 @@
         v-for="route in item.children"
         :key="route.path"
         :item="route"
+        :rolePermission="rolePermission"
       ></vab-menu>
     </template>
   </component>
@@ -25,6 +26,9 @@
       item: {
         type: Object,
         required: true,
+      },
+      rolePermission: {
+        type: Object,
       },
     },
     data() {
@@ -49,6 +53,17 @@
       handleChildren(children = []) {
         if (children === null) return []
         return children.filter((item) => item.hidden !== true)
+      },
+      // 检测用户是否拥有资格看到该路由
+      checkPermission(meta) {
+        let hasPermission = true
+        if (meta && meta.permission && this.rolePermission) {
+          const hasIndex = meta.permission.indexOf(this.rolePermission[0])
+          if (hasIndex === -1) {
+            hasPermission = false
+          }
+        }
+        return hasPermission
       },
     },
   }

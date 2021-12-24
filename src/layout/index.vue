@@ -21,7 +21,12 @@
         v-model:selectedKeys="selectedKeys"
         v-model:openKeys="openKeys"
       >
-        <vab-menu v-for="route in routes" :key="route.path" :item="route" />
+        <vab-menu
+          v-for="route in routes"
+          :key="route.path"
+          :item="route"
+          :rolePermission="rolePermission"
+        />
       </a-menu>
     </a-layout-sider>
     <a-layout
@@ -60,6 +65,7 @@
   import VabContent from './vab-content'
   import { mapActions, mapGetters } from 'vuex'
   import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
+  import store from '@/store'
 
   export default {
     components: {
@@ -75,6 +81,7 @@
       return {
         selectedKeys: [],
         openKeys: [],
+        rolePermission: null,
       }
     },
     computed: {
@@ -109,6 +116,7 @@
     },
     mounted() {
       this.handleLayouts()
+      this.rolePermission = store.getters['acl/role']
     },
     methods: {
       ...mapActions({
