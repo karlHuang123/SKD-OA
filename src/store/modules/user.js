@@ -6,8 +6,9 @@ import {
   getUserInfo,
   login,
   register,
-  confirmed,
+  confirmedRegister,
   forgetPassword,
+  resetPassword,
   confirmedResetPassword,
   logout,
   getAuthCode,
@@ -130,8 +131,8 @@ const actions = {
     }
   },
   // 确认注册邮箱链接，注册成功
-  async confirmed({ state }, body) {
-    const res = await confirmed(body.uuid)
+  async confirmedRegister({ state }, body) {
+    const res = await confirmedRegister(body.uuid)
     console.log(state.accessToken)
     if (res) {
       body.callback && body.callback(res)
@@ -146,8 +147,16 @@ const actions = {
     }
   },
   // 重置密码
+  async resetPassword({ state }, body) {
+    const res = await resetPassword(body.uuid, body.password)
+    console.log(state.accessToken)
+    if (res) {
+      body.callback && body.callback(res)
+    }
+  },
+  // 确认重置密码
   async confirmedResetPassword({ state }, body) {
-    const res = await confirmedResetPassword(body.code, body.password)
+    const res = confirmedResetPassword(body.uuid)
     console.log(state.accessToken)
     if (res) {
       body.callback && body.callback(res)
