@@ -126,6 +126,28 @@ export const asyncRoutes = [
     ],
   },
   {
+    path: '/user-manager',
+    component: Layout,
+    redirect: '/user-manager/user-manager',
+    meta: {
+      title: '用户管理',
+      icon: 'test-tube-line',
+      permission: ['TEACHER', 'MANAGER'],
+    },
+    children: [
+      {
+        path: 'user-manager',
+        name: 'User-Manager',
+        component: () => import('@/views/user-manager'),
+        meta: {
+          title: '用户管理',
+          icon: 'user-3-line',
+          permission: ['MANAGER'],
+        },
+      },
+    ],
+  },
+  {
     path: '/error',
     name: 'Error',
     component: Layout,
