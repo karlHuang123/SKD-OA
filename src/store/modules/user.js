@@ -6,6 +6,7 @@ import {
   getUserInfo,
   login,
   register,
+  applyRegister,
   confirmedRegister,
   forgetPassword,
   resetPassword,
@@ -94,7 +95,7 @@ const actions = {
     sessionStorage.setItem('token', res.token)
     if (res.token) {
       commit('setAccessToken', res.token)
-      commit('setUsername', userInfo.username)
+      sessionStorage.setItem('username', userInfo.username)
       const hour = new Date().getHours()
       const thisTime =
         hour < 8
@@ -127,6 +128,14 @@ const actions = {
     const res = await register(body.userInfo)
     if (res) {
       commit('setAuthCode', res.uuid)
+      body.callback && body.callback(res)
+    }
+  },
+  // 外部邮箱注册申请接口
+  async applyRegister({ state }, body) {
+    const res = await applyRegister(body.email)
+    if (res) {
+      console.log(state.accessToken)
       body.callback && body.callback(res)
     }
   },
@@ -189,17 +198,18 @@ const actions = {
     const data = {
       roles: ['TEACHER'],
       ability: ['READ', 'EDIT', 'WRITE'],
+      username: sessionStorage.getItem('username'),
       'avatar|1': [
         'https://i.gtimg.cn/club/item/face/img/2/15922_100.gif',
         'https://i.gtimg.cn/club/item/face/img/8/15918_100.gif',
       ],
     }
-    let { avatar, roles, ability } = data
+    let { username, avatar, roles, ability } = data
     if (roles && Array.isArray(roles)) {
       dispatch('acl/setRole', roles, { root: true })
       if (ability && ability.length > 0)
         dispatch('acl/setAbility', ability, { root: true })
-      // commit('setUsername', username)
+      commit('setUsername', username)
       commit('setAvatar', avatar)
     } else {
       message.error('用户信息接口异常')

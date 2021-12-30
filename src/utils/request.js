@@ -9,7 +9,7 @@ import {
 } from '@/config'
 import store from '@/store'
 import qs from 'qs'
-import router from '@/router'
+// import router from '@/router'
 import { isArray } from '@/utils/validate'
 import { message } from 'ant-design-vue'
 
@@ -27,8 +27,9 @@ const handleCode = (code, msg) => {
       message.error(msg || '登录失效')
       store.dispatch('user/resetAll').catch(() => {})
       break
+    // 没有401的页面，暂时绕过这个跳转
     case 403:
-      router.push({ path: '/401' }).catch(() => {})
+      console.log('请求无权限')
       break
     default:
       message.error(msg || `后端接口${code}异常`)

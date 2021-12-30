@@ -125,8 +125,10 @@
       },
     },
     mounted() {
-      this.form.username = 'admin'
-      this.form.password = 'admin123'
+      this.form.username = sessionStorage.getItem('username')
+        ? sessionStorage.getItem('username')
+        : ''
+      // this.form.password = 'admin123'
       this.getAuthCode((res) => {
         this.codeImg = 'data:image/gif;base64,' + res.img
         this.form.uuid = res.uuid

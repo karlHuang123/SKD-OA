@@ -17,6 +17,14 @@ export async function register(data) {
   })
 }
 
+// 注册外部邮箱申请，待改动
+export async function applyRegister(email) {
+  return request({
+    url: `/register/outer/applay?email=${email}`,
+    method: 'post',
+  })
+}
+
 export async function confirmedRegister(uuid) {
   return request({
     url: `/register/confirm/${uuid}`,

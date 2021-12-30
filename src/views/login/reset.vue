@@ -10,7 +10,11 @@
           <a-form :model="form" @submit="handleSubmit" @submit.prevent>
             <div class="">请设置您的新密码</div>
             <a-form-item>
-              <a-input v-model:value="form.newPassword" placeholder="新密码">
+              <a-input
+                type="password"
+                v-model:value="form.newPassword"
+                placeholder="新密码"
+              >
                 <template v-slot:prefix>
                   <LockOutlined style="color: rgba(0, 0, 0, 0.25)" />
                 </template>
@@ -21,6 +25,7 @@
               <a-input
                 v-model:value="form.confirmPassword"
                 placeholder="确认密码"
+                type="password"
               >
                 <template v-slot:prefix>
                   <LockOutlined style="color: rgba(0, 0, 0, 0.25)" />
@@ -91,7 +96,7 @@
       if (uuidForConfirm && uuidForConfirm !== '') {
         // TO DO 处理邮箱点击进入的情况
         this.uuidForConfirmReset = uuidForConfirm
-        this.initConfirmedRegister(uuidForConfirm)
+        this.initConfirmedResetPassword(uuidForConfirm)
       }
     },
     methods: {

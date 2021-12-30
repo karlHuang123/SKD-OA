@@ -21,10 +21,15 @@
     methods: {
       ...mapActions({
         getPositionList: 'position/getPositionList',
+        getPositionDetail: 'position/getPositionDetail',
       }),
       searchPosition(positionId) {
-        // TO DO
-        console.log(positionId)
+        this.getPositionDetail({
+          positionId: positionId,
+          callback: (res) => {
+            console.log(res)
+          },
+        })
       },
     },
     mounted() {
