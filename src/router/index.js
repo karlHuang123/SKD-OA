@@ -130,8 +130,8 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/user-manager/user-manager',
     meta: {
-      title: '用户管理',
-      icon: 'test-tube-line',
+      title: '员工管理',
+      icon: 'group-line',
       permission: ['TEACHER', 'MANAGER'],
     },
     children: [
@@ -140,8 +140,8 @@ export const asyncRoutes = [
         name: 'User-Manager',
         component: () => import('@/views/user-manager'),
         meta: {
-          title: '用户管理',
-          icon: 'user-3-line',
+          title: '员工管理',
+          icon: 'group-line',
           permission: ['MANAGER'],
         },
       },

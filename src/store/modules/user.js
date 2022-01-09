@@ -196,7 +196,7 @@ const actions = {
   },
   async getUserInfoMock({ commit, dispatch }) {
     const data = {
-      roles: ['TEACHER'],
+      roles: ['ALL'],
       ability: ['READ', 'EDIT', 'WRITE'],
       username: sessionStorage.getItem('username'),
       'avatar|1': [

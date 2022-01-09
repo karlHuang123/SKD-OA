@@ -59,7 +59,7 @@
         let hasPermission = true
         if (meta && meta.permission && this.rolePermission) {
           const hasIndex = meta.permission.indexOf(this.rolePermission[0])
-          if (hasIndex === -1) {
+          if (hasIndex === -1 && this.rolePermission[0] !== 'ALL') {
             hasPermission = false
           }
         }
