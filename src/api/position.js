@@ -13,3 +13,12 @@ export async function getPositionDetail(positionId) {
     method: 'get',
   })
 }
+
+export async function getStaffList(listPara) {
+  return request({
+    url: `/system/user/getList?pageNum=${listPara.pageNum}&pageSize=${
+      listPara.pageSize
+    }&searchVal=${listPara.searchVal ? listPara.searchVal : ''}`,
+    method: 'get',
+  })
+}

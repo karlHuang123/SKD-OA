@@ -21,7 +21,35 @@
           </a-button>
         </div>
       </div>
-      <a-table :columns="columns" :data="listData"></a-table>
+      <a-table
+        :columns="columns"
+        :pagination="pagination"
+        @change="handleStaffListChange"
+        :row-key="
+          (r) => {
+            return r.userId
+          }
+        "
+        :data-source="staffListJson"
+      >
+        <template #operation="{ record }">
+          <div class="editable-row-operations">
+            <span class="edit">
+              <a-button type="primary" @click="() => editStaff(record.userId)">
+                编辑
+              </a-button>
+            </span>
+            <span>
+              <a-popconfirm
+                title="确定删除该员工吗？"
+                @confirm="() => deleteStaff(record.userId)"
+              >
+                <a-button type="danger">删除</a-button>
+              </a-popconfirm>
+            </span>
+          </div>
+        </template>
+      </a-table>
     </div>
     <a-modal
       @cancel="closeAddUser"
@@ -60,10 +88,14 @@
     name: 'UserManager',
     data() {
       return {
-        positionListJson: null,
-        listData: [],
+        staffListJson: null,
         showAddUserModal: false,
         modalTitle: '',
+        listPara: {
+          pageNum: 1,
+          pageSize: 10,
+          searchVal: '',
+        },
         form: {
           userEmail: '',
           department: '',
@@ -72,53 +104,41 @@
         },
         campus: allInformation.campus,
         userCampus: '请选择',
-        columns: [
-          {
-            title: '用户名',
-            dataIndex: 'name',
-            key: 'name',
-            filters: [],
-          },
-          {
-            title: '部门',
-            dataIndex: 'department',
-            key: 'department',
-          },
-          {
-            title: '职位',
-            dataIndex: 'position',
-            key: 'position',
-            filters: [],
-          },
-          {
-            title: '员工类型',
-            dataIndex: 'positionType',
-            key: 'positionType',
-          },
-          {
-            title: '所属分公司',
-            dataIndex: 'subCompany',
-            key: 'subCompany',
-          },
-          {
-            title: '操作',
-            dataIndex: 'operation',
-            key: 'operation',
-            scopedSlots: { customRender: 'operation' },
-          },
-        ],
+        columns: allInformation.columns,
+        pagination: {
+          total: 0,
+          current: 1,
+          pageSize: 10,
+          showSizeChanger: true,
+          showQuickJumper: true,
+          pageSizeOptions: ['10', '20', '50', '100'],
+          showTotal: (total) => `共${total}条`,
+        },
       }
     },
     methods: {
       ...mapActions({
-        getPositionList: 'position/getPositionList',
+        // getPositionList: 'position/getPositionList',
         getPositionDetail: 'position/getPositionDetail',
+        getStaffList: 'position/getStaffList',
       }),
       searchPosition(positionId) {
         this.getPositionDetail({
           positionId: positionId,
           callback: (res) => {
             console.log(res)
+          },
+        })
+      },
+      getStaffListFuc(pageNum = 1, pageSize = 10, searchVal = '') {
+        this.listPara.pageNum = pageNum
+        this.listPara.pageSize = pageSize
+        this.listPara.searchVal = searchVal
+        this.getStaffList({
+          listPara: this.listPara,
+          callback: (res) => {
+            this.staffListJson = res.rows
+            this.pagination.total = res.total
           },
         })
       },
@@ -132,18 +152,21 @@
       submitUser() {
         this.closeAddUser()
       },
+      editStaff(staffId) {
+        console.log(staffId)
+      },
+      handleStaffListChange({ current, pageSize }) {
+        this.getStaffListFuc(current, pageSize)
+      },
+      deleteStaff(staffId) {
+        console.log(staffId)
+      },
       closeAddUser() {
         this.showAddUserModal = false
       },
     },
     mounted() {
-      this.getPositionList((res) => {
-        if (res.code === 200 && res.data) {
-          this.positionListJson = JSON.stringify(res.data)
-        } else {
-          this.$message.error('请求错误，请稍后重试或联系维护认员。')
-        }
-      })
+      this.getStaffListFuc()
     },
   }
 </script>
@@ -159,9 +182,11 @@
         margin-left: auto;
       }
     }
-
     .table-operations > button {
       margin-right: 8px;
+    }
+    .edit {
+      margin-right: 20px;
     }
   }
   .version-information {

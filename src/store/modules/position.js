@@ -3,17 +3,23 @@
  * @description 获取岗位信息
  */
 
-import { getPositionList, getPositionDetail } from '@/api/position'
+import {
+  getPositionList,
+  getPositionDetail,
+  getStaffList,
+} from '@/api/position'
 import { message } from 'ant-design-vue'
 
 const state = () => ({
   positionList: null,
   positionDetail: null,
+  staffList: null,
 })
 
 const getters = {
   positionList: (state) => state.positionList,
   positionDetail: (state) => state.positionDetail,
+  staffList: (state) => state.staffList,
 }
 
 const mutations = {
@@ -34,6 +40,15 @@ const mutations = {
    */
   setPositionDetail(state, positionDetail) {
     state.positionDetail = positionDetail
+  },
+  /**
+   * @author KarlHuang
+   * @description 设置岗位详情
+   * @param {*} state
+   * @param {*} positionDetail
+   */
+  setStaffList(state, staffList) {
+    state.staffList = staffList
   },
 }
 
@@ -56,6 +71,16 @@ const actions = {
       body.callback && body.callback(res)
     } else {
       message.error('请求错误，请稍后重试')
+    }
+  },
+  // 获取改账号下所有员工的列表
+  async getStaffList({ commit }, body) {
+    const res = await getStaffList(body.listPara)
+    if (res && res.code === 200) {
+      commit('setStaffList', res.rows)
+      body.callback && body.callback(res)
+    } else {
+      body.errCallback && body.errCallback(res)
     }
   },
 }

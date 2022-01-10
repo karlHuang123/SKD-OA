@@ -25,6 +25,41 @@ const allInformation = {
       value: '青岛',
     },
   ],
+  columns: [
+    {
+      title: '用户名',
+      dataIndex: 'userName',
+      key: 'userName',
+      filters: [],
+    },
+    {
+      title: '部门',
+      dataIndex: 'deptName',
+      key: 'deptName',
+    },
+    {
+      title: '职位',
+      dataIndex: 'postName',
+      key: 'postName',
+      filters: [],
+    },
+    {
+      title: '员工类型',
+      dataIndex: 'userType',
+      key: 'userType',
+    },
+    {
+      title: '所属分公司',
+      dataIndex: 'parentDeptName',
+      key: 'parentDeptName',
+    },
+    {
+      title: '操作',
+      dataIndex: 'operation',
+      key: 'operation',
+      slots: { customRender: 'operation' },
+    },
+  ],
 }
 
 export { allInformation }
