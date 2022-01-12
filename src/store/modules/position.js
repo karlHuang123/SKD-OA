@@ -7,6 +7,7 @@ import {
   getPositionList,
   getPositionDetail,
   getStaffList,
+  deleteStaff,
 } from '@/api/position'
 import { message } from 'ant-design-vue'
 
@@ -83,5 +84,15 @@ const actions = {
       body.errCallback && body.errCallback(res)
     }
   },
+  // 删除员工
+  async deleteStaff({ state }, body) {
+    const res = await deleteStaff(body.staffId)
+    if (res && res.code === 200) {
+      console.log(state.positionList)
+      body.callback && body.callback(res)
+    } else {
+      body.errCallback && body.errCallback(res)
+    }
+  }
 }
 export default { state, getters, mutations, actions }

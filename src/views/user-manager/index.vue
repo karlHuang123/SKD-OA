@@ -11,6 +11,7 @@
             placeholder="请输入关键字"
             style="width: 200px"
             @search="searchPosition"
+            v-model:value="listPara.searchVal"
           />
           <a-button
             style="margin-left: 30px"
@@ -122,13 +123,12 @@
         getPositionDetail: 'position/getPositionDetail',
         getStaffList: 'position/getStaffList',
       }),
-      searchPosition(positionId) {
-        this.getPositionDetail({
-          positionId: positionId,
-          callback: (res) => {
-            console.log(res)
-          },
-        })
+      searchPosition() {
+        this.getStaffListFuc(
+          this.listPara.pageNum,
+          this.listPara.pageSize,
+          this.listPara.searchVal,
+        )
       },
       getStaffListFuc(pageNum = 1, pageSize = 10, searchVal = '') {
         this.listPara.pageNum = pageNum
@@ -156,7 +156,9 @@
         console.log(staffId)
       },
       handleStaffListChange({ current, pageSize }) {
-        this.getStaffListFuc(current, pageSize)
+        this.pagination.current = current
+        this.pagination.pageSize = pageSize
+        this.getStaffListFuc(current, pageSize, this.listPara.searchVal)
       },
       deleteStaff(staffId) {
         console.log(staffId)

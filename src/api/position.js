@@ -22,3 +22,10 @@ export async function getStaffList(listPara) {
     method: 'get',
   })
 }
+
+export async function deleteStaff(staffId) {
+  return request({
+    url: ,
+    method: '',
+  })
+}
