@@ -1,30 +1,68 @@
 const allInformation = {
-  campus: [
-    {
-      key: 'Beijing',
-      value: '北京',
-    },
-    {
-      key: 'Shanghai',
-      value: '上海',
-    },
-    {
-      key: 'Dalian',
-      value: '大连',
-    },
-    {
-      key: 'Chengdu',
-      value: '成都',
-    },
-    {
-      key: 'Guangzhou',
-      value: '广州',
-    },
-    {
-      key: 'Qingdao',
-      value: '青岛',
-    },
-  ],
+  positions: {
+    教学部: [
+      {
+        key: '2DManager',
+        value: '2D科系老师',
+      },
+      {
+        key: '3DManager',
+        value: '3D科系主管',
+      },
+      {
+        key: 'interactionManager',
+        value: '交互工业科系主管',
+      },
+      {
+        key: 'fashionManager',
+        value: '时尚科系主管',
+      },
+      {
+        key: 'threeStarTeacher',
+        value: '三星导师',
+      },
+      {
+        key: 'fourStarTeacher',
+        value: '四星导师',
+      },
+      {
+        key: 'fiveStarTeacher',
+        value: '五星导师',
+      },
+      {
+        key: 'softwareTeacher',
+        value: '软件导师',
+      },
+      {
+        key: 'supportTeacher',
+        value: '助教导师',
+      },
+      {
+        key: 'partTimeTeacher',
+        value: '兼职导师',
+      },
+    ],
+    教务部: [
+      {
+        key: 'educationalManager',
+        value: '教务主管',
+      },
+      {
+        key: 'educationalTeacher',
+        value: '教务老师',
+      },
+    ],
+    申请部: [
+      {
+        key: 'applyManager',
+        value: '申请主管',
+      },
+      {
+        key: 'documentTeacher',
+        value: '文书导师',
+      },
+    ],
+  },
   columns: [
     {
       title: '用户名',

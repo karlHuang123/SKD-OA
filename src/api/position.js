@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export async function getPositionList() {
+export async function getDeptTree() {
   return request({
-    url: '/system/position/treeList',
+    url: '/system/dept/getDeptTree',
     method: 'get',
   })
 }

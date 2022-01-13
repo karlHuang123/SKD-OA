@@ -4,7 +4,7 @@
  */
 
 import {
-  getPositionList,
+  getDeptTree,
   getPositionDetail,
   getStaffList,
   deleteStaff,
@@ -30,8 +30,8 @@ const mutations = {
    * @param {*} state
    * @param {*} positionList
    */
-  setPositionList(state, positionList) {
-    state.positionList = positionList
+  setDeptTree(state, deptTree) {
+    state.DeptTree = deptTree
   },
   /**
    * @author KarlHuang
@@ -55,10 +55,10 @@ const mutations = {
 
 const actions = {
   // 获取岗位层级列表
-  async getPositionList({ commit }, callback) {
-    const res = await getPositionList()
+  async getDeptTree({ commit }, callback) {
+    const res = await getDeptTree()
     if (res) {
-      commit('setPositionList', res)
+      commit('setDeptTree', res)
       callback && callback(res)
     } else {
       message.error('请求错误，请稍后重试')
@@ -93,6 +93,6 @@ const actions = {
     } else {
       body.errCallback && body.errCallback(res)
     }
-  }
+  },
 }
 export default { state, getters, mutations, actions }
