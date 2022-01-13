@@ -25,7 +25,7 @@ export async function getStaffList(listPara) {
 
 export async function deleteStaff(staffId) {
   return request({
-    url: ,
-    method: '',
+    url: `/system/user/delete/${staffId}`,
+    method: 'delete',
   })
 }
