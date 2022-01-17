@@ -8,6 +8,8 @@ import {
   getPositionDetail,
   getStaffList,
   deleteStaff,
+  getStaffAbilitiesList,
+  getListByDeptName,
 } from '@/api/position'
 import { message } from 'ant-design-vue'
 
@@ -15,12 +17,14 @@ const state = () => ({
   positionList: null,
   positionDetail: null,
   staffList: null,
+  abilitiesList: null,
 })
 
 const getters = {
   positionList: (state) => state.positionList,
   positionDetail: (state) => state.positionDetail,
   staffList: (state) => state.staffList,
+  abilitiesList: (state) => state.abilitiesList,
 }
 
 const mutations = {
@@ -50,6 +54,15 @@ const mutations = {
    */
   setStaffList(state, staffList) {
     state.staffList = staffList
+  },
+  /**
+   * @author KarlHuang
+   * @description 设置功能列表
+   * @param {*} state
+   * @param {*} positionDetail
+   */
+  setAbilitiesList(state, abilitiesList) {
+    state.abilitiesList = abilitiesList
   },
 }
 
@@ -92,6 +105,25 @@ const actions = {
       body.callback && body.callback(res)
     } else {
       body.errCallback && body.errCallback(res)
+    }
+  },
+  // 获取功能列表
+  async getStaffAbilitiesList({ commit }, body) {
+    const res = await getStaffAbilitiesList()
+    if (res && res.code === 200) {
+      commit('setAbilitiesList', res)
+      body.callback && body.callback(res)
+    } else {
+      body.errCallback && body.errCallback(res)
+    }
+  },
+  // 通过部门获取岗位列表
+  async getListByDeptName({ state }, body) {
+    const res = await getListByDeptName(body.deptName)
+    if (res && res.code === 200) {
+      body.callback && body.callback(res)
+    } else {
+      console.log(state.staffList)
     }
   },
 }

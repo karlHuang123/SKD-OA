@@ -98,6 +98,9 @@
           {{ item.label }}
         </a-select-option>
       </a-select>
+      <div class="user-deparment section">
+        <span>用户权限</span>
+      </div>
     </a-modal>
   </div>
 </template>
@@ -138,6 +141,8 @@
           pageSizeOptions: ['10', '20', '50', '100'],
           showTotal: (total) => `共${total}条`,
         },
+        staffAbilitiesList: null,
+        positions: [], // 根据部门查找到的岗位信息
       }
     },
     methods: {
@@ -146,6 +151,8 @@
         getPositionDetail: 'position/getPositionDetail',
         getStaffList: 'position/getStaffList',
         deleteStaff: 'position/deleteStaff',
+        getStaffAbilitiesList: 'position/getStaffAbilitiesList',
+        getListByDeptName: 'position/getListByDeptName',
       }),
       searchPosition() {
         this.getStaffListFuc(
@@ -166,15 +173,43 @@
           },
         })
       },
+      getStaffAbilitiesListFuc() {
+        this.getStaffAbilitiesList({
+          callback: (res) => {
+            console.log(res)
+            this.staffAbilitiesList = res.data
+          },
+        })
+      },
+      getListByDeptNameFuc(deptName) {
+        this.getListByDeptName({
+          deptName: deptName,
+          callback: (res) => {
+            console.log('positions', res)
+            res.rows.forEach((item) => {
+              const ele = {
+                label: item.postName,
+                value: item.postCode,
+              }
+              this.positions.push(ele)
+            })
+          },
+        })
+      },
       handleCampusChange(value) {
         this.userCampus = value
         this.deparment = this.campus.find((item) => {
           return item.id === this.userCampus
         }).children
-        console.log(this.deparment)
       },
       handleDeparmentChange(value) {
-        this.userDeparment = value
+        this.userDeparment = this.deparment.find((item) => {
+          return item.id === value
+        }).label
+        this.getListByDeptNameFuc(this.userDeparment)
+      },
+      handlePositionChange(value) {
+        this.form.position = value
       },
       openAddUser(title) {
         this.modalTitle = title
@@ -212,6 +247,7 @@
         this.userCampus = '请选择'
         this.userDeparment = '请选择'
         this.userPosition = '请选择'
+        this.positions = []
         if (this.campus) {
           this.deparment = null
         }
@@ -219,8 +255,14 @@
     },
     mounted() {
       this.getStaffListFuc()
+      const abilitiesList = this.$store.getters['position/abilitiesList']
+      if (abilitiesList) {
+        this.staffAbilitiesList = this.abilitiesList
+      } else {
+        this.getStaffAbilitiesListFuc()
+      }
+      console.log(this.staffAbilitiesList)
       this.getDeptTree((res) => {
-        console.log(res)
         if (res.data[0].label === 'SKD科技') {
           this.campus = res.data[0].children
         } else {

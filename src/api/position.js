@@ -29,3 +29,17 @@ export async function deleteStaff(staffId) {
     method: 'delete',
   })
 }
+
+export async function getStaffAbilitiesList() {
+  return request({
+    url: '/system/menu/getAbilities',
+    method: 'get',
+  })
+}
+
+export async function getListByDeptName(deptName) {
+  return request({
+    url: `/system/post/getListByDeptName?deptName=${deptName}`,
+    method: 'get',
+  })
+}

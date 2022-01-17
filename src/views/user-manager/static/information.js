@@ -63,6 +63,26 @@ const allInformation = {
       },
     ],
   },
+  abilities: {
+    教务: [
+      {
+        key: 'stdDocManaging',
+        value: '学生档案管理',
+      },
+      {
+        key: 'stdLessonArranging',
+        value: '学生排课',
+      },
+      {
+        key: 'stdCostListPre',
+        value: '学生费用结算清单-预估',
+      },
+      {
+        key: 'stdCostList',
+        value: '学生费用结算清单',
+      },
+    ],
+  },
   columns: [
     {
       title: '用户名',
