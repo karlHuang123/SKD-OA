@@ -62,44 +62,51 @@
         <span>员工邮箱</span>
         <a-input placeholder="请输入员工邮箱" v-model="form.email" />
       </div>
-      <div class="user-campus section" v-if="campus">
-        <div>校区</div>
-        <a-select
-          :default-value="userCampus"
-          style="width: 120px"
-          @change="handleCampusChange"
-        >
-          <a-select-option v-for="item in campus" :key="item.id">
-            {{ item.label }}
-          </a-select-option>
-        </a-select>
-      </div>
-      <div class="user-deparment section">
-        <span>所属部门</span>
-      </div>
-      <a-select
-        :default-value="userDeparment"
-        style="width: 120px"
-        @change="handleDeparmentChange"
-      >
-        <a-select-option v-for="item in deparment" :key="item.id">
-          {{ item.label }}
-        </a-select-option>
-      </a-select>
-      <div class="user-deparment section">
-        <span>岗位</span>
-      </div>
-      <a-select
-        :default-value="userPosition"
-        style="width: 120px"
-        @change="handlePositionChange"
-      >
-        <a-select-option v-for="item in positions" :key="item.id">
-          {{ item.label }}
-        </a-select-option>
-      </a-select>
-      <div class="user-deparment section">
-        <span>用户权限</span>
+      <div class="feature-container">
+        <div class="left-feature">
+          <div class="user-campus section" v-if="campus">
+            <div>校区</div>
+            <a-select
+              :default-value="userCampus"
+              style="width: 120px"
+              @change="handleCampusChange"
+            >
+              <a-select-option v-for="item in campus" :key="item.id">
+                {{ item.label }}
+              </a-select-option>
+            </a-select>
+          </div>
+          <div class="user-deparment section">
+            <span>所属部门</span>
+          </div>
+          <a-select
+            :default-value="userDeparment"
+            style="width: 120px"
+            @change="handleDeparmentChange"
+          >
+            <a-select-option v-for="item in deparment" :key="item.id">
+              {{ item.label }}
+            </a-select-option>
+          </a-select>
+          <div class="user-deparment section">
+            <span>岗位</span>
+          </div>
+          <a-select
+            :default-value="userPosition"
+            style="width: 120px"
+            @change="handlePositionChange"
+          >
+            <a-select-option v-for="item in positions" :key="item.id">
+              {{ item.label }}
+            </a-select-option>
+          </a-select>
+        </div>
+        <div class="right-container">
+          <div class="user-deparment section">
+            <span>用户权限</span>
+            <div class="check-group"></div>
+          </div>
+        </div>
       </div>
     </a-modal>
   </div>
@@ -320,5 +327,9 @@
   }
   .section {
     margin: 10px auto;
+  }
+  .feature-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 </style>

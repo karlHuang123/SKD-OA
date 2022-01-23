@@ -82,6 +82,28 @@ const allInformation = {
         value: '学生费用结算清单',
       },
     ],
+    教务主管: [
+      {
+        key: 'allStdDocManaging',
+        value: '所有学生档案管理',
+      },
+      {
+        key: 'allStdLessonArranging',
+        value: '所有学生排课',
+      },
+      {
+        key: 'allStdCostListPre',
+        value: '所有学生费用结算清单-预估',
+      },
+      {
+        key: 'allStdCostList',
+        value: '所有学生费用结算清单',
+      },
+      {
+        key: 'allStdDocAssign',
+        value: '所有学生档案分配',
+      },
+    ],
   },
   columns: [
     {
