@@ -126,6 +126,39 @@ export const asyncRoutes = [
     ],
   },
   {
+    path: '/educational-info',
+    component: Layout,
+    redirect: '/educational-info/contract-input',
+    alwaysShow: false,
+    meta: {
+      title: '教务信息',
+      icon: 'information-line',
+      permission: ['EDUCATIONAL', 'MANAGER'],
+    },
+    children: [
+      {
+        path: 'contract-input',
+        name: 'ContractInput',
+        component: () => import('@/views/contract-input'),
+        meta: {
+          title: '合同信息录入',
+          icon: 'contacts-book-line',
+          permission: ['EDUCATIONAL', 'MANAGER'],
+        },
+      },
+      {
+        path: 'student-list',
+        name: 'StudentList',
+        component: () => import('@/views/student-list'),
+        meta: {
+          title: '学生信息列表',
+          icon: 'list-check',
+          permission: ['EDUCATIONAL', 'MANAGER'],
+        },
+      },
+    ],
+  },
+  {
     path: '/user-manager',
     component: Layout,
     redirect: '/user-manager/user-manager',

@@ -64,44 +64,44 @@ const allInformation = {
     ],
   },
   abilities: {
-    教务: [
+    教务老师: [
       {
-        key: 'stdDocManaging',
-        value: '学生档案管理',
+        value: 'stdDocManaging',
+        label: '学生档案管理',
       },
       {
-        key: 'stdLessonArranging',
-        value: '学生排课',
+        value: 'stdLessonArranging',
+        label: '学生排课',
       },
       {
-        key: 'stdCostListPre',
-        value: '学生费用结算清单-预估',
+        value: 'stdCostListPre',
+        label: '学生费用结算清单-预估',
       },
       {
-        key: 'stdCostList',
-        value: '学生费用结算清单',
+        value: 'stdCostList',
+        label: '学生费用结算清单',
       },
     ],
     教务主管: [
       {
-        key: 'allStdDocManaging',
-        value: '所有学生档案管理',
+        value: 'allStdDocManaging',
+        label: '所有学生档案管理',
       },
       {
-        key: 'allStdLessonArranging',
-        value: '所有学生排课',
+        value: 'allStdLessonArranging',
+        label: '所有学生排课',
       },
       {
-        key: 'allStdCostListPre',
-        value: '所有学生费用结算清单-预估',
+        value: 'allStdCostListPre',
+        label: '所有学生费用结算清单-预估',
       },
       {
-        key: 'allStdCostList',
-        value: '所有学生费用结算清单',
+        value: 'allStdCostList',
+        label: '所有学生费用结算清单',
       },
       {
-        key: 'allStdDocAssign',
-        value: '所有学生档案分配',
+        value: 'allStdDocAssign',
+        label: '所有学生档案分配',
       },
     ],
   },

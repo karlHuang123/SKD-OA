@@ -70,6 +70,7 @@
               :default-value="userCampus"
               style="width: 120px"
               @change="handleCampusChange"
+              v-if="showAddUserModal"
             >
               <a-select-option v-for="item in campus" :key="item.id">
                 {{ item.label }}
@@ -83,6 +84,7 @@
             :default-value="userDeparment"
             style="width: 120px"
             @change="handleDeparmentChange"
+            v-if="showAddUserModal"
           >
             <a-select-option v-for="item in deparment" :key="item.id">
               {{ item.label }}
@@ -95,6 +97,7 @@
             :default-value="userPosition"
             style="width: 120px"
             @change="handlePositionChange"
+            v-if="showAddUserModal"
           >
             <a-select-option v-for="item in positions" :key="item.id">
               {{ item.label }}
@@ -193,6 +196,7 @@
           deptName: deptName,
           callback: (res) => {
             console.log('positions', res)
+            this.positions = []
             res.rows.forEach((item) => {
               const ele = {
                 label: item.postName,
@@ -217,6 +221,7 @@
       },
       handlePositionChange(value) {
         this.form.position = value
+        console.log(allInformation.abilities)
       },
       openAddUser(title) {
         this.modalTitle = title
