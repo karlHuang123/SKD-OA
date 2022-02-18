@@ -5,7 +5,7 @@
       <div class="info-input">
         <div class="section">
           <span>学生姓名：</span>
-          <a-input v-model:value="studentInfo.name"></a-input>
+          <a-input v-model:value="studentInfo.studentName"></a-input>
         </div>
         <div class="section">
           <span>学生性别：</span>
@@ -263,7 +263,7 @@
         <a-upload-dragger
           name="file"
           :multiple="true"
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          :customRequest="uploadContract"
           @change="handleContractFileChange"
           accept=".pdf,.doc,.docx"
         >
@@ -286,12 +286,12 @@
     data() {
       return {
         studentInfo: {
-          name: null, // 学生姓名
+          studentName: null, // 学生姓名
           gender: '男', // 性别
           contactPhone: null, //联系电话
           wechatNum: null, // 微信号
           emrgencyContact: null, // 紧急联系人
-          pdoructType: null, // 产品类别
+          productType: null, // 产品类别
           productLevel: null, // 产品级别
           applyMajor: null, // 申请专业
           applyDegree: null, // 申请学历
@@ -304,6 +304,7 @@
           additionalProtocol: '是', // 补充协议
           studentStatus: '在读', // 学生状态
           schoolArea: null, // 学习校区
+          contractFilepath: null,
         },
         productLevelList: null,
         applyMajorList: inputInformation.applyMajorList,
@@ -318,13 +319,14 @@
     methods: {
       ...mapActions({
         addStudent: 'contract/addStudent',
+        uploadFile: 'contract/uploadFile',
       }),
       handleGenderChange(value) {
         this.studentInfo.gender = value
       },
       handleProductTypeChange(value) {
         this.studentInfo.productLevel = null
-        this.studentInfo.pdoructType = value
+        this.studentInfo.productType = value
         if (value === 'VIP') {
           this.productLevelList = inputInformation.productLevelListVIP
         } else {
@@ -332,6 +334,7 @@
         }
       },
       handleProductLevelChange(value) {
+        this.studentInfo.productLevel = value
         switch (value) {
           case '单作品集':
             this.projectsList = inputInformation.projectCombo.singleModule
@@ -384,6 +387,20 @@
       handleContractFileChange(e) {
         console.log(e)
       },
+      uploadContract(data) {
+        const formData = new FormData()
+        formData.append('file', data.file)
+        this.saveFile(formData)
+      },
+      saveFile(formData) {
+        this.uploadFile({
+          data: formData,
+          callback: (res) => {
+            this.studentInfo.contractFilepath = res.data
+            this.$message.success('合同文件上传成功！')
+          },
+        })
+      },
       submit() {
         let nullEles = []
         let nullNames = []
@@ -414,27 +431,27 @@
             applyMajor: this.studentInfo.applyMajor,
             applyEducation: this.studentInfo.applyDegree,
             applyMainCountry: this.studentInfo.mainCountry,
-            appluBakCountry: this.studentInfo.subCountry,
+            applyBakCountry: this.studentInfo.subCountry,
             admissionYear: this.studentInfo.enterYear,
             contractSignDate: this.studentInfo.contractSignTime,
             contractEndDate: this.studentInfo.contractEndTime,
-            advisorJoinContract: this.studentInfo.contractHandover,
+            advisorJoinContract: this.studentInfo.isContractHandover,
             contractAdditionalAgreement: this.studentInfo.additionalProtocol,
             deptId: this.studentInfo.schoolArea,
             status: this.studentInfo.studentStatus,
-            projects: [],
+            projects: this.projectsList,
+            contractFilepath: this.studentInfo.contractFilepath,
           }
           this.addStudent({
             data: para,
             callback: (res) => {
               if (res) {
-                console.log(res)
+                this.$message.success('合同信息录入成功！')
               } else {
                 this.$message.error('添加失败，请稍后重试。')
               }
             },
           })
-          console.log(para)
         }
       },
     },
