@@ -65,11 +65,11 @@
                 <a-input></a-input>
               </div>
             </template>
-            <a-button
+            <!-- <a-button
               @click="addProject('research', customerStudentInfo.studentId)"
             >
               添加项目
-            </a-button>
+            </a-button> -->
           </a-popconfirm>
         </div>
       </div>

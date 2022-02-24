@@ -181,6 +181,29 @@ export const asyncRoutes = [
     ],
   },
   {
+    path: '/general-info',
+    component: Layout,
+    redirect: '/educational-info/contract-input',
+    alwaysShow: false,
+    meta: {
+      title: '通用',
+      icon: 'lightbulb-flash-line',
+      permission: ['EDUCATIONAL', 'MANAGER'],
+    },
+    children: [
+      {
+        path: 'message-list',
+        name: 'MessageList',
+        component: () => import('@/views/message-list'),
+        meta: {
+          title: '消息列表',
+          icon: 'message-2-line',
+          permission: ['EDUCATIONAL', 'MANAGER'],
+        },
+      },
+    ],
+  },
+  {
     path: '/error',
     name: 'Error',
     component: Layout,

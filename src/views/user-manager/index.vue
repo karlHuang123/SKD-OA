@@ -62,6 +62,10 @@
         <span>员工邮箱</span>
         <a-input placeholder="请输入员工邮箱" v-model="form.email" />
       </div>
+      <div class="user-deparment section">
+        <span>老师姓名(中文)</span>
+        <a-input placeholder="请输入老师姓名" v-model="form.teacherName" />
+      </div>
       <div class="feature-container">
         <div class="left-feature">
           <div class="user-campus section" v-if="campus">
@@ -135,6 +139,7 @@
           department: '',
           position: '',
           userFeature: [],
+          teacherName: '',
         },
         campus: null,
         deparment: null,
