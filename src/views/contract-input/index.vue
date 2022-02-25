@@ -177,10 +177,12 @@
     </div>
     <div class="info-style">
       <h2>项目信息</h2>
+      <a-button @click="addProject" type="primary" v-if="this.projectsList">
+        添加项目
+      </a-button>
       <div class="project-list" v-if="this.projectsList">
         <div class="list-ele" v-if="this.projectsList.productMajor.length > 0">
           <h3>作品集专业课</h3>
-          <a-button @click="addProject('productMajor')">添加项目</a-button>
           <div class="list-ele-container">
             <div
               class="list-label"
@@ -193,7 +195,6 @@
         </div>
         <div class="list-ele" v-if="this.projectsList.research.length > 0">
           <h3>教研服务</h3>
-          <a-button @click="addProject('research')">添加项目</a-button>
           <div class="list-ele-container">
             <div
               class="list-label"
@@ -206,7 +207,6 @@
         </div>
         <div class="list-ele" v-if="this.projectsList.apply.length > 0">
           <h3>申请服务</h3>
-          <a-button @click="addProject('apply')">添加项目</a-button>
           <div class="list-ele-container">
             <div
               class="list-label"
@@ -219,7 +219,6 @@
         </div>
         <div class="list-ele" v-if="this.projectsList.upgrade.length > 0">
           <h3>学员升级服务</h3>
-          <a-button @click="addProject('upgrade')">添加项目</a-button>
           <div class="list-ele-container">
             <div
               class="list-label"
@@ -279,21 +278,41 @@
       </div>
     </div>
     <a-button type="primary" @click="submit">提交信息</a-button>
+    <a-modal
+      @cancel="closeAddProject"
+      :visible="showAddProject"
+      :title="'添加服务项目'"
+      @ok="confirmAddProject"
+    >
+      <div style="margin-bottom: 10px">
+        <label for="">服务名称：</label>
+        <a-select
+          :default-value="'请选择'"
+          style="width: 150px"
+          @change="handleServiceChange"
+        >
+          <a-select-option
+            v-for="item in serviceList"
+            :key="item.value"
+            :value="item.value"
+          >
+            {{ item.label }}
+          </a-select-option>
+        </a-select>
+      </div>
+      <div>
+        <label for="">项目名称：</label>
+        <a-input v-model:value="tempProjectName"></a-input>
+      </div>
+    </a-modal>
   </div>
-  <a-modal
-    @cancel="closeAddProject"
-    :visible="showAddProject"
-    :title="'添加服务项目'"
-    @ok="confirmAddProject"
-  >
-    <label for="">项目名称:</label>
-    <a-input v-model:value="tempProjectName"></a-input>
-  </a-modal>
 </template>
 
 <script>
   import { mapActions } from 'vuex'
   import { inputInformation } from './static/inputInformation.js'
+
+  let transferPinYin = require('js-pinyin')
   export default {
     name: 'ContractInput',
     data() {
@@ -325,6 +344,7 @@
         mainCountryList: inputInformation.mainCountryList,
         subCountryList: inputInformation.subCountryList,
         schoolAreaList: inputInformation.schoolAreaList,
+        serviceList: inputInformation.serviceList,
         enterYearList: [],
         projectsList: null,
         tempProjectName: null,
@@ -387,6 +407,9 @@
       handleSchoolAreaChange(value) {
         this.studentInfo.schoolArea = value
       },
+      handleServiceChange(value) {
+        this.projectSection = value
+      },
       contractSignChange(date, dateString) {
         this.studentInfo.contractSignTime = dateString
       },
@@ -402,8 +425,7 @@
       handleContractFileChange(e) {
         console.log(e)
       },
-      addProject(projectSection) {
-        this.projectSection = projectSection
+      addProject() {
         this.showAddProject = true
       },
       closeAddProject() {
@@ -412,28 +434,34 @@
         this.showAddProject = false
       },
       confirmAddProject() {
-        let tempProject = {
-          projectKey: 'SKDModuleTwo',
-          projectName: this.tempProjectName,
-          projectTeacherId: null,
-          projectPredictCost: '',
-          projectPeriod: null,
-          status: 0,
-          type: this.projectSection,
-        }
-        switch (this.projectSection) {
-          case 'projectMajor':
-            this.projectsList.projectMajor.push(tempProject)
-            break
-          case 'research':
-            this.projectsList.research.push(tempProject)
-            break
-          case 'apply':
-            this.projectsList.apply.push(tempProject)
-            break
-          case 'upgrade':
-            this.projectsList.upgrade.push(tempProject)
-            break
+        if (!this.tempProjectName || !this.projectSection) {
+          this.$message.error('请完善项目信息')
+        } else {
+          let tempProject = {
+            projectKey: transferPinYin.getFullChars(this.tempProjectName),
+            projectName: this.tempProjectName,
+            projectTeacherId: null,
+            projectTeacherChinesename: null,
+            projectPredictCost: '',
+            projectPeriod: null,
+            status: 0,
+            type: this.projectSection,
+          }
+          switch (this.projectSection) {
+            case 'projectMajor':
+              this.projectsList.projectMajor.push(tempProject)
+              break
+            case 'research':
+              this.projectsList.research.push(tempProject)
+              break
+            case 'apply':
+              this.projectsList.apply.push(tempProject)
+              break
+            case 'upgrade':
+              this.projectsList.upgrade.push(tempProject)
+              break
+          }
+          this.showAddProject = false
         }
       },
       uploadContract(data) {

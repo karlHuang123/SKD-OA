@@ -11,13 +11,13 @@ const listParameters = {
       dataIndex: 'contact',
       key: 'contact',
       fixed: 'left',
-      width: 130,
+      width: 132,
     },
     {
       title: '紧急联系人',
       dataIndex: 'urgentContact',
       key: 'urgentContact',
-      width: 130,
+      width: 135,
     },
     {
       title: '微信号',

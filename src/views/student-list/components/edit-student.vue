@@ -1,5 +1,6 @@
 <template>
   <div class="component-container" v-if="customerStudentInfo">
+    <a-button @click="addProject" type="primary">添加项目</a-button>
     <div
       class="section"
       v-if="
@@ -19,7 +20,7 @@
           </div>
           <label for="">指导老师:</label>
           <a-input
-            v-model:value="item.projectTeacherId"
+            v-model:value="item.projectTeacherChinesename"
             @change="handleChange"
           ></a-input>
         </div>
@@ -44,33 +45,9 @@
           </div>
           <label for="">指导老师:</label>
           <a-input
-            v-model:value="item.projectTeacherId"
+            v-model:value="item.projectTeacherChinesename"
             @change="handleChange"
           ></a-input>
-        </div>
-        <div class="add-btn project-ele">
-          <a-popconfirm
-            placement="top"
-            ok-text="添加"
-            cancel-text="取消"
-            @confirm="confirm"
-          >
-            <template v-slot:title>
-              <div class="title">
-                <span>项目名称:</span>
-                <a-input></a-input>
-              </div>
-              <div class="title">
-                <span>指导老师:</span>
-                <a-input></a-input>
-              </div>
-            </template>
-            <!-- <a-button
-              @click="addProject('research', customerStudentInfo.studentId)"
-            >
-              添加项目
-            </a-button> -->
-          </a-popconfirm>
         </div>
       </div>
     </div>
@@ -93,7 +70,7 @@
           </div>
           <label for="">指导老师:</label>
           <a-input
-            v-model:value="item.projectTeacherId"
+            v-model:value="item.projectTeacherChinesename"
             @change="handleChange"
           ></a-input>
         </div>
@@ -118,15 +95,48 @@
           </div>
           <label for="">指导老师:</label>
           <a-input
-            v-model:value="item.projectTeacherId"
+            v-model:value="item.projectTeacherChinesename"
             @change="handleChange"
           ></a-input>
         </div>
       </div>
     </div>
+    <a-modal
+      @cancel="closeAddProject"
+      :visible="showAddProject"
+      :title="'添加服务项目'"
+      @ok="confirmAddProject"
+    >
+      <div style="margin-bottom: 10px">
+        <label for="">服务名称：</label>
+        <a-select
+          :default-value="'请选择'"
+          style="width: 150px"
+          @change="handleServiceChange"
+        >
+          <a-select-option
+            v-for="item in serviceList"
+            :key="item.value"
+            :value="item.value"
+          >
+            {{ item.label }}
+          </a-select-option>
+        </a-select>
+      </div>
+      <div>
+        <label for="">项目名称：</label>
+        <a-input v-model:value="tempProjectName"></a-input>
+      </div>
+      <div>
+        <label for="">老师姓名：</label>
+        <a-input v-model:value="tempTeacherName"></a-input>
+      </div>
+    </a-modal>
   </div>
 </template>
 <script>
+  import { inputInformation } from '../../contract-input/static/inputInformation.js'
+  let transferPinYin = require('js-pinyin')
   export default {
     props: ['studentInfo'],
     data() {
@@ -142,6 +152,10 @@
           projectPredictionCost: null,
           projectType: null,
         },
+        serviceList: inputInformation.serviceList,
+        showAddProject: false,
+        tempProjectName: null,
+        tempTeacherName: null,
       }
     },
     watch: {
@@ -155,10 +169,48 @@
       handleChange() {
         this.$emit('studentInfoChanged', this.customerStudentInfo)
       },
-      addProject(projectTeam, studentId) {
-        console.log(projectTeam)
-        this.tempEle.studentId = studentId
-        this.projectTeam = projectTeam
+      handleServiceChange(value) {
+        this.projectSection = value
+      },
+      addProject() {
+        this.showAddProject = true
+      },
+      closeAddProject() {
+        this.projectSection = null
+        this.tempProjectName = null
+        this.tempTeacherName = null
+        this.showAddProject = false
+      },
+      confirmAddProject() {
+        if (!this.tempProjectName || !this.projectSection) {
+          this.$message.error('请完善项目信息')
+        } else {
+          let tempProject = {
+            projectKey: transferPinYin.getFullChars(this.tempProjectName),
+            projectName: this.tempProjectName,
+            projectTeacherId: null,
+            projectTeacherChinesename: this.tempTeacherName,
+            projectPredictCost: '',
+            projectPeriod: null,
+            status: 0,
+            type: this.projectSection,
+          }
+          switch (this.projectSection) {
+            case 'projectMajor':
+              this.customerStudentInfo.projects.projectMajor.push(tempProject)
+              break
+            case 'research':
+              this.customerStudentInfo.projects.research.push(tempProject)
+              break
+            case 'apply':
+              this.customerStudentInfo.projects.apply.push(tempProject)
+              break
+            case 'upgrade':
+              this.customerStudentInfo.projects.upgrade.push(tempProject)
+              break
+          }
+          this.showAddProject = false
+        }
       },
     },
     mounted() {
