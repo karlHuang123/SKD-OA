@@ -1,30 +1,5 @@
 <template>
-  <a-dropdown
-    :trigger="['click']"
-    overlayClassName="drop-down"
-    placement="bottomCenter"
-  >
-    <div class="message-alert" @click="(e) => e.preventDefault()">
-      <BellOutlined />
-      <div class="message-number">
-        <div class="">!</div>
-      </div>
-    </div>
-    <template #overlay>
-      <a-menu>
-        <a-menu-item key="0">
-          <div class="message-container">学生卡尔被分配了新的教师</div>
-        </a-menu-item>
-        <a-menu-item key="1">
-          <div class="message-container">学生Kei被分配了新的教师</div>
-        </a-menu-item>
-        <a-menu-divider />
-        <a-menu-item key="3">
-          <div class="check-read" @click="goToMessageList">查看全部消息</div>
-        </a-menu-item>
-      </a-menu>
-    </template>
-  </a-dropdown>
+  <alert-message :userName="username" />
   <div class="vab-avatar">
     <a-dropdown>
       <span class="ant-dropdown-link">
@@ -44,15 +19,15 @@
 
 <script>
   import { recordRoute } from '@/config'
-  import { DownOutlined, BellOutlined } from '@ant-design/icons-vue'
+  import { DownOutlined } from '@ant-design/icons-vue'
 
   import { useStore } from 'vuex'
   import { computed } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
-
+  import AlertMessage from './components/alert-message'
   export default {
     name: 'VabAvatar',
-    components: { DownOutlined, BellOutlined },
+    components: { DownOutlined, AlertMessage },
     setup() {
       const store = useStore()
       const router = useRouter()
@@ -72,16 +47,11 @@
         window.open('http://vue-admin-beautiful.com/authorization/')
       }
 
-      const goToMessageList = () => {
-        router.push('/general-info/message-list')
-      }
-
       return {
         avatar: computed(() => store.getters['user/avatar']),
         username: computed(() => store.getters['user/username']),
         logout,
         buy,
-        goToMessageList,
       }
     },
   }

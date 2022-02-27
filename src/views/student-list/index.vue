@@ -112,6 +112,7 @@
         this.showEditStudentModal = false
       },
       submitStudent() {
+        this.studentInfo.managerPostCodes = ['educationalManager']
         this.editStudent({
           studentInfo: this.studentInfo,
           callback: (res) => {
@@ -140,9 +141,10 @@
       handleStudentListChange({ current, pageSize }) {
         this.pagination.current = current
         this.pagination.pageSize = pageSize
-        this.getStaffListFuc(current, pageSize, this.listPara.searchVal)
+        this.getStudentListFuc(current, pageSize, this.listPara.searchVal)
       },
       handleStudentInfoChange(e) {
+        console.log(e)
         let temp = JSON.parse(JSON.stringify(e))
         delete temp.contractEndDate
         delete temp.contractSignDate

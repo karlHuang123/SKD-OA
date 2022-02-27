@@ -228,9 +228,10 @@ const actions = {
    * @description 退出登录
    * @param {*} { dispatch }
    */
-  async logout({ dispatch }) {
+  async logout({ dispatch, commit }) {
     await logout(state.accessToken)
     await dispatch('resetAll')
+    commit('setUsername', null)
   },
   /**
    * @author chuzhixin 1204505056@qq.com

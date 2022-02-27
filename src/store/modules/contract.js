@@ -10,17 +10,21 @@ import {
   deleteStudent,
   getStudent,
   editStudent,
+  getMessageList,
+  updateMessageStatus,
 } from '@/api/contract'
 import { message } from 'ant-design-vue'
 
 const state = () => ({
   studentList: null,
   studentInfo: null,
+  messageList: null,
 })
 
 const getters = {
   studentList: (state) => state.studentList,
   studentInfo: (state) => state.studentInfo,
+  messageList: (state) => state.messageList,
 }
 
 const mutations = {
@@ -28,16 +32,25 @@ const mutations = {
    * @author KarlHuang
    * @description 设置学生列表
    * @param {*} state
-   * @param {*} positionList
+   * @param {*} studentList
    */
   setStudentList(state, studentList) {
     state.studentList = studentList
   },
   /**
    * @author KarlHuang
+   * @description 设置消息列表
+   * @param {*} state
+   * @param {*} messageList
+   */
+  setMessageList(state, messageList) {
+    state.messageList = messageList
+  },
+  /**
+   * @author KarlHuang
    * @description 设置学生信息
    * @param {*} state
-   * @param {*} positionList
+   * @param {*} studentInfo
    */
   setStudentInfo(state, studentInfo) {
     state.studentInfo = studentInfo
@@ -103,6 +116,22 @@ const actions = {
       body.callback && body.callback(res)
     } else {
       message.error('删除失败，请稍后重试。')
+    }
+  },
+  // 获取消息列表
+  async getMessageList({ commit }, body) {
+    const res = await getMessageList(body.listPara)
+    if (res && res.code === 200) {
+      commit('setMessageList', res.rows)
+      body.callback && body.callback(res)
+    }
+  },
+  // 消息已读
+  async updateMessageStatus({ state }, body) {
+    const res = await updateMessageStatus(body.id)
+    if (res && res.code === 200) {
+      console.log(state.messageList)
+      body.callback && body.callback(res)
     }
   },
 }

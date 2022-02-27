@@ -44,3 +44,17 @@ export async function deleteStudent(studentIds) {
     method: 'delete',
   })
 }
+
+export async function getMessageList(listPara) {
+  return request({
+    url: `/system/message/getList?pageNum=${listPara.pageNum}&pageSize=${listPara.pageSize}`,
+    method: 'get',
+  })
+}
+
+export async function updateMessageStatus(id) {
+  return request({
+    url: `/system/message/updateMessageStatus?id=${id}`,
+    method: 'put',
+  })
+}

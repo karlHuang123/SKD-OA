@@ -448,8 +448,8 @@
             type: this.projectSection,
           }
           switch (this.projectSection) {
-            case 'projectMajor':
-              this.projectsList.projectMajor.push(tempProject)
+            case 'productMajor':
+              this.projectsList.productMajor.push(tempProject)
               break
             case 'research':
               this.projectsList.research.push(tempProject)
@@ -518,7 +518,19 @@
             status: this.studentInfo.studentStatus,
             projects: this.projectsList,
             contractFilepath: this.studentInfo.contractFilepath,
+            managerPostCodes: [],
           }
+          console.log(para.projects)
+          if (
+            para.projects.productMajor.length !== 0 ||
+            para.projects.research.length !== 0
+          )
+            para.managerPostCodes.push('teacherManager')
+          if (
+            para.projects.apply.length !== 0 ||
+            para.projects.upgrade.length !== 0
+          )
+            para.managerPostCodes.push('applyManager')
           this.addStudent({
             data: para,
             callback: (res) => {
