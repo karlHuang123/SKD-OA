@@ -19,12 +19,14 @@ const state = () => ({
   studentList: null,
   studentInfo: null,
   messageList: null,
+  studentName: null,
 })
 
 const getters = {
   studentList: (state) => state.studentList,
   studentInfo: (state) => state.studentInfo,
   messageList: (state) => state.messageList,
+  studentName: (state) => state.studentName,
 }
 
 const mutations = {
@@ -45,6 +47,15 @@ const mutations = {
    */
   setMessageList(state, messageList) {
     state.messageList = messageList
+  },
+  /**
+   * @author KarlHuang
+   * @description 设置学生姓名
+   * @param {*} state
+   * @param {*} studentInfo
+   */
+  setStudentName(state, studentName) {
+    state.studentName = studentName
   },
   /**
    * @author KarlHuang

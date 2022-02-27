@@ -1,6 +1,14 @@
 <template>
   <div class="test-container">
     <div class="list-container">
+      <div class="search-area">
+        <a-input-search
+          placeholder="请输入关键字"
+          style="width: 200px"
+          @search="searchStudent"
+          v-model:value="listPara.searchVal"
+        />
+      </div>
       <a-table
         :columns="listColumns"
         :pagination="pagination"
@@ -73,6 +81,7 @@
         listPara: {
           pageNum: 1,
           pageSize: 10,
+          searchVal: '',
         },
         studentInfo: null,
         showEditStudentModal: false,
@@ -88,8 +97,7 @@
       getStudentListFuc(pageNum = 1, pageSize = 10, searchVal = '') {
         this.listPara.pageNum = pageNum
         this.listPara.pageSize = pageSize
-        console.log(searchVal)
-        // this.listPara.searchVal = searchVal
+        this.listPara.searchVal = searchVal
         this.getStudentList({
           listPara: this.listPara,
           callback: (res) => {
@@ -123,6 +131,13 @@
           },
         })
       },
+      searchStudent() {
+        this.getStudentListFuc(
+          this.listPara.pageNum,
+          this.listPara.pageSize,
+          this.listPara.searchVal,
+        )
+      },
       deleteStudentFuc(studentIds) {
         let studentPara
         if (typeof studentIds.length === 'number' && studentIds.length !== 0) {
@@ -144,7 +159,6 @@
         this.getStudentListFuc(current, pageSize, this.listPara.searchVal)
       },
       handleStudentInfoChange(e) {
-        console.log(e)
         let temp = JSON.parse(JSON.stringify(e))
         delete temp.contractEndDate
         delete temp.contractSignDate
@@ -156,7 +170,16 @@
       },
     },
     mounted() {
-      this.getStudentListFuc()
+      const studentName = this.$store.getters['contract/studentName']
+      console.log(studentName)
+      if (studentName !== ':studentName') {
+        this.getStudentListFuc(1, 10, studentName)
+      } else {
+        this.getStudentListFuc()
+      }
+    },
+    destoryed() {
+      this.$store.commit('contract/setStudentName', null)
     },
   }
 </script>
@@ -178,5 +201,9 @@
     .edit {
       margin-right: 20px;
     }
+  }
+  .search-area {
+    text-align: right;
+    margin-bottom: 20px;
   }
 </style>

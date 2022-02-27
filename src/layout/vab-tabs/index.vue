@@ -120,6 +120,9 @@
         const view = this.visitedRoutes.find((item) => {
           return fullPath === item.fullPath
         })
+        if (fullPath === '/educational-info/student-list')
+          // 重置学生列表搜索词
+          this.$store.commit('contract/setStudentName', null)
         await this.delVisitedRoute(view)
         if (this.isActive(view)) this.toLastTag()
       },

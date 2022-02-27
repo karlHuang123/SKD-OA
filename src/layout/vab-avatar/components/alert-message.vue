@@ -7,7 +7,10 @@
     >
       <div class="message-alert" @click="(e) => e.preventDefault()">
         <BellOutlined />
-        <div class="message-number">
+        <div
+          class="message-number"
+          v-if="messageList && messageList.length !== 0"
+        >
           <div class="">!</div>
         </div>
       </div>
@@ -16,9 +19,14 @@
           <a-menu-item
             v-for="item in messageList"
             v-bind:key="item.id"
-            @click="updateMessageStatusFun(item.id)"
+            @click="goToStudentList(item.messageContent, item.id)"
           >
-            <div class="message-container">学生卡尔被分配了新的教师</div>
+            <a-tooltip placement="top">
+              <template #title>
+                <span>{{ item.messageContent }}</span>
+              </template>
+              <div class="message-container">{{ item.messageContent }}</div>
+            </a-tooltip>
           </a-menu-item>
           <a-menu-divider />
           <a-menu-item key="3">
@@ -55,15 +63,21 @@
         this.getMessageList({
           listPara: this.listPara,
           callback: (res) => {
-            console.log(res)
+            this.messageList = res.rows.filter((item) => {
+              return item.status === 0
+            })
           },
         })
       },
-      updateMessageStatusFun(id) {
+      goToStudentList(text, id) {
+        const studentName = text.split('学生')[1].split('【')[1].split('】')[0]
         this.updateMessageStatus({
           id: id,
-          callback: (res) => {
-            console.log(res)
+          callback: () => {
+            this.$store.commit('contract/setStudentName', studentName)
+            this.$router.push({
+              name: 'StudentList',
+            })
           },
         })
       },
