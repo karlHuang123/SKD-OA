@@ -51,9 +51,9 @@
         avatar: computed(() => store.getters['user/avatar']),
         username: computed(() => store.getters['user/username']),
         logout,
-        buy,
+        buy
       }
-    },
+    }
   }
 </script>
 <style lang="less">

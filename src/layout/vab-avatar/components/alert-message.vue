@@ -19,7 +19,7 @@
           <a-menu-item
             v-for="item in messageList"
             v-bind:key="item.id"
-            @click="goToStudentList(item.messageContent, item.id)"
+            @click="goToStudentList(item.remark, item.id)"
           >
             <a-tooltip placement="top">
               <template #title>
@@ -47,17 +47,17 @@
       return {
         listPara: {
           pageNum: 1,
-          pageSize: 10,
+          pageSize: 10
         },
-        messageList: null,
+        messageList: null
       }
     },
     methods: {
       ...mapActions({
         getMessageList: 'contract/getMessageList',
-        updateMessageStatus: 'contract/updateMessageStatus',
+        updateMessageStatus: 'contract/updateMessageStatus'
       }),
-      getMessageListFun(pageNum = 1, pageSize = 500) {
+      getMessageListFun(pageNum, pageSize, interval) {
         this.listPara.pageNum = pageNum
         this.listPara.pageSize = pageSize
         this.getMessageList({
@@ -67,31 +67,37 @@
               return item.status === 0
             })
           },
+          errCallback: () => {
+            if (interval) {
+              clearInterval(interval)
+            }
+          }
         })
       },
       goToStudentList(text, id) {
-        const studentName = text.split('学生')[1].split('【')[1].split('】')[0]
         this.updateMessageStatus({
           id: id,
           callback: () => {
-            this.$store.commit('contract/setStudentName', studentName)
+            this.$store.commit('contract/setStudentName', text)
             this.$router.push({
-              name: 'StudentList',
+              name: 'StudentList'
             })
-          },
+          }
         })
       },
       goToMessageList() {
         this.$router.push('/general-info/message-list')
-      },
+      }
     },
     mounted() {
-      const intervalTime = 5000 //轮询时间
-      setInterval(() => {
+      const userName = this.$store.getters['user/username']
+      if (userName) this.getMessageListFun(1, 500)
+      const intervalTime = 60000 //轮询时间
+      const messageInterval = setInterval(() => {
         const userName = this.$store.getters['user/username']
-        if (userName) this.getMessageListFun()
+        if (userName) this.getMessageListFun(1, 500, messageInterval)
       }, intervalTime)
-    },
+    }
   }
 </script>
 <style lang="less" scoped>

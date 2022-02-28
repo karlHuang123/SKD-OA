@@ -62,34 +62,34 @@
   export default {
     name: 'Reset',
     components: {
-      LockOutlined,
+      LockOutlined
     },
     data() {
       return {
         form: {
           confirmPassword: '',
-          newPassword: '',
+          newPassword: ''
         },
         redirect: undefined,
         dependencies: dependencies,
         devDependencies: devDependencies,
         codeImg: '',
-        uuidForConfirmReset: '',
+        uuidForConfirmReset: ''
       }
     },
     computed: {
       ...mapGetters({
         logo: 'settings/logo',
-        title: 'settings/title',
-      }),
+        title: 'settings/title'
+      })
     },
     watch: {
       $route: {
         handler(route) {
           this.redirect = (route.query && route.query.redirect) || '/'
         },
-        immediate: true,
-      },
+        immediate: true
+      }
     },
     mounted() {
       const uuidForConfirm = this.$route.query.uuid
@@ -102,7 +102,7 @@
     methods: {
       ...mapActions({
         resetPassword: 'user/resetPassword',
-        confirmedResetPassword: 'user/confirmedResetPassword',
+        confirmedResetPassword: 'user/confirmedResetPassword'
       }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'
@@ -118,7 +118,7 @@
               if (res) {
                 this.$router.push({ path: '/login' })
               }
-            },
+            }
           })
         } else {
           message.error('密码不一致，请重新输入！')
@@ -130,10 +130,10 @@
           callback: (res) => {
             console.log(res)
             message.success('请输入并确认新密码。')
-          },
+          }
         })
-      },
-    },
+      }
+    }
   }
 </script>
 <style scoped lang="less">

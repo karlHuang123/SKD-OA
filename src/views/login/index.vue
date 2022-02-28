@@ -84,7 +84,7 @@
     UserOutlined,
     LockOutlined,
     SafetyOutlined,
-    SyncOutlined,
+    SyncOutlined
   } from '@ant-design/icons-vue'
   import { message } from 'ant-design-vue'
 
@@ -94,7 +94,7 @@
       UserOutlined,
       LockOutlined,
       SafetyOutlined,
-      SyncOutlined,
+      SyncOutlined
     },
     data() {
       return {
@@ -102,27 +102,27 @@
           username: '',
           password: '',
           code: '',
-          uuid: '',
+          uuid: ''
         },
         redirect: undefined,
         dependencies: dependencies,
         devDependencies: devDependencies,
-        codeImg: '',
+        codeImg: ''
       }
     },
     computed: {
       ...mapGetters({
         logo: 'settings/logo',
-        title: 'settings/title',
-      }),
+        title: 'settings/title'
+      })
     },
     watch: {
       $route: {
         handler(route) {
           this.redirect = (route.query && route.query.redirect) || '/'
         },
-        immediate: true,
-      },
+        immediate: true
+      }
     },
     mounted() {
       this.form.username = sessionStorage.getItem('username')
@@ -146,7 +146,7 @@
       ...mapActions({
         login: 'user/login',
         getAuthCode: 'user/getAuthCode',
-        confirmedRegister: 'user/confirmedRegister',
+        confirmedRegister: 'user/confirmedRegister'
       }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'
@@ -172,18 +172,18 @@
           callback: (res) => {
             console.log(res)
             message.success('注册成功，请输入用户名和密码登录。')
-          },
+          }
         })
       },
       testConfirm() {
         this.$router.replace({
           name: 'please-confirmed',
           params: {
-            info: `为了您的账号安全，请前往${this.form.username}进行验证`,
-          },
+            info: `为了您的账号安全，请前往${this.form.username}进行验证`
+          }
         })
-      },
-    },
+      }
+    }
   }
 </script>
 <style scoped lang="less">

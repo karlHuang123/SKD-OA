@@ -19,7 +19,7 @@
     components: {},
     data() {
       return {
-        text: '',
+        text: ''
       }
     },
     mounted() {
@@ -27,7 +27,7 @@
         this.text = this.$route.params.info
       }
     },
-    methods: {},
+    methods: {}
   }
 </script>
 <style scoped lang="less">

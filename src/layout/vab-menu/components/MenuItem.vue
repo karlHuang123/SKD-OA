@@ -18,12 +18,12 @@
         type: Object,
         default() {
           return null
-        },
+        }
       },
       routeChildren: {
         type: Object,
-        default: () => null,
-      },
+        default: () => null
+      }
     },
     methods: {
       handleLink() {
@@ -36,7 +36,7 @@
           if (isExternal(routePath)) window.location.href = routePath
           else if (this.$route.path !== routePath) this.$router.push(routePath)
         }
-      },
-    },
+      }
+    }
   }
 </script>

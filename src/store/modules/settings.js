@@ -19,7 +19,7 @@ const {
   showTheme,
   showTagsBar,
   showNotice,
-  showFullScreen,
+  showFullScreen
 } = defaultSettings
 
 const getLocalStorage = (key) => {
@@ -54,7 +54,7 @@ const state = () => ({
   showTheme: toggleBoolean(showTheme),
   showTagsBar: toggleBoolean(showTagsBar),
   showNotice: toggleBoolean(showNotice),
-  showFullScreen: toggleBoolean(showFullScreen),
+  showFullScreen: toggleBoolean(showFullScreen)
 })
 const getters = {
   collapse: (state) => state.collapse,
@@ -72,14 +72,14 @@ const getters = {
   showTagsBar: (state) => state.showTagsBar,
   showNotice: (state) => state.showNotice,
   showFullScreen: (state) => state.showFullScreen,
-  themeName: (state) => state.themeName,
+  themeName: (state) => state.themeName
 }
 const mutations = {
   toggleCollapse(state) {
     state.collapse = !state.collapse
     localStorage.setItem(
       'vue-admin-beautiful-pro-collapse',
-      `{"collapse":${state.collapse}}`,
+      `{"collapse":${state.collapse}}`
     )
   },
   toggleDevice(state, device) {
@@ -124,10 +124,10 @@ const mutations = {
   changeLanguage(state, language) {
     localStorage.setItem(
       'vue-admin-beautiful-pro-language',
-      `{"language":"${language}"}`,
+      `{"language":"${language}"}`
     )
     state.language = language
-  },
+  }
 }
 const actions = {
   toggleCollapse({ commit }) {
@@ -174,6 +174,6 @@ const actions = {
   },
   changeLanguage: ({ commit }, language) => {
     commit('changeLanguage', language)
-  },
+  }
 }
 export default { state, getters, mutations, actions }

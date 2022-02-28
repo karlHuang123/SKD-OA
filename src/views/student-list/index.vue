@@ -2,12 +2,13 @@
   <div class="test-container">
     <div class="list-container">
       <div class="search-area">
-        <a-input-search
+        <!-- <a-input-search
           placeholder="请输入关键字"
           style="width: 200px"
           @search="searchStudent"
           v-model:value="listPara.searchVal"
-        />
+        /> -->
+        <a-button @click="checkAll" type="primary">查看全部学生</a-button>
       </div>
       <a-table
         :columns="listColumns"
@@ -75,16 +76,23 @@
           showSizeChanger: true,
           showQuickJumper: true,
           pageSizeOptions: ['10', '20', '50', '100'],
-          showTotal: (total) => `共${total}条`,
+          showTotal: (total) => `共${total}条`
         },
         studentListJson: null,
         listPara: {
           pageNum: 1,
           pageSize: 10,
-          searchVal: '',
+          admissionYear: '',
+          applyMainCountry: '',
+          applyBakCountry: '',
+          applyMajor: '',
+          createBy: '',
+          createTime: '',
+          productLevel: '',
+          studentName: ''
         },
         studentInfo: null,
-        showEditStudentModal: false,
+        showEditStudentModal: false
       }
     },
     methods: {
@@ -92,18 +100,18 @@
         getStudentList: 'contract/getStudentList',
         deleteStudent: 'contract/deleteStudent',
         getStudent: 'contract/getStudent',
-        editStudent: 'contract/editStudent',
+        editStudent: 'contract/editStudent'
       }),
-      getStudentListFuc(pageNum = 1, pageSize = 10, searchVal = '') {
+      getStudentListFuc(pageNum = 1, pageSize = 10, studentName = '') {
         this.listPara.pageNum = pageNum
         this.listPara.pageSize = pageSize
-        this.listPara.searchVal = searchVal
+        this.listPara.studentName = studentName
         this.getStudentList({
           listPara: this.listPara,
           callback: (res) => {
             this.studentListJson = res.rows
             this.pagination.total = res.total
-          },
+          }
         })
       },
       getStudentFuc(studentId) {
@@ -112,8 +120,11 @@
           callback: (res) => {
             this.studentInfo = res.data
             this.showEditStudentModal = true
-          },
+          }
         })
+      },
+      checkAll() {
+        this.getStudentListFuc()
       },
       closeEditStudent() {
         this.studentInfo = null
@@ -128,14 +139,14 @@
               this.showEditStudentModal = false
               this.$message.success('编辑成功。')
             }
-          },
+          }
         })
       },
       searchStudent() {
         this.getStudentListFuc(
           this.listPara.pageNum,
           this.listPara.pageSize,
-          this.listPara.searchVal,
+          this.listPara.studentName
         )
       },
       deleteStudentFuc(studentIds) {
@@ -150,13 +161,13 @@
           callback: () => {
             this.$message.success('删除成功！')
             this.getStudentListFuc(this.pagination.current)
-          },
+          }
         })
       },
       handleStudentListChange({ current, pageSize }) {
         this.pagination.current = current
         this.pagination.pageSize = pageSize
-        this.getStudentListFuc(current, pageSize, this.listPara.searchVal)
+        this.getStudentListFuc(current, pageSize, this.listPara.studentName)
       },
       handleStudentInfoChange(e) {
         let temp = JSON.parse(JSON.stringify(e))
@@ -167,20 +178,30 @@
         delete temp.updateBy
         delete temp.updateTime
         this.studentInfo = temp
-      },
+      }
     },
     mounted() {
       const studentName = this.$store.getters['contract/studentName']
-      console.log(studentName)
-      if (studentName !== ':studentName') {
-        this.getStudentListFuc(1, 10, studentName)
+      if (studentName) {
+        this.getStudentListFuc()
+        const filterInterval = setInterval(() => {
+          if (
+            this.studentListJson &&
+            typeof this.studentListJson.length === 'number'
+          ) {
+            this.studentListJson = this.studentListJson.filter((item) => {
+              return item.studentName === studentName
+            })
+            clearInterval(filterInterval)
+          }
+        }, 5)
       } else {
         this.getStudentListFuc()
       }
     },
     destoryed() {
       this.$store.commit('contract/setStudentName', null)
-    },
+    }
   }
 </script>
 <style lang="less" scoped>

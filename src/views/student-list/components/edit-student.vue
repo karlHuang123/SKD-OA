@@ -151,21 +151,21 @@
           status: '0',
           projectPeriod: null,
           projectPredictionCost: null,
-          projectType: null,
+          projectType: null
         },
         serviceList: inputInformation.serviceList,
         showAddProject: false,
         tempProjectName: null,
         tempTeacherName: null,
-        defaultSelect: '请选择',
+        defaultSelect: '请选择'
       }
     },
     watch: {
       studentInfo: {
         handler(newVal) {
           this.customerStudentInfo = JSON.parse(JSON.stringify(newVal))
-        },
-      },
+        }
+      }
     },
     methods: {
       handleChange() {
@@ -193,7 +193,7 @@
             projectPredictCost: '',
             projectPeriod: null,
             status: 0,
-            type: this.projectSection,
+            type: this.projectSection
           }
           switch (this.projectSection) {
             case 'productMajor':
@@ -212,11 +212,11 @@
           this.$emit('studentInfoChanged', this.customerStudentInfo)
           this.showAddProject = false
         }
-      },
+      }
     },
     mounted() {
       this.customerStudentInfo = JSON.parse(JSON.stringify(this.studentInfo))
-    },
+    }
   }
 </script>
 <style lang="less" scoped>

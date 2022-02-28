@@ -83,7 +83,7 @@
     UserOutlined,
     LockOutlined,
     SafetyOutlined,
-    SyncOutlined,
+    SyncOutlined
   } from '@ant-design/icons-vue'
 
   import { message } from 'ant-design-vue'
@@ -94,7 +94,7 @@
       UserOutlined,
       LockOutlined,
       SafetyOutlined,
-      SyncOutlined,
+      SyncOutlined
     },
     data() {
       return {
@@ -103,27 +103,27 @@
           password: '',
           email: '',
           code: '',
-          uuid: '',
+          uuid: ''
         },
         redirect: undefined,
         dependencies: dependencies,
         devDependencies: devDependencies,
-        codeImg: '',
+        codeImg: ''
       }
     },
     computed: {
       ...mapGetters({
         logo: 'settings/logo',
-        title: 'settings/title',
-      }),
+        title: 'settings/title'
+      })
     },
     watch: {
       $route: {
         handler(route) {
           this.redirect = (route.query && route.query.redirect) || '/'
         },
-        immediate: true,
-      },
+        immediate: true
+      }
     },
     mounted() {
       this.getAuthCode((res) => {
@@ -141,7 +141,7 @@
     methods: {
       ...mapActions({
         register: 'user/register',
-        getAuthCode: 'user/getAuthCode',
+        getAuthCode: 'user/getAuthCode'
       }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'
@@ -159,13 +159,13 @@
               this.$router.replace({
                 name: 'please-confirmed',
                 params: {
-                  info: `为了您的账号安全，请前往${this.form.email}进行验证`,
-                },
+                  info: `为了您的账号安全，请前往${this.form.email}进行验证`
+                }
               })
             } else {
               message.error(res.msg)
             }
-          },
+          }
         })
       },
       refreshCode() {
@@ -173,8 +173,8 @@
           this.codeImg = 'data:image/gif;base64,' + res.img
           this.form.uuid = res.uuid
         })
-      },
-    },
+      }
+    }
   }
 </script>
 <style scoped lang="less">

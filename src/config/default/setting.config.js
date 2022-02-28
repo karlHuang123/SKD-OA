@@ -42,7 +42,7 @@ const setting = {
     '/please-confirmed',
     '/callback',
     '/404',
-    '/403',
+    '/403'
   ],
   //加载时显示文字
   loadingText: '正在加载中...',
@@ -83,6 +83,6 @@ const setting = {
   //是否显示终端donation打印
   donation: false,
   //画廊布局和综合布局时，是否点击一级菜单默认开启第一个二级菜单
-  openFirstMenu: true,
+  openFirstMenu: true
 }
 module.exports = setting

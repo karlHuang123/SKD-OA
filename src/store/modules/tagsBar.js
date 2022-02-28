@@ -4,10 +4,10 @@
  */
 
 const state = () => ({
-  visitedRoutes: [],
+  visitedRoutes: []
 })
 const getters = {
-  visitedRoutes: (state) => state.visitedRoutes,
+  visitedRoutes: (state) => state.visitedRoutes
 }
 const mutations = {
   /**
@@ -46,7 +46,7 @@ const mutations = {
    */
   delOthersVisitedRoutes(state, route) {
     state.visitedRoutes = state.visitedRoutes.filter(
-      (item) => item.meta.affix || item.path === route.path,
+      (item) => item.meta.affix || item.path === route.path
     )
   },
   /**
@@ -86,7 +86,7 @@ const mutations = {
    */
   delAllVisitedRoutes(state) {
     state.visitedRoutes = state.visitedRoutes.filter((item) => item.meta.affix)
-  },
+  }
 }
 const actions = {
   /**
@@ -141,6 +141,6 @@ const actions = {
    */
   delAllVisitedRoutes({ commit }) {
     commit('delAllVisitedRoutes')
-  },
+  }
 }
 export default { state, getters, mutations, actions }

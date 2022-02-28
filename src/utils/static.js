@@ -33,7 +33,7 @@ export function mockXHR() {
         result = respond({
           method: type,
           body: JSON.parse(body),
-          query: paramObj(url),
+          query: paramObj(url)
         })
       } else {
         result = respond
@@ -46,7 +46,7 @@ export function mockXHR() {
     Mock.mock(
       new RegExp(item.url),
       item.type || 'get',
-      XHRHttpRequst(item.response),
+      XHRHttpRequst(item.response)
     )
   })
 }

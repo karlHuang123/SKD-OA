@@ -11,7 +11,7 @@ import {
   getStudent,
   editStudent,
   getMessageList,
-  updateMessageStatus,
+  updateMessageStatus
 } from '@/api/contract'
 import { message } from 'ant-design-vue'
 
@@ -19,14 +19,14 @@ const state = () => ({
   studentList: null,
   studentInfo: null,
   messageList: null,
-  studentName: null,
+  studentName: null
 })
 
 const getters = {
   studentList: (state) => state.studentList,
   studentInfo: (state) => state.studentInfo,
   messageList: (state) => state.messageList,
-  studentName: (state) => state.studentName,
+  studentName: (state) => state.studentName
 }
 
 const mutations = {
@@ -65,7 +65,7 @@ const mutations = {
    */
   setStudentInfo(state, studentInfo) {
     state.studentInfo = studentInfo
-  },
+  }
 }
 
 const actions = {
@@ -135,6 +135,8 @@ const actions = {
     if (res && res.code === 200) {
       commit('setMessageList', res.rows)
       body.callback && body.callback(res)
+    } else {
+      body.errCallback && body.errCallback()
     }
   },
   // 消息已读
@@ -144,6 +146,6 @@ const actions = {
       console.log(state.messageList)
       body.callback && body.callback(res)
     }
-  },
+  }
 }
 export default { state, getters, mutations, actions }

@@ -25,16 +25,16 @@
     props: {
       item: {
         type: Object,
-        required: true,
+        required: true
       },
       rolePermission: {
-        type: Object,
-      },
+        type: Object
+      }
     },
     data() {
       return {
         routeChildren: {},
-        menuComponent: '',
+        menuComponent: ''
       }
     },
     created() {
@@ -64,8 +64,8 @@
           }
         }
         return hasPermission
-      },
-    },
+      }
+    }
   }
 </script>
 <style lang="less">

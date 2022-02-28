@@ -6,44 +6,44 @@ export const constantRoutes = [
     path: '/login',
     name: 'login',
     component: () => import('@/views/login/index'),
-    hidden: true,
+    hidden: true
   },
   {
     path: '/register',
     name: 'register',
     component: () => import('@/views/login/register'),
-    hidden: true,
+    hidden: true
   },
   {
     path: '/find-password',
     name: 'find-password',
     component: () => import('@/views/login/Password'),
-    hidden: true,
+    hidden: true
   },
   {
     path: '/reset-password',
     name: 'reset-password',
     component: () => import('@/views/login/reset'),
-    hidden: true,
+    hidden: true
   },
   {
     path: '/please-confirmed',
     name: 'please-confirmed',
     component: () => import('@/views/login/please-confirmed'),
-    hidden: true,
+    hidden: true
   },
   {
     path: '/403',
     name: '403',
     component: () => import('@/views/403'),
-    hidden: true,
+    hidden: true
   },
   {
     path: '/404',
     name: '404',
     component: () => import('@/views/404'),
-    hidden: true,
-  },
+    hidden: true
+  }
 ]
 export const asyncRoutes = [
   {
@@ -54,7 +54,7 @@ export const asyncRoutes = [
       title: '首页',
       icon: 'home-4-line',
       affix: true,
-      permission: ['TEACHER', 'MANAGER'],
+      permission: ['TEACHER', 'MANAGER']
     },
     children: [
       {
@@ -65,10 +65,10 @@ export const asyncRoutes = [
           title: '首页',
           icon: 'home-4-line',
           affix: true,
-          permission: ['TEACHER', 'MANAGER'],
-        },
-      },
-    ],
+          permission: ['TEACHER', 'MANAGER']
+        }
+      }
+    ]
   },
   {
     path: '/vab',
@@ -78,7 +78,7 @@ export const asyncRoutes = [
     meta: {
       title: '组件',
       icon: 'apps-line',
-      permission: ['TEACHER', 'MANAGER'],
+      permission: ['TEACHER', 'MANAGER']
     },
     children: [
       {
@@ -88,8 +88,8 @@ export const asyncRoutes = [
         meta: {
           title: '表格',
           icon: 'table-2',
-          permission: ['MANAGER'],
-        },
+          permission: ['MANAGER']
+        }
       },
       {
         path: 'icon',
@@ -98,10 +98,10 @@ export const asyncRoutes = [
         meta: {
           title: '图标',
           icon: 'remixicon-line',
-          permission: ['TEACHER', 'MANAGER'],
-        },
-      },
-    ],
+          permission: ['TEACHER', 'MANAGER']
+        }
+      }
+    ]
   },
   {
     path: '/test',
@@ -110,7 +110,7 @@ export const asyncRoutes = [
     meta: {
       title: '动态路由测试',
       icon: 'test-tube-line',
-      permission: ['TEACHER', 'MANAGER'],
+      permission: ['TEACHER', 'MANAGER']
     },
     children: [
       {
@@ -120,10 +120,10 @@ export const asyncRoutes = [
         meta: {
           title: '动态路由测试',
           icon: 'test-tube-line',
-          permission: ['TEACHER', 'MANAGER'],
-        },
-      },
-    ],
+          permission: ['TEACHER', 'MANAGER']
+        }
+      }
+    ]
   },
   {
     path: '/educational-info',
@@ -133,7 +133,7 @@ export const asyncRoutes = [
     meta: {
       title: '教务信息',
       icon: 'information-line',
-      permission: ['EDUCATIONAL', 'MANAGER'],
+      permission: ['EDUCATIONAL', 'MANAGER']
     },
     children: [
       {
@@ -143,8 +143,8 @@ export const asyncRoutes = [
         meta: {
           title: '合同信息录入',
           icon: 'contacts-book-line',
-          permission: ['EDUCATIONAL', 'MANAGER'],
-        },
+          permission: ['EDUCATIONAL', 'MANAGER']
+        }
       },
       {
         path: 'student-list',
@@ -153,10 +153,10 @@ export const asyncRoutes = [
         meta: {
           title: '学生信息列表',
           icon: 'list-check',
-          permission: ['EDUCATIONAL', 'MANAGER'],
-        },
-      },
-    ],
+          permission: ['EDUCATIONAL', 'MANAGER']
+        }
+      }
+    ]
   },
   {
     path: '/user-manager',
@@ -165,7 +165,7 @@ export const asyncRoutes = [
     meta: {
       title: '员工管理',
       icon: 'group-line',
-      permission: ['TEACHER', 'MANAGER'],
+      permission: ['TEACHER', 'MANAGER']
     },
     children: [
       {
@@ -175,10 +175,10 @@ export const asyncRoutes = [
         meta: {
           title: '员工管理',
           icon: 'group-line',
-          permission: ['MANAGER'],
-        },
-      },
-    ],
+          permission: ['MANAGER']
+        }
+      }
+    ]
   },
   {
     path: '/general-info',
@@ -188,7 +188,7 @@ export const asyncRoutes = [
     meta: {
       title: '通用',
       icon: 'lightbulb-flash-line',
-      permission: ['EDUCATIONAL', 'MANAGER'],
+      permission: ['EDUCATIONAL', 'MANAGER']
     },
     children: [
       {
@@ -198,10 +198,10 @@ export const asyncRoutes = [
         meta: {
           title: '消息列表',
           icon: 'message-2-line',
-          permission: ['EDUCATIONAL', 'MANAGER'],
-        },
-      },
-    ],
+          permission: ['EDUCATIONAL', 'MANAGER']
+        }
+      }
+    ]
   },
   {
     path: '/error',
@@ -211,7 +211,7 @@ export const asyncRoutes = [
     meta: {
       title: '错误页',
       icon: 'error-warning-line',
-      permission: ['TEACHER', 'MANAGER'],
+      permission: ['TEACHER', 'MANAGER']
     },
     children: [
       {
@@ -221,8 +221,8 @@ export const asyncRoutes = [
         meta: {
           title: '403',
           icon: 'error-warning-line',
-          permission: ['TEACHER', 'MANAGER'],
-        },
+          permission: ['TEACHER', 'MANAGER']
+        }
       },
       {
         path: '404',
@@ -231,20 +231,20 @@ export const asyncRoutes = [
         meta: {
           title: '404',
           icon: 'error-warning-line',
-          permission: ['MANAGER'],
-        },
-      },
-    ],
+          permission: ['MANAGER']
+        }
+      }
+    ]
   },
   {
     path: '/*',
     redirect: '/404',
-    hidden: true,
-  },
+    hidden: true
+  }
 ]
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: constantRoutes,
+  routes: constantRoutes
 })
 
 export default router

@@ -336,7 +336,7 @@
           additionalProtocol: '是', // 补充协议
           studentStatus: '在读', // 学生状态
           schoolArea: null, // 学习校区
-          contractFilepath: null,
+          contractFilepath: null
         },
         productLevelList: null,
         applyMajorList: inputInformation.applyMajorList,
@@ -349,13 +349,13 @@
         projectsList: null,
         tempProjectName: null,
         showAddProject: false,
-        projectSection: '',
+        projectSection: ''
       }
     },
     methods: {
       ...mapActions({
         addStudent: 'contract/addStudent',
-        uploadFile: 'contract/uploadFile',
+        uploadFile: 'contract/uploadFile'
       }),
       handleGenderChange(value) {
         this.studentInfo.gender = value
@@ -445,7 +445,7 @@
             projectPredictCost: '',
             projectPeriod: null,
             status: 0,
-            type: this.projectSection,
+            type: this.projectSection
           }
           switch (this.projectSection) {
             case 'productMajor':
@@ -475,7 +475,7 @@
           callback: (res) => {
             this.studentInfo.contractFilepath = res.data
             this.$message.success('合同文件上传成功！')
-          },
+          }
         })
       },
       submit() {
@@ -518,7 +518,7 @@
             status: this.studentInfo.studentStatus,
             projects: this.projectsList,
             contractFilepath: this.studentInfo.contractFilepath,
-            managerPostCodes: [],
+            managerPostCodes: []
           }
           console.log(para.projects)
           if (
@@ -539,10 +539,10 @@
               } else {
                 this.$message.error('添加失败，请稍后重试。')
               }
-            },
+            }
           })
         }
-      },
+      }
     },
     mounted() {
       const date = new Date()
@@ -550,11 +550,11 @@
       for (let i = 1; i < 4; i++) {
         let ele = {
           label: year + i + ' Fall',
-          value: year + i + ' Fall',
+          value: year + i + ' Fall'
         }
         this.enterYearList.push(ele)
       }
-    },
+    }
   }
 </script>
 <style lang="less" scoped>

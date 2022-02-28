@@ -13,12 +13,12 @@ import {
   confirmedResetPassword,
   logout,
   getAuthCode,
-  getUserList,
+  getUserList
 } from '@/api/user'
 import {
   getAccessToken,
   removeAccessToken,
-  setAccessToken,
+  setAccessToken
 } from '@/utils/accessToken'
 import { title, tokenName } from '@/config'
 import { message, notification } from 'ant-design-vue'
@@ -28,12 +28,12 @@ const state = () => ({
   username: '',
   avatar: '',
   code: '',
-  userList: null,
+  userList: null
 })
 const getters = {
   accessToken: (state) => state.accessToken,
   username: (state) => state.username,
-  avatar: (state) => state.avatar,
+  avatar: (state) => state.avatar
 }
 const mutations = {
   /**
@@ -71,7 +71,7 @@ const mutations = {
    */
   setAvatar(state, avatar) {
     state.avatar = avatar
-  },
+  }
 }
 const actions = {
   /**
@@ -109,7 +109,7 @@ const actions = {
           : '晚上好'
       notification.open({
         message: `欢迎登录${title}`,
-        description: `${thisTime}！`,
+        description: `${thisTime}！`
       })
     } else {
       message.error(`登录接口异常，未正确返回${tokenName}...`)
@@ -201,8 +201,8 @@ const actions = {
       username: sessionStorage.getItem('username'),
       'avatar|1': [
         'https://i.gtimg.cn/club/item/face/img/2/15922_100.gif',
-        'https://i.gtimg.cn/club/item/face/img/8/15918_100.gif',
-      ],
+        'https://i.gtimg.cn/club/item/face/img/8/15918_100.gif'
+      ]
     }
     let { username, avatar, roles, ability } = data
     if (roles && Array.isArray(roles)) {
@@ -251,6 +251,6 @@ const actions = {
    */
   setAccessToken({ commit }, accessToken) {
     commit('setAccessToken', accessToken)
-  },
+  }
 }
 export default { state, getters, mutations, actions }

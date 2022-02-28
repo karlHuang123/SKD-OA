@@ -23,7 +23,7 @@
           <span class="edit">
             <a-button
               type="primary"
-              @click="() => goToStudentList(record.messageContent, record.id)"
+              @click="() => goToStudentList(record.remark, record.id)"
             >
               处理消息
             </a-button>
@@ -51,7 +51,7 @@
       return {
         listPara: {
           pageNum: 1,
-          pageSize: 10,
+          pageSize: 10
         },
         listColumns: messageData.listColumns,
         messageListJson: null,
@@ -62,14 +62,14 @@
           showSizeChanger: true,
           showQuickJumper: true,
           pageSizeOptions: ['10', '20', '50', '100'],
-          showTotal: (total) => `共${total}条`,
-        },
+          showTotal: (total) => `共${total}条`
+        }
       }
     },
     methods: {
       ...mapActions({
         getMessageList: 'contract/getMessageList',
-        updateMessageStatus: 'contract/updateMessageStatus',
+        updateMessageStatus: 'contract/updateMessageStatus'
       }),
       getMessageListFun(pageNum = 1, pageSize = 10) {
         this.listPara.pageNum = pageNum
@@ -79,25 +79,24 @@
           callback: (res) => {
             this.messageListJson = res.rows
             this.pagination.total = res.total
-          },
+          }
         })
       },
       goToStudentList(text, id) {
-        const studentName = text.split('学生')[1].split('【')[1].split('】')[0]
         this.updateMessageStatus({
           id: id,
           callback: () => {
-            this.$store.commit('contract/setStudentName', studentName)
+            this.$store.commit('contract/setStudentName', text)
             this.$router.push({
-              name: 'StudentList',
+              name: 'StudentList'
             })
-          },
+          }
         })
-      },
+      }
     },
     mounted() {
       this.getMessageListFun()
-    },
+    }
   }
 </script>
 <style lang="less" scoped>

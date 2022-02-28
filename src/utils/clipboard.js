@@ -16,7 +16,7 @@ function clipboardError(text) {
  */
 export default function handleClipboard(text, event) {
   const clipboard = new Clipboard(event.target, {
-    text: () => text,
+    text: () => text
   })
   clipboard.on('success', () => {
     clipboardSuccess(text)

@@ -49,27 +49,27 @@
   export default {
     name: 'VabTabs',
     components: {
-      DownOutlined,
+      DownOutlined
     },
     data() {
       return {
         affixTabs: [],
         tabActive: null,
-        created: false,
+        created: false
       }
     },
     computed: {
       ...mapGetters({
         visitedRoutes: 'tagsBar/visitedRoutes',
-        routes: 'routes/routes',
-      }),
+        routes: 'routes/routes'
+      })
     },
     watch: {
       $route: {
         handler(route) {
           this.addTabs(route)
-        },
-      },
+        }
+      }
     },
     created() {
       this.initAffixTabs(this.routes)
@@ -82,7 +82,7 @@
         delOthersVisitedRoutes: 'tagsBar/delOthersVisitedRoutes',
         delLeftVisitedRoutes: 'tagsBar/delLeftVisitedRoutes',
         delRightVisitedRoutes: 'tagsBar/delRightVisitedRoutes',
-        delAllVisitedRoutes: 'tagsBar/delAllVisitedRoutes',
+        delAllVisitedRoutes: 'tagsBar/delAllVisitedRoutes'
       }),
       initAffixTabs(routes) {
         routes.forEach((route) => {
@@ -101,7 +101,7 @@
             params: tag.params,
             name: tag.name,
             matched: matched,
-            meta: { ...tag.meta },
+            meta: { ...tag.meta }
           })
           this.tabActive = tag.fullPath
         }
@@ -170,12 +170,12 @@
       },
       toThisTag() {
         const view = this.visitedRoutes.find(
-          (item) => item.fullPath === this.$route.fullPath,
+          (item) => item.fullPath === this.$route.fullPath
         )
         if (this.$route.path !== view.path) this.$router.push(view)
         return view
-      },
-    },
+      }
+    }
   }
 </script>
 <style lang="less">

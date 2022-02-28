@@ -27,13 +27,13 @@
         updateTime: process.env.VUE_APP_UPDATE_TIME,
         dependencies: dependencies,
         devDependencies: devDependencies,
-        userListJson: null,
+        userListJson: null
       }
     },
     methods: {
       ...mapActions({
-        getUserList: 'user/getUserList',
-      }),
+        getUserList: 'user/getUserList'
+      })
     },
     mounted() {
       this.getUserList({
@@ -41,9 +41,9 @@
         pageSize: 10,
         callback: (res) => {
           this.userListJson = JSON.stringify(res)
-        },
+        }
       })
-    },
+    }
   }
 </script>
 <style lang="less" scoped>

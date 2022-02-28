@@ -20,14 +20,14 @@
         type: Object,
         default() {
           return null
-        },
+        }
       },
       routeChildren: {
         type: Object,
         default() {
           return null
-        },
-      },
-    },
+        }
+      }
+    }
   }
 </script>

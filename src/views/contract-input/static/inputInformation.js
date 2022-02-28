@@ -2,252 +2,252 @@ const inputInformation = {
   productLevelListVIP: [
     {
       label: 'VIP1点校',
-      value: 'VIP1点校',
+      value: 'VIP1点校'
     },
     {
       label: 'TOP3',
-      value: 'TOP3',
+      value: 'TOP3'
     },
     {
       label: 'TOP5',
-      value: 'TOP5',
+      value: 'TOP5'
     },
     {
       label: 'TOP8',
-      value: 'TOP8',
-    },
+      value: 'TOP8'
+    }
   ],
   productLevelListNoVIP: [
     {
       label: '单作品集',
-      value: '单作品集',
+      value: '单作品集'
     },
     {
       label: '单作品集加文书申请',
-      value: '单作品集加文书申请',
+      value: '单作品集加文书申请'
     },
     {
       label: '单项目',
-      value: '单项目',
-    },
+      value: '单项目'
+    }
   ],
   applyMajorList: [
     {
       label: '平面',
-      value: '平面',
+      value: '平面'
     },
     {
       label: '交互',
-      value: '交互',
+      value: '交互'
     },
     {
       label: '服务',
-      value: '服务',
+      value: '服务'
     },
     {
       label: '视觉传达',
-      value: '视觉传达',
+      value: '视觉传达'
     },
     {
       label: '工业',
-      value: '工业',
+      value: '工业'
     },
     {
       label: '产品',
-      value: '产品',
-    },
+      value: '产品'
+    }
   ],
   applyDegreeList: [
     {
       label: '本科',
-      value: '本科',
+      value: '本科'
     },
     {
       label: '本科预科',
-      value: '本科预科',
+      value: '本科预科'
     },
     {
       label: '研究生预科',
-      value: '研究生预科',
+      value: '研究生预科'
     },
     {
       label: '研究生',
-      value: '研究生',
+      value: '研究生'
     },
     {
       label: '高中',
-      value: '高中',
+      value: '高中'
     },
     {
       label: '初中',
-      value: '初中',
-    },
+      value: '初中'
+    }
   ],
   mainCountryList: [
     {
       label: '美国',
-      value: '美国',
+      value: '美国'
     },
     {
       label: '英国',
-      value: '英国',
+      value: '英国'
     },
     {
       label: '日本',
-      value: '日本',
+      value: '日本'
     },
     {
       label: '意大利',
-      value: '意大利',
+      value: '意大利'
     },
     {
       label: '法国',
-      value: '法国',
+      value: '法国'
     },
     {
       label: '中国',
-      value: '中国',
-    },
+      value: '中国'
+    }
   ],
   subCountryList: [
     {
       label: '无',
-      value: '无',
+      value: '无'
     },
     {
       label: '美国',
-      value: '美国',
+      value: '美国'
     },
     {
       label: '英国',
-      value: '英国',
+      value: '英国'
     },
     {
       label: '日本',
-      value: '日本',
+      value: '日本'
     },
     {
       label: '意大利',
-      value: '意大利',
+      value: '意大利'
     },
     {
       label: '法国',
-      value: '法国',
+      value: '法国'
     },
     {
       label: '中国',
-      value: '中国',
-    },
+      value: '中国'
+    }
   ],
   schoolAreaList: [
     {
       label: '北京校区',
-      value: 101,
+      value: 101
     },
     {
       label: '上海校区',
-      value: 203,
+      value: 203
     },
     {
       label: '成都校区',
-      value: 219,
+      value: 219
     },
     {
       label: '大连校区',
-      value: 205,
+      value: 205
     },
     {
       label: '青岛校区',
-      value: 206,
+      value: 206
     },
     {
       label: '武汉校区',
-      value: 202,
+      value: 202
     },
     {
       label: '广州校区',
-      value: 204,
-    },
+      value: 204
+    }
   ],
   parameterMap: [
     {
       key: 'name',
-      label: '学生姓名',
+      label: '学生姓名'
     },
     {
       key: 'gender',
-      label: '学生性别',
+      label: '学生性别'
     },
     {
       key: 'contactPhone',
-      label: '联系方式(电话)',
+      label: '联系方式(电话)'
     },
     {
       key: 'wechatNum',
-      label: '微信号',
+      label: '微信号'
     },
     {
       key: 'emrgencyContact',
-      label: '紧急联系人',
+      label: '紧急联系人'
     },
     {
       key: 'pdoructType',
-      label: '产品类别',
+      label: '产品类别'
     },
     {
       key: 'productLevel',
-      label: '产品级别',
+      label: '产品级别'
     },
     {
       key: 'applyMajor',
-      label: '申请专业',
+      label: '申请专业'
     },
     {
       key: 'applyDegree',
-      label: '申请学历',
+      label: '申请学历'
     },
     {
       key: 'mainCountry',
-      label: '主申国家',
+      label: '主申国家'
     },
     {
       key: 'subCountry',
-      label: '辅申国家',
+      label: '辅申国家'
     },
     {
       key: 'enterYear',
-      label: '入学年份',
+      label: '入学年份'
     },
     {
       key: 'contractSignTime',
-      label: '合同签约日期',
+      label: '合同签约日期'
     },
     {
       key: 'contractEndTime',
-      label: '合同截至日期',
+      label: '合同截至日期'
     },
     {
       key: 'schoolArea',
-      label: '学习校区',
-    },
+      label: '学习校区'
+    }
   ],
   serviceList: [
     {
       label: '作品集专业课',
-      value: 'productMajor',
+      value: 'productMajor'
     },
     {
       label: '教研服务',
-      value: 'research',
+      value: 'research'
     },
     {
       label: '申请服务',
-      value: 'apply',
+      value: 'apply'
     },
     {
       label: '学员升级服务',
-      value: 'upgrade',
-    },
+      value: 'upgrade'
+    }
   ],
   projectCombo: {
     singleModule: {
@@ -260,7 +260,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleTwo',
@@ -270,7 +270,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleThree',
@@ -280,7 +280,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleFour',
@@ -290,8 +290,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
-        },
+          type: 'productMajor'
+        }
       ],
       research: [
         {
@@ -302,7 +302,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'critiqueAndSupervise',
@@ -312,7 +312,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'projectQABySchoolArea',
@@ -322,7 +322,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'schoolChooseGuide',
@@ -332,11 +332,11 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
-        },
+          type: 'research'
+        }
       ],
       apply: [],
-      upgrade: [],
+      upgrade: []
     },
     vipOne: {
       productMajor: [
@@ -348,7 +348,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDMajorTheoryImprove',
@@ -358,7 +358,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDMajorTheoryOneOnOne',
@@ -368,7 +368,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDMajorSkillOneOnOne',
@@ -378,7 +378,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleOne',
@@ -388,7 +388,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleTwo',
@@ -398,7 +398,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleThree',
@@ -408,7 +408,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleFour',
@@ -418,7 +418,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleFive',
@@ -428,7 +428,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDInterview',
@@ -438,7 +438,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDTreble X',
@@ -448,7 +448,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDWorkshop',
@@ -458,7 +458,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDVIPSpecialService',
@@ -468,7 +468,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDPortfolioLayout',
@@ -478,7 +478,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDGlobalCollegeAnalyze',
@@ -488,7 +488,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDPaperImprove',
@@ -498,7 +498,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDPAndCImprove',
@@ -508,7 +508,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDMasterShare',
@@ -518,8 +518,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
-        },
+          type: 'productMajor'
+        }
       ],
       research: [
         {
@@ -530,7 +530,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'recordAndFeedback',
@@ -540,7 +540,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'critiqueAndSupervise',
@@ -550,7 +550,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'projectQABySchoolArea',
@@ -560,7 +560,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'projectQAByCountry',
@@ -570,7 +570,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'admissionQA',
@@ -580,7 +580,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'paperTextTransfer',
@@ -590,7 +590,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'schoolChooseGuide',
@@ -600,7 +600,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'schoolChooseGuideAll',
@@ -610,7 +610,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'essayGuide',
@@ -620,7 +620,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'teachingTrackAndFeedback',
@@ -630,7 +630,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'overSeaQAProfessorOneProject',
@@ -640,7 +640,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'overSeaQAProfessorAll',
@@ -650,7 +650,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'mockInterview',
@@ -660,8 +660,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
-        },
+          type: 'research'
+        }
       ],
       apply: [
         {
@@ -672,7 +672,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'essayWritten',
@@ -682,7 +682,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'applyAndSubmit',
@@ -692,7 +692,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'transcriptAndCertificationTransfer',
@@ -702,7 +702,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'transcriptCertificated',
@@ -712,7 +712,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'collegeELIApply',
@@ -722,7 +722,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'collegeAdvisor',
@@ -732,7 +732,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'visaApplyAndGuide',
@@ -742,7 +742,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'specialOneOnOnePlanService',
@@ -752,7 +752,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'overseaProfessorEssayService',
@@ -762,7 +762,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'professorReference',
@@ -772,7 +772,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'pickUpService',
@@ -782,7 +782,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'houseApply',
@@ -792,7 +792,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'relativesVisaApply',
@@ -802,7 +802,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'vipParentsMeeting',
@@ -812,7 +812,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'freshManService',
@@ -822,8 +822,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
-        },
+          type: 'apply'
+        }
       ],
       upgrade: [
         {
@@ -834,7 +834,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'relatedInternRecommend',
@@ -844,7 +844,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'bigCompaniesInternRecommend',
@@ -854,7 +854,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'shortTermLesson',
@@ -864,7 +864,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'graduationShowPlan',
@@ -874,7 +874,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'topSummerSchoolApply',
@@ -884,7 +884,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'lessonAndGraduationGuide',
@@ -894,7 +894,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'raceProjectGuide',
@@ -904,7 +904,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'personalWebDesign',
@@ -914,9 +914,9 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
-        },
-      ],
+          type: 'upgrade'
+        }
+      ]
     },
     vipTopThree: {
       productMajor: [
@@ -928,7 +928,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDMajorTheoryImprove',
@@ -938,7 +938,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDMajorTheoryOneOnOne',
@@ -948,7 +948,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleOne',
@@ -958,7 +958,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleTwo',
@@ -968,7 +968,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleThree',
@@ -978,7 +978,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleFour',
@@ -988,7 +988,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleFive',
@@ -998,7 +998,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDInterview',
@@ -1008,7 +1008,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDTreble X',
@@ -1018,7 +1018,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDWorkshop',
@@ -1028,7 +1028,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDPortfolioLayout',
@@ -1038,7 +1038,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDGlobalCollegeAnalyze',
@@ -1048,7 +1048,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDPaperImprove',
@@ -1058,7 +1058,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDPAndCImprove',
@@ -1068,7 +1068,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDMasterShare',
@@ -1078,8 +1078,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
-        },
+          type: 'productMajor'
+        }
       ],
       research: [
         {
@@ -1090,7 +1090,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'recordAndFeedback',
@@ -1100,7 +1100,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'critiqueAndSupervise',
@@ -1110,7 +1110,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'projectQABySchoolArea',
@@ -1120,7 +1120,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'projectQAByCountry',
@@ -1130,7 +1130,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'admissionQA',
@@ -1140,7 +1140,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'paperTextTransfer',
@@ -1150,7 +1150,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'schoolChooseGuide',
@@ -1160,7 +1160,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'schoolChooseGuideAll',
@@ -1170,7 +1170,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'essayGuide',
@@ -1180,7 +1180,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'teachingTrackAndFeedback',
@@ -1190,7 +1190,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'overSeaQAProfessorOneProject',
@@ -1200,8 +1200,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
-        },
+          type: 'research'
+        }
       ],
       apply: [
         {
@@ -1212,7 +1212,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'essayWritten',
@@ -1222,7 +1222,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'applyAndSubmit',
@@ -1232,7 +1232,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'transcriptAndCertificationTransfer',
@@ -1242,7 +1242,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'transcriptCertificated',
@@ -1252,7 +1252,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'collegeELIApply',
@@ -1262,7 +1262,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'collegeAdvisor',
@@ -1272,7 +1272,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'visaApplyAndGuide',
@@ -1282,7 +1282,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'specialOneOnOnePlanService',
@@ -1292,7 +1292,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'overseaProfessorEssayService',
@@ -1302,7 +1302,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'professorReference',
@@ -1312,7 +1312,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'pickUpService',
@@ -1322,7 +1322,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'houseApply',
@@ -1332,7 +1332,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'relativesVisaApply',
@@ -1342,7 +1342,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'vipParentsMeeting',
@@ -1352,7 +1352,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'freshManService',
@@ -1362,8 +1362,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
-        },
+          type: 'apply'
+        }
       ],
       upgrade: [
         {
@@ -1374,7 +1374,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'relatedInternRecommend',
@@ -1384,7 +1384,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'bigCompaniesInternRecommend',
@@ -1394,7 +1394,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'shortTermLesson',
@@ -1404,7 +1404,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'graduationShowPlan',
@@ -1414,7 +1414,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'topSummerSchoolApply',
@@ -1424,7 +1424,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'lessonAndGraduationGuide',
@@ -1434,9 +1434,9 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
-        },
-      ],
+          type: 'upgrade'
+        }
+      ]
     },
     vipTopFive: {
       productMajor: [
@@ -1448,7 +1448,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDMajorTheoryImprove',
@@ -1458,7 +1458,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDMajorSkillOneOnOne',
@@ -1468,7 +1468,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleOne',
@@ -1478,7 +1478,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleTwo',
@@ -1488,7 +1488,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleThree',
@@ -1498,7 +1498,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleFour',
@@ -1508,7 +1508,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleFive',
@@ -1518,7 +1518,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDInterview',
@@ -1528,7 +1528,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDTreble X',
@@ -1538,7 +1538,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDWorkshop',
@@ -1548,7 +1548,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDVIPSpecialService',
@@ -1558,7 +1558,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDPortfolioLayout',
@@ -1568,7 +1568,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDGlobalCollegeAnalyze',
@@ -1578,7 +1578,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDPaperImprove',
@@ -1588,7 +1588,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDPAndCImprove',
@@ -1598,7 +1598,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDMasterShare',
@@ -1608,8 +1608,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
-        },
+          type: 'productMajor'
+        }
       ],
       research: [
         {
@@ -1620,7 +1620,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'recordAndFeedback',
@@ -1630,7 +1630,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'critiqueAndSupervise',
@@ -1640,7 +1640,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'projectQABySchoolArea',
@@ -1650,7 +1650,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'projectQAByCountry',
@@ -1660,7 +1660,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'admissionQA',
@@ -1670,7 +1670,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'paperTextTransfer',
@@ -1680,7 +1680,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'schoolChooseGuide',
@@ -1690,7 +1690,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'schoolChooseGuideAll',
@@ -1700,7 +1700,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'essayGuide',
@@ -1710,7 +1710,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'teachingTrackAndFeedback',
@@ -1720,8 +1720,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
-        },
+          type: 'research'
+        }
       ],
       apply: [
         {
@@ -1732,7 +1732,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'essayWritten',
@@ -1742,7 +1742,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'applyAndSubmit',
@@ -1752,7 +1752,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'transcriptAndCertificationTransfer',
@@ -1762,7 +1762,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'transcriptCertificated',
@@ -1772,7 +1772,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'collegeELIApply',
@@ -1782,7 +1782,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'collegeAdvisor',
@@ -1792,7 +1792,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'visaApplyAndGuide',
@@ -1802,7 +1802,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'specialOneOnOnePlanService',
@@ -1812,7 +1812,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'relativesVisaApply',
@@ -1822,7 +1822,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'vipParentsMeeting',
@@ -1832,8 +1832,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
-        },
+          type: 'apply'
+        }
       ],
       upgrade: [
         {
@@ -1844,7 +1844,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'relatedInternRecommend',
@@ -1854,7 +1854,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'graduationShowPlan',
@@ -1864,9 +1864,9 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
-        },
-      ],
+          type: 'upgrade'
+        }
+      ]
     },
     vipTopEight: {
       productMajor: [
@@ -1878,7 +1878,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDMajorTheoryImprove',
@@ -1888,7 +1888,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleOne',
@@ -1898,7 +1898,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleTwo',
@@ -1908,7 +1908,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleThree',
@@ -1918,7 +1918,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDModuleFour',
@@ -1928,7 +1928,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDInterview',
@@ -1938,7 +1938,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDTreble X',
@@ -1948,7 +1948,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDWorkshop',
@@ -1958,7 +1958,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDPortfolioLayout',
@@ -1968,7 +1968,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDGlobalCollegeAnalyze',
@@ -1978,7 +1978,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDPaperImprove',
@@ -1988,7 +1988,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDPAndCImprove',
@@ -1998,7 +1998,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
+          type: 'productMajor'
         },
         {
           projectKey: 'SKDMasterShare',
@@ -2008,8 +2008,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'productMajor',
-        },
+          type: 'productMajor'
+        }
       ],
       research: [
         {
@@ -2020,7 +2020,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'recordAndFeedback',
@@ -2030,7 +2030,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'critiqueAndSupervise',
@@ -2040,7 +2040,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'projectQABySchoolArea',
@@ -2050,7 +2050,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'admissionQA',
@@ -2060,7 +2060,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'paperTextTransfer',
@@ -2070,7 +2070,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'schoolChooseGuide',
@@ -2080,7 +2080,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
+          type: 'research'
         },
         {
           projectKey: 'essayGuide',
@@ -2090,8 +2090,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'research',
-        },
+          type: 'research'
+        }
       ],
       apply: [
         {
@@ -2102,7 +2102,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'essayWritten',
@@ -2112,7 +2112,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'applyAndSubmit',
@@ -2122,7 +2122,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'transcriptAndCertificationTransfer',
@@ -2132,7 +2132,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'transcriptCertificated',
@@ -2142,7 +2142,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'collegeELIApply',
@@ -2152,7 +2152,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'collegeAdvisor',
@@ -2162,7 +2162,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'visaApplyAndGuide',
@@ -2172,7 +2172,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
+          type: 'apply'
         },
         {
           projectKey: 'vipParentsMeeting',
@@ -2182,8 +2182,8 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'apply',
-        },
+          type: 'apply'
+        }
       ],
       upgrade: [
         {
@@ -2194,7 +2194,7 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
+          type: 'upgrade'
         },
         {
           projectKey: 'graduationShowPlan',
@@ -2204,11 +2204,11 @@ const inputInformation = {
           projectPredictCost: '',
           projectPeriod: null,
           status: 0,
-          type: 'upgrade',
-        },
-      ],
-    },
-  },
+          type: 'upgrade'
+        }
+      ]
+    }
+  }
 }
 
 export { inputInformation }
