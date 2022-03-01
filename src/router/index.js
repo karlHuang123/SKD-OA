@@ -181,6 +181,28 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/personal-calender',
+    component: Layout,
+    redirect: '/personal-calender/personal-calender',
+    meta: {
+      title: '个人日程表',
+      icon: 'calendar-line',
+      permission: ['TEACHER', 'MANAGER']
+    },
+    children: [
+      {
+        path: 'personal-calender',
+        name: 'Personal-Calender',
+        component: () => import('@/views/personal-calender'),
+        meta: {
+          title: '个人日程表',
+          icon: 'calendar-line',
+          permission: ['MANAGER']
+        }
+      }
+    ]
+  },
+  {
     path: '/general-info',
     component: Layout,
     redirect: '/educational-info/contract-input',
