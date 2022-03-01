@@ -43,22 +43,22 @@
   export default {
     name: 'FindPassword',
     components: {
-      MailOutlined,
+      MailOutlined
     },
     data() {
       return {
         form: {
-          email: '',
+          email: ''
         },
         dependencies: dependencies,
-        devDependencies: devDependencies,
+        devDependencies: devDependencies
       }
     },
     computed: {
       ...mapGetters({
         logo: 'settings/logo',
-        title: 'settings/title',
-      }),
+        title: 'settings/title'
+      })
     },
     mounted() {
       if (window.history && window.history.pushState) {
@@ -71,7 +71,7 @@
     },
     methods: {
       ...mapActions({
-        forgetPassword: 'user/forgetPassword',
+        forgetPassword: 'user/forgetPassword'
       }),
       goBack() {
         this.$router.go(-1)
@@ -85,14 +85,14 @@
               this.$router.replace({
                 name: 'please-confirmed',
                 params: {
-                  info: `重置密码链接已发送，请前往${this.form.email}进行验证`,
-                },
+                  info: `重置密码链接已发送，请前往${this.form.email}进行验证`
+                }
               })
             }
-          },
+          }
         })
-      },
-    },
+      }
+    }
   }
 </script>
 <style scoped lang="less">

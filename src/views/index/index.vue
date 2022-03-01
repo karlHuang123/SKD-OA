@@ -8,6 +8,6 @@
   import VersionInformation from './components/VersionInformation'
   export default {
     name: 'Index',
-    components: { VersionInformation },
+    components: { VersionInformation }
   }
 </script>

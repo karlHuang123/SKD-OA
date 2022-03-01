@@ -132,14 +132,14 @@
         listPara: {
           pageNum: 1,
           pageSize: 10,
-          searchVal: '',
+          searchVal: ''
         },
         form: {
           userEmail: '',
           department: '',
           position: '',
           userFeature: [],
-          teacherName: '',
+          teacherName: ''
         },
         campus: null,
         deparment: null,
@@ -154,10 +154,10 @@
           showSizeChanger: true,
           showQuickJumper: true,
           pageSizeOptions: ['10', '20', '50', '100'],
-          showTotal: (total) => `共${total}条`,
+          showTotal: (total) => `共${total}条`
         },
         staffAbilitiesList: null,
-        positions: [], // 根据部门查找到的岗位信息
+        positions: [] // 根据部门查找到的岗位信息
       }
     },
     methods: {
@@ -167,13 +167,13 @@
         getStaffList: 'position/getStaffList',
         deleteStaff: 'position/deleteStaff',
         getStaffAbilitiesList: 'position/getStaffAbilitiesList',
-        getListByDeptName: 'position/getListByDeptName',
+        getListByDeptName: 'position/getListByDeptName'
       }),
       searchPosition() {
         this.getStaffListFuc(
           this.listPara.pageNum,
           this.listPara.pageSize,
-          this.listPara.searchVal,
+          this.listPara.searchVal
         )
       },
       getStaffListFuc(pageNum = 1, pageSize = 10, searchVal = '') {
@@ -185,7 +185,7 @@
           callback: (res) => {
             this.staffListJson = res.rows
             this.pagination.total = res.total
-          },
+          }
         })
       },
       getStaffAbilitiesListFuc() {
@@ -193,7 +193,7 @@
           callback: (res) => {
             console.log(res)
             this.staffAbilitiesList = res.data
-          },
+          }
         })
       },
       getListByDeptNameFuc(deptName) {
@@ -205,11 +205,11 @@
             res.rows.forEach((item) => {
               const ele = {
                 label: item.postName,
-                value: item.postCode,
+                value: item.postCode
               }
               this.positions.push(ele)
             })
-          },
+          }
         })
       },
       handleCampusChange(value) {
@@ -256,7 +256,7 @@
             if (err) {
               this.$message.success(err)
             }
-          },
+          }
         })
       },
       closeAddUser() {
@@ -268,7 +268,7 @@
         if (this.campus) {
           this.deparment = null
         }
-      },
+      }
     },
     mounted() {
       this.getStaffListFuc()
@@ -286,7 +286,7 @@
           this.deparment = res.data[0].children
         }
       })
-    },
+    }
   }
 </script>
 <style lang="less" scoped>

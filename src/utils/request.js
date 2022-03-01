@@ -4,7 +4,7 @@ import {
   contentType,
   debounce,
   requestTimeout,
-  successCode,
+  successCode
   // tokenName,
 } from '@/config'
 import store from '@/store'
@@ -45,8 +45,8 @@ const instance = axios.create({
   baseURL,
   timeout: requestTimeout,
   headers: {
-    'Content-Type': contentType,
-  },
+    'Content-Type': contentType
+  }
 })
 
 /**
@@ -71,7 +71,7 @@ instance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error)
-  },
+  }
 )
 
 /**
@@ -95,7 +95,7 @@ instance.interceptors.response.use(
       handleCode(code, msg)
       return Promise.reject(
         'SKD-OA请求异常拦截:' +
-          JSON.stringify({ url: config.url, code, msg }) || 'Error',
+          JSON.stringify({ url: config.url, code, msg }) || 'Error'
       )
     }
   },
@@ -121,7 +121,7 @@ instance.interceptors.response.use(
       message.error(message || `后端接口未知异常`)
       return Promise.reject(error)
     }
-  },
+  }
 )
 
 export default instance

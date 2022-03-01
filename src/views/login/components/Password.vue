@@ -43,22 +43,22 @@
   export default {
     name: 'FindPassword',
     components: {
-      MailOutlined,
+      MailOutlined
     },
     data() {
       return {
         form: {
-          email: '',
+          email: ''
         },
         dependencies: dependencies,
-        devDependencies: devDependencies,
+        devDependencies: devDependencies
       }
     },
     computed: {
       ...mapGetters({
         logo: 'settings/logo',
-        title: 'settings/title',
-      }),
+        title: 'settings/title'
+      })
     },
     mounted() {
       if (window.history && window.history.pushState) {
@@ -71,7 +71,7 @@
     },
     methods: {
       ...mapActions({
-        findPassWord: 'user/findPassWord',
+        findPassWord: 'user/findPassWord'
       }),
       goBack() {
         this.$router.go(-1)
@@ -79,8 +79,8 @@
       async handleSubmit() {
         await this.findPassWord(this.form)
         this.$emit('')
-      },
-    },
+      }
+    }
   }
 </script>
 <style scoped lang="less">

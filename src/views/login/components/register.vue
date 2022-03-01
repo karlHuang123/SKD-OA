@@ -82,7 +82,7 @@
     UserOutlined,
     LockOutlined,
     SafetyOutlined,
-    SyncOutlined,
+    SyncOutlined
   } from '@ant-design/icons-vue'
 
   export default {
@@ -91,7 +91,7 @@
       UserOutlined,
       LockOutlined,
       SafetyOutlined,
-      SyncOutlined,
+      SyncOutlined
     },
     data() {
       return {
@@ -100,27 +100,27 @@
           password: '',
           email: '',
           code: '',
-          uuid: '',
+          uuid: ''
         },
         redirect: undefined,
         dependencies: dependencies,
         devDependencies: devDependencies,
-        codeImg: '',
+        codeImg: ''
       }
     },
     computed: {
       ...mapGetters({
         logo: 'settings/logo',
-        title: 'settings/title',
-      }),
+        title: 'settings/title'
+      })
     },
     watch: {
       $route: {
         handler(route) {
           this.redirect = (route.query && route.query.redirect) || '/'
         },
-        immediate: true,
-      },
+        immediate: true
+      }
     },
     mounted() {
       this.getAuthCode((res) => {
@@ -138,7 +138,7 @@
     methods: {
       ...mapActions({
         register: 'user/register',
-        getAuthCode: 'user/getAuthCode',
+        getAuthCode: 'user/getAuthCode'
       }),
       handleRoute() {
         return this.redirect === '/404' || this.redirect === '/403'
@@ -157,8 +157,8 @@
           this.codeImg = 'data:image/gif;base64,' + res.img
           this.form.uuid = res.uuid
         })
-      },
-    },
+      }
+    }
   }
 </script>
 <style scoped lang="less">

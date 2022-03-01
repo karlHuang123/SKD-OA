@@ -9,7 +9,7 @@ import {
   getStaffList,
   deleteStaff,
   getStaffAbilitiesList,
-  getListByDeptName,
+  getListByDeptName
 } from '@/api/position'
 import { message } from 'ant-design-vue'
 
@@ -17,14 +17,14 @@ const state = () => ({
   positionList: null,
   positionDetail: null,
   staffList: null,
-  abilitiesList: null,
+  abilitiesList: null
 })
 
 const getters = {
   positionList: (state) => state.positionList,
   positionDetail: (state) => state.positionDetail,
   staffList: (state) => state.staffList,
-  abilitiesList: (state) => state.abilitiesList,
+  abilitiesList: (state) => state.abilitiesList
 }
 
 const mutations = {
@@ -63,7 +63,7 @@ const mutations = {
    */
   setAbilitiesList(state, abilitiesList) {
     state.abilitiesList = abilitiesList
-  },
+  }
 }
 
 const actions = {
@@ -125,6 +125,6 @@ const actions = {
     } else {
       console.log(state.staffList)
     }
-  },
+  }
 }
 export default { state, getters, mutations, actions }

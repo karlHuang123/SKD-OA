@@ -6,11 +6,11 @@ module.exports = {
   singleQuote: true,
   quoteProps: 'as-needed',
   jsxSingleQuote: false,
-  trailingComma: 'all',
+  trailingComma: 'none',
   bracketSpacing: true,
   jsxBracketSameLine: false,
   arrowParens: 'always',
   htmlWhitespaceSensitivity: 'ignore',
   vueIndentScriptAndStyle: true,
-  endOfLine: 'lf',
+  endOfLine: 'lf'
 }

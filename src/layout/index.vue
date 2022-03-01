@@ -75,27 +75,27 @@
       VabTabs,
       VabContent,
       MenuUnfoldOutlined,
-      MenuFoldOutlined,
+      MenuFoldOutlined
     },
     data() {
       return {
         selectedKeys: [],
         openKeys: [],
-        rolePermission: null,
+        rolePermission: null
       }
     },
     computed: {
       ...mapGetters({
         collapse: 'settings/collapse',
         routes: 'routes/routes',
-        device: 'settings/device',
+        device: 'settings/device'
       }),
       classObj() {
         return {
           'vab-mobile': this.device === 'mobile',
-          'vab-collapse': this.collapse,
+          'vab-collapse': this.collapse
         }
-      },
+      }
     },
     watch: {
       $route: {
@@ -105,8 +105,8 @@
             : (this.selectedKeys = [matched[0].path])
           this.openKeys = [matched[0].path]
         },
-        immediate: true,
-      },
+        immediate: true
+      }
     },
     beforeMount() {
       window.addEventListener('resize', this.handleLayouts)
@@ -122,7 +122,7 @@
       ...mapActions({
         toggleDevice: 'settings/toggleDevice',
         handleFoldSideBar: 'settings/foldSideBar',
-        toggleCollapse: 'settings/toggleCollapse',
+        toggleCollapse: 'settings/toggleCollapse'
       }),
       handleLayouts() {
         const width = document.body.getBoundingClientRect().width
@@ -131,8 +131,8 @@
           this.toggleDevice(isMobile ? 'mobile' : 'desktop')
           this.width = width
         }
-      },
-    },
+      }
+    }
   }
 </script>
 <style lang="less">

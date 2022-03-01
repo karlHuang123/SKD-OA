@@ -110,9 +110,10 @@
       <div style="margin-bottom: 10px">
         <label for="">服务名称：</label>
         <a-select
-          :default-value="'请选择'"
+          :default-value="defaultSelect"
           style="width: 150px"
           @change="handleServiceChange"
+          v-if="showAddProject"
         >
           <a-select-option
             v-for="item in serviceList"
@@ -150,20 +151,21 @@
           status: '0',
           projectPeriod: null,
           projectPredictionCost: null,
-          projectType: null,
+          projectType: null
         },
         serviceList: inputInformation.serviceList,
         showAddProject: false,
         tempProjectName: null,
         tempTeacherName: null,
+        defaultSelect: '请选择'
       }
     },
     watch: {
       studentInfo: {
         handler(newVal) {
           this.customerStudentInfo = JSON.parse(JSON.stringify(newVal))
-        },
-      },
+        }
+      }
     },
     methods: {
       handleChange() {
@@ -176,8 +178,6 @@
         this.showAddProject = true
       },
       closeAddProject() {
-        this.projectSection = null
-        this.tempProjectName = null
         this.tempTeacherName = null
         this.showAddProject = false
       },
@@ -193,11 +193,11 @@
             projectPredictCost: '',
             projectPeriod: null,
             status: 0,
-            type: this.projectSection,
+            type: this.projectSection
           }
           switch (this.projectSection) {
-            case 'projectMajor':
-              this.customerStudentInfo.projects.projectMajor.push(tempProject)
+            case 'productMajor':
+              this.customerStudentInfo.projects.productMajor.push(tempProject)
               break
             case 'research':
               this.customerStudentInfo.projects.research.push(tempProject)
@@ -209,13 +209,14 @@
               this.customerStudentInfo.projects.upgrade.push(tempProject)
               break
           }
+          this.$emit('studentInfoChanged', this.customerStudentInfo)
           this.showAddProject = false
         }
-      },
+      }
     },
     mounted() {
       this.customerStudentInfo = JSON.parse(JSON.stringify(this.studentInfo))
-    },
+    }
   }
 </script>
 <style lang="less" scoped>

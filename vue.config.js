@@ -15,7 +15,7 @@ const {
   devPort,
   providePlugin,
   build7z,
-  donation,
+  donation
 } = require('./src/config')
 const { webpackBarName, webpackBanner, donationConsole } = require('vab-config')
 
@@ -24,6 +24,7 @@ const { version, author } = require('./package.json')
 const Webpack = require('webpack')
 const WebpackBar = require('webpackbar')
 const FileManagerPlugin = require('filemanager-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 const dayjs = require('dayjs')
 const date = dayjs().format('YYYY_M_D')
 const time = dayjs().format('YYYY-M-D HH:mm:ss')
@@ -57,7 +58,7 @@ module.exports = {
     noInfo: false,
     overlay: {
       warnings: true,
-      errors: true,
+      errors: true
     },
     // 注释掉的地方是前端配置代理访问后端的示例
     // proxy: {
@@ -70,22 +71,22 @@ module.exports = {
     //     },
     //   },
     // },
-    after: mockServer(),
+    after: mockServer()
   },
   configureWebpack() {
     return {
       resolve: {
         alias: {
           '@': resolve('src'),
-          '*': resolve(''),
-        },
+          '*': resolve('')
+        }
       },
       plugins: [
         new Webpack.ProvidePlugin(providePlugin),
         new WebpackBar({
-          name: webpackBarName,
-        }),
-      ],
+          name: webpackBarName
+        })
+      ]
     }
   },
   chainWebpack(config) {
@@ -116,9 +117,9 @@ module.exports = {
             name: 'vue-admin-beautiful-libs',
             test: /[\\/]node_modules[\\/]/,
             priority: 10,
-            chunks: 'initial',
-          },
-        },
+            chunks: 'initial'
+          }
+        }
       })
       config
         .plugin('banner')
@@ -129,7 +130,7 @@ module.exports = {
         .use('image-webpack-loader')
         .loader('image-webpack-loader')
         .options({
-          bypassOnDebug: true,
+          bypassOnDebug: true
         })
         .end()
     })
@@ -145,14 +146,25 @@ module.exports = {
                 archive: [
                   {
                     source: `./${outputDir}`,
-                    destination: `./${outputDir}/${abbreviation}_${outputDir}_${date}.7z`,
-                  },
-                ],
-              },
-            },
+                    destination: `./${outputDir}/${abbreviation}_${outputDir}_${date}.7z`
+                  }
+                ]
+              }
+            }
           ])
           .end()
       })
+    }
+    // 生产环境，开启js\css压缩
+    if (process.env.NODE_ENV === 'production') {
+      config.plugin('compressionPlugin').use(
+        new CompressionPlugin({
+          test: /\.(js|css|less)$/, // 匹配文件名
+          threshold: 10240, // 对超过10k的数据压缩
+          minRatio: 0.8,
+          deleteOriginalAssets: true // 删除源文件
+        })
+      )
     }
   },
   runtimeCompiler: true,
@@ -168,10 +180,10 @@ module.exports = {
             'vab-color-blue': '#1890ff',
             'vab-margin': '20px',
             'vab-padding': '20px',
-            'vab-header-height': '65px',
-          },
-        },
-      },
-    },
-  },
+            'vab-header-height': '65px'
+          }
+        }
+      }
+    }
+  }
 }

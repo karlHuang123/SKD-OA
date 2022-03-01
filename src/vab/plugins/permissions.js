@@ -9,7 +9,7 @@ import {
   authentication,
   loginInterception,
   recordRoute,
-  routesWhiteList,
+  routesWhiteList
 } from '@/config'
 
 router.beforeEach(async (to, from, next) => {
@@ -52,7 +52,7 @@ router.beforeEach(async (to, from, next) => {
             next({
               path: '/login',
               query: { redirect: to.path },
-              replace: true,
+              replace: true
             })
           else next({ path: '/login', replace: true })
         }

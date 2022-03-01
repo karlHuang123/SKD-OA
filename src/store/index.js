@@ -13,5 +13,5 @@ Object.keys(modules).forEach((key) => {
   modules[key]['namespaced'] = true
 })
 export default createStore({
-  modules,
+  modules
 })

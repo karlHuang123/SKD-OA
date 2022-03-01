@@ -13,20 +13,20 @@
   const columns = [
     {
       title: 'title',
-      dataIndex: 'title',
+      dataIndex: 'title'
     },
     {
       title: 'description',
-      dataIndex: 'description',
+      dataIndex: 'description'
     },
     {
       title: 'author',
-      dataIndex: 'author',
+      dataIndex: 'author'
     },
     {
       title: 'datetime',
-      dataIndex: 'datetime',
-    },
+      dataIndex: 'datetime'
+    }
   ]
 
   export default {
@@ -36,11 +36,11 @@
         pagination: {
           showLessItems: true,
           showQuickJumper: true,
-          showSizeChanger: true,
+          showSizeChanger: true
         },
         query: {},
         loading: false,
-        columns,
+        columns
       }
     },
     mounted() {
@@ -57,7 +57,7 @@
         this.loading = true
         getList({
           pageSize: this.pagination.pageSize,
-          current: this.pagination.current,
+          current: this.pagination.current
         }).then(({ data, total }) => {
           const pagination = { ...this.pagination }
           pagination.total = total
@@ -65,7 +65,7 @@
           this.data = data
           this.pagination = pagination
         })
-      },
-    },
+      }
+    }
   }
 </script>

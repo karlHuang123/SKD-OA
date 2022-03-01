@@ -18,9 +18,9 @@
             this.$store.dispatch('settings/foldSideBar')
           }
         },
-        immediate: true,
-      },
-    },
+        immediate: true
+      }
+    }
   }
 </script>
 

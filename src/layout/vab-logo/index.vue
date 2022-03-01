@@ -18,9 +18,9 @@
       const store = useStore()
       return {
         logo: computed(() => store.getters['settings/logo']),
-        title: computed(() => store.getters['settings/title']),
+        title: computed(() => store.getters['settings/title'])
       }
-    },
+    }
   }
 </script>
 <style lang="less" scoped>

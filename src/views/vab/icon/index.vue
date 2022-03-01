@@ -56,8 +56,8 @@
         queryForm: {
           current: 1,
           pageSize: 72,
-          title: '',
-        },
+          title: ''
+        }
       }
     },
     created() {
@@ -86,8 +86,8 @@
       },
       handleCopyIcon(item, event) {
         clip(`<vab-remix-icon icon-class="${item}"></vab-remix-icon>`, event)
-      },
-    },
+      }
+    }
   }
 </script>
 

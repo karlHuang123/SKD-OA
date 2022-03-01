@@ -39,7 +39,7 @@
         headline: '您没有操作角色...',
         info: '当前帐号没有操作角色,请联系管理员。',
         btn: '返回首页',
-        timer: 0,
+        timer: 0
       }
     },
     mounted() {
@@ -51,7 +51,7 @@
     methods: {
       ...mapActions({
         delVisitedRoute: 'tagsBar/delVisitedRoute',
-        delOthersVisitedRoutes: 'tagsBar/delOthersVisitedRoutes',
+        delOthersVisitedRoutes: 'tagsBar/delOthersVisitedRoutes'
       }),
       timeChange() {
         this.timer = setInterval(() => {
@@ -63,8 +63,8 @@
             clearInterval(this.timer)
           }
         }, 1000)
-      },
-    },
+      }
+    }
   }
 </script>
 
