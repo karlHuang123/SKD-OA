@@ -13,6 +13,10 @@
     "deploy": "start ./deploy.sh"
   },
   "dependencies": {
+    "@fullcalendar/core": "^5.10.1",
+    "@fullcalendar/daygrid": "^5.10.1",
+    "@fullcalendar/interaction": "^5.10.1",
+    "@fullcalendar/vue": "^5.10.1",
     "ant-design-vue": "2.2.2",
     "axios": "^0.21.1",
     "clipboard": "^2.0.8",
