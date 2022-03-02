@@ -117,6 +117,7 @@
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
             // right: ''
           },
+          buttonText: { today: '今天', month: '月', week: '周', day: '天' },
           evnetTime: {
             hour: 'numeric',
             minute: '2-digit',
@@ -131,7 +132,11 @@
           ],
           dateClick: this.handleDateClick,
           eventClick: this.eventClick,
-          eventRender: this.eventRender
+          businessHours: {
+            startTime: '10:00',
+            endTime: '19:00'
+          },
+          snapDuration: { hours: 2 }
         }
       }
     },
@@ -165,6 +170,9 @@
             // add new event data
             title: `${this.studentName}，${this.projectName}`,
             start: this.tempDateArg.dateStr,
+            end: Moment(this.tempDateArg.dateStr)
+              .subtract(-2, 'hours')
+              .format('YYYY-MM-DD HH:mm'), // 设置向后固定两个小时
             groupId: Math.random().toFixed(5).toString()
           })
         } else {
