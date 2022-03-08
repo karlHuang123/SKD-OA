@@ -88,6 +88,7 @@
   import dayGridPlugin from '@fullcalendar/daygrid'
   import timeGridPlugin from '@fullcalendar/timegrid'
   import interactionPlugin from '@fullcalendar/interaction'
+  import dateModeTransform from '../../utils/date'
   //   import '@fullcalendar/core/main.css'
   import Moment from 'moment'
   export default {
@@ -107,15 +108,24 @@
         endDate: '',
         calendarOptions: {
           plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
-          initialView: 'dayGridMonth',
+          initialView: 'timeGridWeek',
+          height: 790,
           firstDay: '1',
           locale: 'zh-cn',
           displayEventTime: true,
+          selectable: true,
+          // editable: true,
+          slotDuration: '1:00',
+          slotMinTime: '08:00:00',
+          slotMaxTime: '20:30:00',
           headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
             // right: ''
+          },
+          selectConstraint: {
+            daysOfWeek: [1, 4, 3, 0, 5]
           },
           buttonText: { today: '今天', month: '月', week: '周', day: '天' },
           evnetTime: {
@@ -123,40 +133,55 @@
             minute: '2-digit',
             hour12: false
           },
-          events: [
-            {
-              title: '孙悟空，西天取经不怕事儿',
-              start: new Date(),
-              groupId: '1'
-            }
-          ],
+          events: [],
           dateClick: this.handleDateClick,
           eventClick: this.eventClick,
-          businessHours: {
-            startTime: '10:00',
-            endTime: '19:00'
-          },
-          snapDuration: { hours: 2 }
+          select: this.select,
+          snapDuration: { hours: 1 }
         }
       }
     },
     methods: {
       handleDateClick(arg) {
         this.tempDateArg = arg
+        const day = Moment(arg.dateStr).day()
+        if (
+          this.calendarOptions.selectConstraint.daysOfWeek.indexOf(day) !== -1
+        ) {
+          this.showDateEdit = true
+        } else {
+          alert('该老师今天休息！')
+        }
+      },
+      select(arg) {
+        this.tempDateArg = arg
+        this.startDate = Moment(arg.startStr)
+          .utcOffset(8)
+          .format('YYYY-MM-DD HH:mm')
+        this.endDate = Moment(arg.endStr)
+          .utcOffset(8)
+          .format('YYYY-MM-DD HH:mm')
         this.showDateEdit = true
       },
       eventClick(info) {
         this.tempInfo = info
-        this.startDate = Moment(info.event._instance.range.start)
-          .utcOffset(0)
-          .format('YYYY-MM-DD HH:mm')
-        this.endDate = Moment(info.event._instance.range.end)
-          .utcOffset(0)
-          .format('YYYY-MM-DD HH:mm')
-        this.studentName = info.event._def.title.split('，')[0]
-        this.projectName = info.event._def.title.split('，')[1]
-        this.showExsitDateEdit = true
-        // this.tempInfo.event.remove()
+        const day = Moment(info.event._instance.range.start).utcOffset(0).format('YYYY-MM-DD HH:mm') // 莫名其妙的时区问题
+        const realDay = Moment(day).day()
+        if (
+          this.calendarOptions.selectConstraint.daysOfWeek.indexOf(realDay) !== -1
+        ) {
+          this.startDate = Moment(info.event._instance.range.start)
+            .utcOffset(0)
+            .format('YYYY-MM-DD HH:mm')
+          this.endDate = Moment(info.event._instance.range.end)
+            .utcOffset(0)
+            .format('YYYY-MM-DD HH:mm')
+          this.studentName = info.event._def.title.split('，')[0]
+          this.projectName = info.event._def.title.split('，')[1]
+          this.showExsitDateEdit = true
+        } else {
+          alert('该老师今天休息！')
+        }
       },
       startDateChange(date, dateString) {
         this.startDate = dateString
@@ -169,10 +194,10 @@
           this.calendarOptions.events.push({
             // add new event data
             title: `${this.studentName}，${this.projectName}`,
-            start: this.tempDateArg.dateStr,
-            end: Moment(this.tempDateArg.dateStr)
-              .subtract(-2, 'hours')
-              .format('YYYY-MM-DD HH:mm'), // 设置向后固定两个小时
+            start: this.startDate ? this.startDate : this.tempDateArg.dateStr,
+            end: this.endDate ? this.endDate : Moment(this.tempDateArg.dateStr)
+              .subtract(-1, 'hours')
+              .format('YYYY-MM-DD HH:mm'), // 设置向后固定一个小时
             groupId: Math.random().toFixed(5).toString()
           })
         } else {
@@ -184,9 +209,7 @@
             end: this.endDate
           })
         }
-        this.showDateEdit = false
-        this.startDate = null
-        this.endDate = null
+        this.closeDateEdit()
       },
       confirmExsitDateEdit() {
         this.calendarOptions.events = this.calendarOptions.events.filter(
@@ -201,7 +224,7 @@
           start: this.startDate,
           end: this.endDate
         })
-        this.showExsitDateEdit = false
+        this.closeExsitDateEdit()
       },
       closeDateEdit() {
         this.studentName = null
@@ -223,10 +246,37 @@
             return item.groupId !== this.tempInfo.event._def.groupId
           }
         )
-        this.showExsitDateEdit = false
+        this.closeExsitDateEdit()
       }
     },
-    mounted() {}
+    mounted() {
+      const restDate = dateModeTransform.getWeek('2018-01-01', '2028-01-01', [2, 6])
+      restDate.forEach(item => {
+        const ele = {
+          title: '休息',
+          start: item + ' 08:00',
+          end: item + ' 20:30',
+          color: 'lightgray'
+        }
+        this.calendarOptions.events.push(ele)
+      })
+    }
   }
 </script>
-<style lang="less" scoped></style>
+<style lang="less">
+  .fc .fc-timegrid-slot {
+    height: 50px !important;
+  }
+  .fc .fc-timegrid-col.fc-day-today {
+    background-color: white !important;
+  }
+  .fc .fc-timegrid-col.fc-day-tue {
+    background-color: lightcyan !important;
+  }
+  .fc .fc-timegrid-col.fc-day-thu {
+    background-color: lightcyan !important;
+  }
+  .fc .fc-timegrid-col.fc-day-sat {
+    background-color: lightcyan !important;
+  }
+</style>
