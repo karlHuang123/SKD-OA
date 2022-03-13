@@ -32,6 +32,11 @@
                 编辑
               </a-button>
             </span>
+            <span class="edit">
+              <a-button @click="() => downloadContractFun(record.studentId)">
+                下载合同
+              </a-button>
+            </span>
             <span>
               <a-popconfirm
                 title="确定删除该学生信息吗？"
@@ -100,7 +105,8 @@
         getStudentList: 'contract/getStudentList',
         deleteStudent: 'contract/deleteStudent',
         getStudent: 'contract/getStudent',
-        editStudent: 'contract/editStudent'
+        editStudent: 'contract/editStudent',
+        downloadContract: 'contract/downloadContract'
       }),
       getStudentListFuc(pageNum = 1, pageSize = 10, studentName = '') {
         this.listPara.pageNum = pageNum
@@ -120,6 +126,16 @@
           callback: (res) => {
             this.studentInfo = res.data
             this.showEditStudentModal = true
+          }
+        })
+      },
+      downloadContractFun(studentId) {
+        this.downloadContract({
+          studentId: studentId,
+          callback: (res) => {
+            if (res) {
+              console.log(res)
+            }
           }
         })
       },

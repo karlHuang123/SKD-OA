@@ -9,7 +9,8 @@ import {
   getStaffList,
   deleteStaff,
   getStaffAbilitiesList,
-  getListByDeptName
+  getListByDeptName,
+  addStaff
 } from '@/api/position'
 import { message } from 'ant-design-vue'
 
@@ -95,6 +96,14 @@ const actions = {
       body.callback && body.callback(res)
     } else {
       body.errCallback && body.errCallback(res)
+    }
+  },
+  // 添加员工
+  async addStaff({ state }, body) {
+    const res = await addStaff(body.data)
+    if (res && res.code === 200) {
+      console.log(state.staffList)
+      body.callback && body.callback(res)
     }
   },
   // 删除员工

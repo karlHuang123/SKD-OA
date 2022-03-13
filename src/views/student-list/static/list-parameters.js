@@ -85,7 +85,7 @@ const listParameters = {
       title: '更多操作',
       dataIndex: 'operation',
       key: 'operation',
-      width: 250,
+      width: 300,
       fixed: 'right',
       slots: { customRender: 'operation' }
     }

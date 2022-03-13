@@ -87,6 +87,7 @@
           <a-select
             :default-value="userDeparment"
             style="width: 120px"
+            :disabled="this.userCampus === '请选择'"
             @change="handleDeparmentChange"
             v-if="showAddUserModal"
           >
@@ -100,18 +101,25 @@
           <a-select
             :default-value="userPosition"
             style="width: 120px"
+            :disabled="this.userDeparment === '请选择'"
             @change="handlePositionChange"
             v-if="showAddUserModal"
           >
-            <a-select-option v-for="item in positions" :key="item.id">
+            <a-select-option v-for="item in positions" :key="item.value">
               {{ item.label }}
             </a-select-option>
           </a-select>
         </div>
         <div class="right-container">
           <div class="user-deparment section">
-            <span>用户权限</span>
-            <div class="check-group"></div>
+            <span>休息时间</span>
+            <div class="check-group">
+              <a-checkbox-group
+                v-model:value="form.restDate"
+                :options="restDateOption"
+                style="width: 100%"
+              ></a-checkbox-group>
+            </div>
           </div>
         </div>
       </div>
@@ -139,7 +147,8 @@
           department: '',
           position: '',
           userFeature: [],
-          teacherName: ''
+          teacherName: '',
+          restDate: []
         },
         campus: null,
         deparment: null,
@@ -157,7 +166,8 @@
           showTotal: (total) => `共${total}条`
         },
         staffAbilitiesList: null,
-        positions: [] // 根据部门查找到的岗位信息
+        positions: [], // 根据部门查找到的岗位信息
+        restDateOption: allInformation.restDateOptions
       }
     },
     methods: {
@@ -165,6 +175,7 @@
         getDeptTree: 'position/getDeptTree',
         getPositionDetail: 'position/getPositionDetail',
         getStaffList: 'position/getStaffList',
+        addStaff: 'position/addStaff',
         deleteStaff: 'position/deleteStaff',
         getStaffAbilitiesList: 'position/getStaffAbilitiesList',
         getListByDeptName: 'position/getListByDeptName'
@@ -191,7 +202,6 @@
       getStaffAbilitiesListFuc() {
         this.getStaffAbilitiesList({
           callback: (res) => {
-            console.log(res)
             this.staffAbilitiesList = res.data
           }
         })
@@ -200,7 +210,6 @@
         this.getListByDeptName({
           deptName: deptName,
           callback: (res) => {
-            console.log('positions', res)
             this.positions = []
             res.rows.forEach((item) => {
               const ele = {
@@ -219,6 +228,7 @@
         }).children
       },
       handleDeparmentChange(value) {
+        console.log(value)
         this.userDeparment = this.deparment.find((item) => {
           return item.id === value
         }).label
@@ -226,7 +236,6 @@
       },
       handlePositionChange(value) {
         this.form.position = value
-        console.log(allInformation.abilities)
       },
       openAddUser(title) {
         this.modalTitle = title
@@ -238,11 +247,23 @@
       editStaff(staffId) {
         console.log(staffId)
       },
+      addStaffFun() {
+        this.addStaff({
+          data: this.form,
+          callback: (res) => {
+            console.log(res)
+            this.$message('添加成功！')
+          }
+        })
+      },
       handleStaffListChange({ current, pageSize }) {
         this.pagination.current = current
         this.pagination.pageSize = pageSize
         this.getStaffListFuc(current, pageSize, this.listPara.searchVal)
       },
+      // onDateChange() {
+      //   console.log(this.form.restDate)
+      // },
       deleteStaffFuc(staffId) {
         this.deleteStaff({
           staffId: staffId,
@@ -278,7 +299,7 @@
       } else {
         this.getStaffAbilitiesListFuc()
       }
-      console.log(this.staffAbilitiesList)
+      // console.log(this.staffAbilitiesList)
       this.getDeptTree((res) => {
         if (res.data[0].label === 'SKD科技') {
           this.campus = res.data[0].children

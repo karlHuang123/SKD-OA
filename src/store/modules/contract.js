@@ -9,6 +9,7 @@ import {
   getStudentList,
   deleteStudent,
   getStudent,
+  downloadContract,
   editStudent,
   getMessageList,
   updateMessageStatus
@@ -107,6 +108,14 @@ const actions = {
       body.callback && body.callback(res)
     } else {
       message.error('删除失败，请稍后重试。')
+    }
+  },
+  // 下载学生合同
+  async downloadContract({ state }, body) {
+    const res = await downloadContract(body.studentId)
+    if (res && res.code === 200) {
+      console.log(state)
+      body.callback && body.callback(res)
     }
   },
   // 编辑修改学生信息

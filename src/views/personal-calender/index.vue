@@ -1,5 +1,13 @@
 <template>
   <div class="test-container">
+    <div class="calendar-search">
+      <a-input-search
+        placeholder="请输入老师姓名查询时间表"
+        style="width: 300px"
+        @search="searchTeacherCalendar"
+        v-model:value="teacherName"
+      />
+    </div>
     <FullCalendar :options="calendarOptions" />
     <a-modal
       :visible="showDateEdit"
@@ -104,6 +112,7 @@
         projectName: null,
         tempDateArg: null,
         tempInfo: null,
+        teacherName: null,
         startDate: '',
         endDate: '',
         calendarOptions: {
@@ -165,10 +174,13 @@
       },
       eventClick(info) {
         this.tempInfo = info
-        const day = Moment(info.event._instance.range.start).utcOffset(0).format('YYYY-MM-DD HH:mm') // 莫名其妙的时区问题
+        const day = Moment(info.event._instance.range.start)
+          .utcOffset(0)
+          .format('YYYY-MM-DD HH:mm') // 莫名其妙的时区问题
         const realDay = Moment(day).day()
         if (
-          this.calendarOptions.selectConstraint.daysOfWeek.indexOf(realDay) !== -1
+          this.calendarOptions.selectConstraint.daysOfWeek.indexOf(realDay) !==
+          -1
         ) {
           this.startDate = Moment(info.event._instance.range.start)
             .utcOffset(0)
@@ -195,9 +207,11 @@
             // add new event data
             title: `${this.studentName}，${this.projectName}`,
             start: this.startDate ? this.startDate : this.tempDateArg.dateStr,
-            end: this.endDate ? this.endDate : Moment(this.tempDateArg.dateStr)
-              .subtract(-1, 'hours')
-              .format('YYYY-MM-DD HH:mm'), // 设置向后固定一个小时
+            end: this.endDate
+              ? this.endDate
+              : Moment(this.tempDateArg.dateStr)
+                  .subtract(-1, 'hours')
+                  .format('YYYY-MM-DD HH:mm'), // 设置向后固定一个小时
             groupId: Math.random().toFixed(5).toString()
           })
         } else {
@@ -247,11 +261,18 @@
           }
         )
         this.closeExsitDateEdit()
+      },
+      searchTeacherCalendar() {
+        console.log(this.teacherName)
       }
     },
     mounted() {
-      const restDate = dateModeTransform.getWeek('2018-01-01', '2028-01-01', [2, 6])
-      restDate.forEach(item => {
+      const restDate = dateModeTransform.getWeek(
+        '2018-01-01',
+        '2028-01-01',
+        [2, 6] // 记得+1和时间表同步
+      )
+      restDate.forEach((item) => {
         const ele = {
           title: '休息',
           start: item + ' 08:00',
@@ -264,6 +285,9 @@
   }
 </script>
 <style lang="less">
+  .calendar-search {
+    margin-bottom: 20px;
+  }
   .fc .fc-timegrid-slot {
     height: 50px !important;
   }

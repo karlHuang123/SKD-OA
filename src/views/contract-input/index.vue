@@ -262,10 +262,11 @@
     </div>
     <div class="info-style">
       <h2>合同上传</h2>
-      <div class="">
+      <div class="" style="width: 250px">
         <a-upload-dragger
           name="file"
           :multiple="true"
+          :fileList="fileList"
           :customRequest="uploadContract"
           @change="handleContractFileChange"
           accept=".pdf,.doc,.docx"
@@ -349,7 +350,8 @@
         projectsList: null,
         tempProjectName: null,
         showAddProject: false,
-        projectSection: ''
+        projectSection: '',
+        fileList: null
       }
     },
     methods: {
@@ -424,6 +426,7 @@
       },
       handleContractFileChange(e) {
         console.log(e)
+        this.fileList = e.fileList
       },
       addProject() {
         this.showAddProject = true
@@ -475,6 +478,7 @@
           callback: (res) => {
             this.studentInfo.contractFilepath = res.data
             this.$message.success('合同文件上传成功！')
+            this.fileList[0].status = 'done'
           }
         })
       },

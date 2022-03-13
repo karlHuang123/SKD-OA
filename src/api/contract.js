@@ -40,6 +40,13 @@ export async function getStudent(studentId) {
   })
 }
 
+export async function downloadContract(studentId) {
+  return request({
+    url: `/system/student/downloadContract/${studentId}`,
+    method: 'get'
+  })
+}
+
 export async function editStudent(data) {
   return request({
     url: '/system/student/edit',

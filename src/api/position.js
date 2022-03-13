@@ -43,3 +43,11 @@ export async function getListByDeptName(deptName) {
     method: 'get'
   })
 }
+
+export async function addStaff(data) {
+  return request({
+    url: `/system/user/addUser`,
+    method: 'post',
+    data: data
+  })
+}
