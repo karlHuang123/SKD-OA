@@ -4,6 +4,7 @@
  */
 import {
   getUserInfo,
+  getUserInfoNova,
   login,
   register,
   applyRegister,
@@ -13,27 +14,42 @@ import {
   confirmedResetPassword,
   logout,
   getAuthCode,
-  getUserList
+  getUserList,
+  getStudentDashboard,
+  getUnScheduleStudentCount,
+  getUnVisitStudentCount,
+  getOnScheduleStudentCount,
+  getOnScheduleStudentCourses,
+  getUnScheduleStudentList,
+  getUnVisitStudentList,
+  getRegionUsers
 } from '@/api/user'
+import { getPositionList } from '@/api/position'
 import {
   getAccessToken,
   removeAccessToken,
   setAccessToken
 } from '@/utils/accessToken'
-import { title, tokenName } from '@/config'
+import { title } from '@/config'
 import { message, notification } from 'ant-design-vue'
 
 const state = () => ({
   accessToken: getAccessToken(),
   username: '',
+  nickName: '',
   avatar: '',
   code: '',
-  userList: null
+  userId: '',
+  userList: null,
+  parentId: ''
 })
 const getters = {
   accessToken: (state) => state.accessToken,
   username: (state) => state.username,
-  avatar: (state) => state.avatar
+  avatar: (state) => state.avatar,
+  nickName: (state) => state.nickName,
+  userId: (state) => state.userId,
+  parentId: (state) => state.parentId
 }
 const mutations = {
   /**
@@ -58,6 +74,15 @@ const mutations = {
   // 设置验证码返回的uuid
   setAuthCode(state, code) {
     state.code = code
+  },
+  setNickName(state, nickName) {
+    state.nickName = nickName
+  },
+  setUserId(state, userId) {
+    state.userId = userId
+  },
+  setParentId(state, parentId) {
+    state.parentId = parentId
   },
   // 保存用户列表
   setUserList(state, userList) {
@@ -96,6 +121,7 @@ const actions = {
     if (res.token) {
       commit('setAccessToken', res.token)
       sessionStorage.setItem('username', userInfo.username)
+      console.log(userInfo)
       const hour = new Date().getHours()
       const thisTime =
         hour < 8
@@ -112,7 +138,7 @@ const actions = {
         description: `${thisTime}！`
       })
     } else {
-      message.error(`登录接口异常，未正确返回${tokenName}...`)
+      message.error(res.msg)
     }
   },
   // 获取验证码接口
@@ -179,6 +205,7 @@ const actions = {
    */
   async getUserInfo({ commit, dispatch, state }) {
     const { data } = await getUserInfo(state.accessToken)
+    console.log('hey', data)
     if (!data) {
       message.error(`验证失败，请重新登录...`)
       return false
@@ -195,31 +222,107 @@ const actions = {
     }
   },
   async getUserInfoMock({ commit, dispatch }) {
-    const data = {
-      roles: ['ALL'],
-      ability: ['READ', 'EDIT', 'WRITE'],
-      username: sessionStorage.getItem('username'),
-      'avatar|1': [
-        'https://i.gtimg.cn/club/item/face/img/2/15922_100.gif',
-        'https://i.gtimg.cn/club/item/face/img/8/15918_100.gif'
-      ]
-    }
-    let { username, avatar, roles, ability } = data
-    if (roles && Array.isArray(roles)) {
-      dispatch('acl/setRole', roles, { root: true })
-      if (ability && ability.length > 0)
-        dispatch('acl/setAbility', ability, { root: true })
-      commit('setUsername', username)
-      commit('setAvatar', avatar)
-    } else {
-      message.error('用户信息接口异常')
-    }
+    const res = await getUserInfoNova()
+    const positionList = await getPositionList()
+    // console.log(positionList)
+    // console.log(res)
+    commit('setNickName', res.user.nickName)
+    if (res.user.userId) commit('setUserId', res.user.userId)
+    setTimeout(() => {
+      const positionName = positionList.rows.find((item) => {
+        return item.postId === res.user.postIds[0]
+      }).postCode
+      const data = {
+        roles: [positionName],
+        ability: ['READ', 'EDIT', 'WRITE'],
+        username: sessionStorage.getItem('username'),
+        'avatar|1': [
+          'https://i.gtimg.cn/club/item/face/img/2/15922_100.gif',
+          'https://i.gtimg.cn/club/item/face/img/8/15918_100.gif'
+        ]
+      }
+      let { username, avatar, roles, ability } = data
+      if (roles && Array.isArray(roles)) {
+        dispatch('acl/setRole', roles, { root: true })
+        if (ability && ability.length > 0)
+          dispatch('acl/setAbility', ability, { root: true })
+        commit('setUsername', username)
+        commit('setAvatar', avatar)
+        commit('setParentId', res.user.dept.parentId)
+      } else {
+        message.error('用户信息接口异常')
+      }
+    }, 50)
   },
   // 获取用户信息列表
   async getUserList({ commit }, body) {
     const res = await getUserList(body.pageNum, body.pageSize)
     if (res) {
       commit('setUserList', res.rows)
+      body.callback && body.callback(res)
+    }
+  },
+  // 获取负责学生总数
+  async getStudentDashboard({ state }, body) {
+    const res = await getStudentDashboard(body.createBy)
+    if (res) {
+      console.log(state)
+      body.callback && body.callback(res)
+    }
+  },
+  // 获取待排课学生数
+  async getUnScheduleStudentCount({ state }, body) {
+    const res = await getUnScheduleStudentCount(body.createBy)
+    if (res) {
+      console.log(state)
+      body.callback && body.callback(res)
+    }
+  },
+  // 获取待回访学生数
+  async getUnVisitStudentCount({ state }, body) {
+    const res = await getUnVisitStudentCount(body.createBy)
+    if (res) {
+      console.log(state)
+      body.callback && body.callback(res)
+    }
+  },
+  // 今天上课学生数
+  async getOnScheduleStudentCount({ state }, body) {
+    const res = await getOnScheduleStudentCount(body.createBy)
+    if (res) {
+      console.log(state)
+      body.callback && body.callback(res)
+    }
+  },
+  // 今天上课学生列表
+  async getOnScheduleStudentCourses({ state }, body) {
+    const res = await getOnScheduleStudentCourses(body.createBy, body.date)
+    if (res) {
+      console.log(state)
+      body.callback && body.callback(res)
+    }
+  },
+  // 待排课学生列表
+  async getUnScheduleStudentList({ state }, body) {
+    const res = await getUnScheduleStudentList(body.listPara)
+    if (res) {
+      console.log(state)
+      body.callback && body.callback(res)
+    }
+  },
+  // 待回访学生列表
+  async getUnVisitStudentList({ state }, body) {
+    const res = await getUnVisitStudentList(body.listPara)
+    if (res) {
+      console.log(state)
+      body.callback && body.callback(res)
+    }
+  },
+  // 获取辖区内的教务老师
+  async getRegionUsers({ state }, body) {
+    const res = await getRegionUsers()
+    if (res) {
+      console.log(state)
       body.callback && body.callback(res)
     }
   },

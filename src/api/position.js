@@ -14,11 +14,25 @@ export async function getPositionDetail(positionId) {
   })
 }
 
+export async function getPositionList() {
+  return request({
+    url: '/system/post/getList',
+    method: 'get'
+  })
+}
+
 export async function getStaffList(listPara) {
   return request({
     url: `/system/user/getList?pageNum=${listPara.pageNum}&pageSize=${
       listPara.pageSize
     }&searchVal=${listPara.searchVal ? listPara.searchVal : ''}`,
+    method: 'get'
+  })
+}
+
+export async function getStaff(staffId) {
+  return request({
+    url: `/system/user/${staffId}`,
     method: 'get'
   })
 }
@@ -49,5 +63,20 @@ export async function addStaff(data) {
     url: `/system/user/addUser`,
     method: 'post',
     data: data
+  })
+}
+
+export async function editStaff(data) {
+  return request({
+    url: `/system/user/editUser`,
+    method: 'post',
+    data: data
+  })
+}
+
+export async function searchTeacherName(teacherName) {
+  return request({
+    url: `/system/teacherCalendar/getEducationDeptTeacherNames?teacherName=${teacherName}`,
+    method: 'get'
   })
 }

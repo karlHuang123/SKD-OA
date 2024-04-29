@@ -30,6 +30,7 @@ const handleCode = (code, msg) => {
     // 没有401的页面，暂时绕过这个跳转
     case 403:
       console.log('请求无权限')
+      message.error(msg)
       break
     default:
       message.error(msg || `后端接口${code}异常`)
@@ -89,14 +90,18 @@ instance.interceptors.response.use(
       ? [...successCode]
       : [...[successCode]]
     // 是否操作正常
-    if (codeVerificationArray.includes(code)) {
-      return data
+    if (response.config.responseType != 'blob') {
+      if (codeVerificationArray.includes(code)) {
+        return data
+      } else {
+        handleCode(code, msg)
+        return Promise.reject(
+          'SKD-OA请求异常拦截:' +
+            JSON.stringify({ url: config.url, code, msg }) || 'Error'
+        )
+      }
     } else {
-      handleCode(code, msg)
-      return Promise.reject(
-        'SKD-OA请求异常拦截:' +
-          JSON.stringify({ url: config.url, code, msg }) || 'Error'
-      )
+      return response
     }
   },
   (error) => {

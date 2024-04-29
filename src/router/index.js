@@ -33,6 +33,12 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/signature',
+    name: 'signature',
+    component: () => import('@/views/signature'),
+    hidden: true
+  },
+  {
     path: '/403',
     name: '403',
     component: () => import('@/views/403'),
@@ -53,8 +59,7 @@ export const asyncRoutes = [
     meta: {
       title: '首页',
       icon: 'home-4-line',
-      affix: true,
-      permission: ['TEACHER', 'MANAGER']
+      affix: true
     },
     children: [
       {
@@ -64,67 +69,66 @@ export const asyncRoutes = [
         meta: {
           title: '首页',
           icon: 'home-4-line',
-          affix: true,
-          permission: ['TEACHER', 'MANAGER']
+          affix: true
         }
       }
     ]
   },
-  {
-    path: '/vab',
-    component: Layout,
-    redirect: '/vab/table',
-    alwaysShow: true,
-    meta: {
-      title: '组件',
-      icon: 'apps-line',
-      permission: ['TEACHER', 'MANAGER']
-    },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/vab/table'),
-        meta: {
-          title: '表格',
-          icon: 'table-2',
-          permission: ['MANAGER']
-        }
-      },
-      {
-        path: 'icon',
-        name: 'Icon',
-        component: () => import('@/views/vab/icon'),
-        meta: {
-          title: '图标',
-          icon: 'remixicon-line',
-          permission: ['TEACHER', 'MANAGER']
-        }
-      }
-    ]
-  },
-  {
-    path: '/test',
-    component: Layout,
-    redirect: '/test/test',
-    meta: {
-      title: '动态路由测试',
-      icon: 'test-tube-line',
-      permission: ['TEACHER', 'MANAGER']
-    },
-    children: [
-      {
-        path: 'test',
-        name: 'Test',
-        component: () => import('@/views/test'),
-        meta: {
-          title: '动态路由测试',
-          icon: 'test-tube-line',
-          permission: ['TEACHER', 'MANAGER']
-        }
-      }
-    ]
-  },
+  // {
+  //   path: '/vab',
+  //   component: Layout,
+  //   redirect: '/vab/table',
+  //   alwaysShow: true,
+  //   meta: {
+  //     title: '组件',
+  //     icon: 'apps-line',
+  //     permission: ['TEACHER', 'MANAGER']
+  //   },
+  //   children: [
+  //     {
+  //       path: 'table',
+  //       name: 'Table',
+  //       component: () => import('@/views/vab/table'),
+  //       meta: {
+  //         title: '表格',
+  //         icon: 'table-2',
+  //         permission: ['MANAGER']
+  //       }
+  //     },
+  //     {
+  //       path: 'icon',
+  //       name: 'Icon',
+  //       component: () => import('@/views/vab/icon'),
+  //       meta: {
+  //         title: '图标',
+  //         icon: 'remixicon-line',
+  //         permission: ['TEACHER', 'MANAGER']
+  //       }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/test',
+  //   component: Layout,
+  //   redirect: '/test/test',
+  //   meta: {
+  //     title: '动态路由测试',
+  //     icon: 'test-tube-line',
+  //     permission: ['TEACHER', 'MANAGER']
+  //   },
+  //   children: [
+  //     {
+  //       path: 'test',
+  //       name: 'Test',
+  //       component: () => import('@/views/test'),
+  //       meta: {
+  //         title: '动态路由测试',
+  //         icon: 'test-tube-line',
+  //         permission: ['TEACHER', 'MANAGER']
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: '/educational-info',
     component: Layout,
@@ -133,7 +137,7 @@ export const asyncRoutes = [
     meta: {
       title: '教务信息',
       icon: 'information-line',
-      permission: ['EDUCATIONAL', 'MANAGER']
+      permission: ['admin', 'educationalManager', 'educationalTeacher']
     },
     children: [
       {
@@ -141,21 +145,29 @@ export const asyncRoutes = [
         name: 'ContractInput',
         component: () => import('@/views/contract-input'),
         meta: {
-          title: '合同信息录入',
+          title: '合同信息录入/编辑',
           icon: 'contacts-book-line',
-          permission: ['EDUCATIONAL', 'MANAGER']
-        }
-      },
-      {
-        path: 'student-list',
-        name: 'StudentList',
-        component: () => import('@/views/student-list'),
-        meta: {
-          title: '学生信息列表',
-          icon: 'list-check',
-          permission: ['EDUCATIONAL', 'MANAGER']
+          permission: ['admin', 'educationalManager', 'educationalTeacher']
         }
       }
+      // {
+      //   path: 'student-list',
+      //   name: 'StudentList',
+      //   component: () => import('@/views/student-list'),
+      //   meta: {
+      //     title: '学生信息列表',
+      //     icon: 'list-check',
+      //     permission: [
+      //       'none'
+      //       'educationalManager',
+      //       'educationalTeacher',
+      //       '3DManager',
+      //       'interactionManager',
+      //       'fashionManager',
+      //       'teacherManager'
+      //     ]
+      //   }
+      // }
     ]
   },
   {
@@ -165,7 +177,7 @@ export const asyncRoutes = [
     meta: {
       title: '员工管理',
       icon: 'group-line',
-      permission: ['TEACHER', 'MANAGER']
+      permission: ['admin', 'educationalManager']
     },
     children: [
       {
@@ -175,7 +187,7 @@ export const asyncRoutes = [
         meta: {
           title: '员工管理',
           icon: 'group-line',
-          permission: ['MANAGER']
+          permission: ['admin', 'educationalManager']
         }
       }
     ]
@@ -185,9 +197,8 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/personal-calender/personal-calender',
     meta: {
-      title: '个人日程表',
-      icon: 'calendar-line',
-      permission: ['TEACHER', 'MANAGER']
+      title: '日程表',
+      icon: 'calendar-line'
     },
     children: [
       {
@@ -195,9 +206,8 @@ export const asyncRoutes = [
         name: 'Personal-Calender',
         component: () => import('@/views/personal-calender'),
         meta: {
-          title: '个人日程表',
-          icon: 'calendar-line',
-          permission: ['MANAGER']
+          title: '日程表',
+          icon: 'calendar-line'
         }
       }
     ]
@@ -209,8 +219,7 @@ export const asyncRoutes = [
     alwaysShow: false,
     meta: {
       title: '通用',
-      icon: 'lightbulb-flash-line',
-      permission: ['EDUCATIONAL', 'MANAGER']
+      icon: 'lightbulb-flash-line'
     },
     children: [
       {
@@ -219,50 +228,121 @@ export const asyncRoutes = [
         component: () => import('@/views/message-list'),
         meta: {
           title: '消息列表',
-          icon: 'message-2-line',
-          permission: ['EDUCATIONAL', 'MANAGER']
+          icon: 'message-2-line'
         }
       }
     ]
   },
   {
-    path: '/error',
-    name: 'Error',
+    path: '/course-history',
     component: Layout,
-    redirect: '/error/403',
+    redirect: '/course-history/course-history',
+    alwaysShow: false,
+    hidden: true,
     meta: {
-      title: '错误页',
-      icon: 'error-warning-line',
-      permission: ['TEACHER', 'MANAGER']
+      title: '学生上课历史记录',
+      icon: 'lightbulb-flash-line'
     },
     children: [
       {
-        path: '403',
-        name: 'Error403',
-        component: () => import('@/views/403'),
+        path: 'course-history',
+        name: 'CourseHistory',
+        component: () => import('@/views/course-history'),
         meta: {
-          title: '403',
-          icon: 'error-warning-line',
-          permission: ['TEACHER', 'MANAGER']
-        }
-      },
-      {
-        path: '404',
-        name: 'Error404',
-        component: () => import('@/views/404'),
-        meta: {
-          title: '404',
-          icon: 'error-warning-line',
-          permission: ['MANAGER']
+          title: '学生上课历史记录',
+          icon: 'message-2-line'
         }
       }
     ]
   },
   {
-    path: '/*',
-    redirect: '/404',
+    path: '/student-form',
+    name: 'student-form',
+    component: () => import('@/views/student-form'),
     hidden: true
+  },
+  {
+    path: '/student-form',
+    component: Layout,
+    redirect: '/student-form/student-form',
+    alwaysShow: false,
+    hidden: true,
+    meta: {
+      title: '学生课堂记录反馈',
+      icon: 'lightbulb-flash-line'
+    },
+    children: [
+      {
+        path: 'student-form',
+        name: 'StudentForm',
+        component: () => import('@/views/student-form'),
+        meta: {
+          title: '学生课堂记录反馈',
+          icon: 'message-2-line'
+        }
+      }
+    ]
+  },
+  {
+    path: '/today-course',
+    component: Layout,
+    redirect: '/today-course/today-course',
+    alwaysShow: false,
+    hidden: true,
+    meta: {
+      title: '今日上课学生名单',
+      icon: 'lightbulb-flash-line'
+    },
+    children: [
+      {
+        path: 'today-course',
+        name: 'TodayCourse',
+        component: () => import('@/views/today-course'),
+        meta: {
+          title: '今日上课学生名单',
+          icon: 'message-2-line'
+        }
+      }
+    ]
   }
+  // {
+  //   path: '/error',
+  //   name: 'Error',
+  //   component: Layout,
+  //   redirect: '/error/403',
+  //   meta: {
+  //     title: '错误页',
+  //     icon: 'error-warning-line',
+  //     permission: ['TEACHER', 'MANAGER']
+  //   },
+  //   children: [
+  //     {
+  //       path: '403',
+  //       name: 'Error403',
+  //       component: () => import('@/views/403'),
+  //       meta: {
+  //         title: '403',
+  //         icon: 'error-warning-line',
+  //         permission: ['TEACHER', 'MANAGER']
+  //       }
+  //     },
+  //     {
+  //       path: '404',
+  //       name: 'Error404',
+  //       component: () => import('@/views/404'),
+  //       meta: {
+  //         title: '404',
+  //         icon: 'error-warning-line',
+  //         permission: ['MANAGER']
+  //       }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/*',
+  //   redirect: '/404',
+  //   hidden: true
+  // }
 ]
 const router = createRouter({
   history: createWebHashHistory(),

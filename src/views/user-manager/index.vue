@@ -36,7 +36,10 @@
         <template #operation="{ record }">
           <div class="editable-row-operations">
             <span class="edit">
-              <a-button type="primary" @click="() => editStaff(record.userId)">
+              <a-button
+                type="primary"
+                @click="() => getStaffFun(record.userId, '编辑员工')"
+              >
                 编辑
               </a-button>
             </span>
@@ -60,11 +63,11 @@
     >
       <div class="user-email section">
         <span>员工邮箱</span>
-        <a-input placeholder="请输入员工邮箱" v-model="form.email" />
+        <a-input placeholder="请输入员工邮箱" v-model:value="form.email" />
       </div>
       <div class="user-deparment section">
         <span>老师姓名(中文)</span>
-        <a-input placeholder="请输入老师姓名" v-model="form.teacherName" />
+        <a-input placeholder="请输入老师姓名" v-model:value="form.nickName" />
       </div>
       <div class="feature-container">
         <div class="left-feature">
@@ -81,13 +84,16 @@
               </a-select-option>
             </a-select>
           </div>
+          <div class="hint" v-if="userCampus !== '请选择' && campus">
+            注: 切换校区后请重新选择一次所属部门，否则编辑/添加不会生效
+          </div>
           <div class="user-deparment section">
             <span>所属部门</span>
           </div>
           <a-select
             :default-value="userDeparment"
             style="width: 120px"
-            :disabled="this.userCampus === '请选择'"
+            :disabled="userCampus === '请选择' && !deparment"
             @change="handleDeparmentChange"
             v-if="showAddUserModal"
           >
@@ -101,7 +107,7 @@
           <a-select
             :default-value="userPosition"
             style="width: 120px"
-            :disabled="this.userDeparment === '请选择'"
+            :disabled="userDeparment === '请选择'"
             @change="handlePositionChange"
             v-if="showAddUserModal"
           >
@@ -109,13 +115,19 @@
               {{ item.label }}
             </a-select-option>
           </a-select>
+          <div class="user-deparment section">
+            <span>毕业院校</span>
+          </div>
+          <div style="width: 80%">
+            <a-input v-model:value="form.graduatedCollege"></a-input>
+          </div>
         </div>
         <div class="right-container">
           <div class="user-deparment section">
             <span>休息时间</span>
             <div class="check-group">
               <a-checkbox-group
-                v-model:value="form.restDate"
+                v-model:value="form.busiDateArray"
                 :options="restDateOption"
                 style="width: 100%"
               ></a-checkbox-group>
@@ -130,12 +142,14 @@
 <script>
   import { mapActions } from 'vuex'
   import { allInformation } from './static/information.js'
+  import { message } from 'ant-design-vue'
   export default {
     name: 'UserManager',
     data() {
       return {
         staffListJson: null,
         showAddUserModal: false,
+        tempId: null,
         modalTitle: '',
         listPara: {
           pageNum: 1,
@@ -143,12 +157,13 @@
           searchVal: ''
         },
         form: {
-          userEmail: '',
-          department: '',
-          position: '',
-          userFeature: [],
-          teacherName: '',
-          restDate: []
+          email: '',
+          deptId: null,
+          postId: null,
+          parentDept: null,
+          nickName: '',
+          graduatedCollege: '',
+          busiDateArray: []
         },
         campus: null,
         deparment: null,
@@ -176,6 +191,8 @@
         getPositionDetail: 'position/getPositionDetail',
         getStaffList: 'position/getStaffList',
         addStaff: 'position/addStaff',
+        getStaff: 'position/getStaff',
+        editStaff: 'position/editStaff',
         deleteStaff: 'position/deleteStaff',
         getStaffAbilitiesList: 'position/getStaffAbilitiesList',
         getListByDeptName: 'position/getListByDeptName'
@@ -199,6 +216,57 @@
           }
         })
       },
+      async getStaffFun(staffId, title) {
+        this.modalTitle = title
+        this.tempId = staffId
+        this.getStaff({
+          staffId: staffId,
+          callback: (res) => {
+            this.form.email = res.user.email
+            this.form.deptId = res.user.deptId
+            if (this.campus) {
+              this.deparment = this.campus.find((item) => {
+                return item.id === res.user.parentDept
+              }).children
+            }
+            this.userDeparment = this.deparment.find((item) => {
+              return item.id === this.form.deptId
+            }).label
+            this.getListByDeptNameFuc(this.userDeparment)
+            this.form.postId =
+              res.user.postIds && res.user.postIds.length > 0
+                ? res.user.postIds[0]
+                : null
+            let postName
+            if (this.form.postId) {
+              postName = setInterval(() => {
+                if (this.positions.length > 0 && this.form.postId) {
+                  this.userPosition = this.positions.find((item) => {
+                    return item.value === this.form.postId
+                  }).label
+                  clearInterval(postName)
+                }
+              }, 100)
+            } else {
+              postName = '请选择'
+            }
+            this.showAddUserModal = true
+            this.form.nickName = res.user.nickName
+            this.form.parentDept = res.user.parentDept
+            if (this.campus) {
+              this.userCampus = this.campus.find((item) => {
+                return item.id === this.form.parentDept
+              }).label
+            }
+            this.form.graduatedCollege = res.user.graduatedCollege
+              ? res.user.graduatedCollege
+              : ''
+            this.form.busiDateArray = res.user.busiDateArray
+              ? res.user.busiDateArray
+              : []
+          }
+        })
+      },
       getStaffAbilitiesListFuc() {
         this.getStaffAbilitiesList({
           callback: (res) => {
@@ -214,7 +282,7 @@
             res.rows.forEach((item) => {
               const ele = {
                 label: item.postName,
-                value: item.postCode
+                value: item.postId
               }
               this.positions.push(ele)
             })
@@ -226,35 +294,54 @@
         this.deparment = this.campus.find((item) => {
           return item.id === this.userCampus
         }).children
+        this.form.parentDept = value
       },
       handleDeparmentChange(value) {
-        console.log(value)
         this.userDeparment = this.deparment.find((item) => {
           return item.id === value
         }).label
+        this.form.deptId = value
         this.getListByDeptNameFuc(this.userDeparment)
       },
       handlePositionChange(value) {
-        this.form.position = value
+        this.form.postId = value
       },
       openAddUser(title) {
         this.modalTitle = title
         this.showAddUserModal = true
       },
       submitUser() {
-        this.closeAddUser()
-      },
-      editStaff(staffId) {
-        console.log(staffId)
+        this.addStaffFun()
       },
       addStaffFun() {
-        this.addStaff({
-          data: this.form,
-          callback: (res) => {
-            console.log(res)
-            this.$message('添加成功！')
-          }
-        })
+        if (this.modalTitle === '添加新员工') {
+          this.addStaff({
+            data: this.form,
+            callback: (res) => {
+              if (res.code === 200) {
+                this.closeAddUser()
+                message.success('添加成功！')
+              } else {
+                message.error(res.msg)
+              }
+            }
+          })
+        } else {
+          let form = this.form
+          form['userId'] = this.tempId
+          this.editStaff({
+            data: form,
+            callback: (res) => {
+              if (res.code === 200) {
+                this.closeAddUser()
+                this.getStaffListFuc()
+                message.success('编辑成功！')
+              } else {
+                message.error(res.msg)
+              }
+            }
+          })
+        }
       },
       handleStaffListChange({ current, pageSize }) {
         this.pagination.current = current
@@ -268,14 +355,16 @@
         this.deleteStaff({
           staffId: staffId,
           callback: (res) => {
-            if (res) {
-              this.$message.success('删除成功')
+            if (res && res.code === 200) {
+              message.success('删除成功')
               this.getStaffListFuc(this.pagination.current)
+            } else {
+              message.error(res.msg)
             }
           },
           errCallback: (err) => {
             if (err) {
-              this.$message.success(err)
+              message.error(err)
             }
           }
         })
@@ -286,6 +375,15 @@
         this.userDeparment = '请选择'
         this.userPosition = '请选择'
         this.positions = []
+        this.form = {
+          email: '',
+          deptId: null,
+          postId: null,
+          parentDept: null,
+          nickName: '',
+          graduatedCollege: '',
+          busiDateArray: []
+        }
         if (this.campus) {
           this.deparment = null
         }
@@ -301,18 +399,23 @@
       }
       // console.log(this.staffAbilitiesList)
       this.getDeptTree((res) => {
+        // 需要根据校区返回部门id
         if (res.data[0].label === 'SKD科技') {
           this.campus = res.data[0].children
         } else {
-          this.deparment = res.data[0].children
+          this.deparment = res.data
         }
       })
+      const parentId = this.$store.getters['user/parentId']
+      if (parentId !== 0) {
+        this.userCampus = parentId
+      }
     }
   }
 </script>
 <style lang="less" scoped>
   .top-container {
-    height: 150px;
+    // height: 150px;
   }
   .list-container {
     .table-operations {
@@ -362,5 +465,10 @@
   .feature-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+  .hint {
+    color: red;
+    font-size: 12px;
+    width: 80%;
   }
 </style>

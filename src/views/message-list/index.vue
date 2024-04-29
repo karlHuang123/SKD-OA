@@ -28,14 +28,6 @@
               处理消息
             </a-button>
           </span>
-          <!-- <span>
-            <a-popconfirm
-              title="确定删除该学生信息吗？"
-              @confirm="() => deleteStudentFuc(record.studentId)"
-            >
-              <a-button type="danger">删除</a-button>
-            </a-popconfirm>
-          </span> -->
         </div>
       </template>
     </a-table>
@@ -92,6 +84,11 @@
             })
           }
         })
+      },
+      handleStudentListChange({ current, pageSize }) {
+        this.pagination.current = current
+        this.pagination.pageSize = pageSize
+        this.getMessageListFun(current, pageSize)
       }
     },
     mounted() {

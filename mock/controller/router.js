@@ -6,7 +6,7 @@ const data = [
     meta: {
       title: '首页',
       icon: 'home-4-line',
-      affix: true,
+      affix: true
     },
     children: [
       {
@@ -16,11 +16,11 @@ const data = [
         meta: {
           title: '首页',
           icon: 'home-4-line',
-          affix: true,
-        },
-      },
-    ],
-  },
+          affix: true
+        }
+      }
+    ]
+  }
 ]
 module.exports = [
   {
@@ -30,8 +30,8 @@ module.exports = [
       return {
         code: 200,
         msg: 'success',
-        data,
+        data
       }
-    },
-  },
+    }
+  }
 ]

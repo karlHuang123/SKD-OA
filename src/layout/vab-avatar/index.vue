@@ -4,12 +4,11 @@
     <a-dropdown>
       <span class="ant-dropdown-link">
         <a-avatar :src="avatar" />
-        {{ username }}
+        {{ username ? username : '请重新登陆' }}
         <DownOutlined />
       </span>
       <template v-slot:overlay>
         <a-menu>
-          <!-- <a-menu-item @click="buy">付费版购买</a-menu-item> -->
           <a-menu-item @click="logout">退出登录</a-menu-item>
         </a-menu>
       </template>

@@ -37,13 +37,13 @@ const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
 
-const mockServer = () => {
-  if (process.env.NODE_ENV === 'development') {
-    return require('./mock/mockServer.js')
-  } else {
-    return ''
-  }
-}
+// const mockServer = () => {
+//   if (process.env.NODE_ENV === 'development') {
+//     return require('./mock/mockServer.js')
+//   } else {
+//     return ''
+//   }
+// }
 
 module.exports = {
   publicPath,
@@ -59,7 +59,7 @@ module.exports = {
     overlay: {
       warnings: true,
       errors: true
-    },
+    }
     // 注释掉的地方是前端配置代理访问后端的示例
     // proxy: {
     //   [baseURL]: {
@@ -71,7 +71,7 @@ module.exports = {
     //     },
     //   },
     // },
-    after: mockServer()
+    // after: mockServer()
   },
   configureWebpack() {
     return {
@@ -85,8 +85,31 @@ module.exports = {
         new Webpack.ProvidePlugin(providePlugin),
         new WebpackBar({
           name: webpackBarName
-        })
-      ]
+        }),
+        new Webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/)
+      ],
+      optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+          chunks: 'all',
+          maxInitialRequests: Infinity,
+          minSize: 20000,
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name(module) {
+                // get the name. E.g. node_modules/packageName/not/this/part.js
+                // or node_modules/packageName
+                const packageName = module.context.match(
+                  /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+                )[1]
+                // npm package names are URL-safe, but some servers don't like @ symbols
+                return `npm.${packageName.replace('@', '')}`
+              }
+            }
+          }
+        }
+      }
     }
   },
   chainWebpack(config) {
@@ -125,14 +148,14 @@ module.exports = {
         .plugin('banner')
         .use(Webpack.BannerPlugin, [`${webpackBanner}${time}`])
         .end()
-      config.module
-        .rule('images')
-        .use('image-webpack-loader')
-        .loader('image-webpack-loader')
-        .options({
-          bypassOnDebug: true
-        })
-        .end()
+      // config.module
+      //   .rule('images')
+      //   .use('image-webpack-loader')
+      //   .loader('image-webpack-loader')
+      //   .options({
+      //     bypassOnDebug: true
+      //   })
+      //   .end()
     })
 
     if (build7z) {
@@ -160,8 +183,8 @@ module.exports = {
       config.plugin('compressionPlugin').use(
         new CompressionPlugin({
           test: /\.(js|css|less)$/, // 匹配文件名
-          threshold: 10240, // 对超过10k的数据压缩
-          minRatio: 0.8,
+          threshold: 0, // 对超过10k的数据压缩
+          minRatio: 0.6,
           deleteOriginalAssets: true // 删除源文件
         })
       )

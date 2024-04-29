@@ -11,7 +11,7 @@
     show-icon
   />
 
-  <a-card class="version-information">
+  <a-card class="version-information" v-if="false">
     <div class="">
       {{ userListJson }}
     </div>

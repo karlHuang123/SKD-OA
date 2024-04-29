@@ -7,10 +7,14 @@ import {
   getDeptTree,
   getPositionDetail,
   getStaffList,
+  getStaff,
   deleteStaff,
   getStaffAbilitiesList,
   getListByDeptName,
-  addStaff
+  addStaff,
+  editStaff,
+  getPositionList,
+  searchTeacherName
 } from '@/api/position'
 import { message } from 'ant-design-vue'
 
@@ -18,14 +22,16 @@ const state = () => ({
   positionList: null,
   positionDetail: null,
   staffList: null,
-  abilitiesList: null
+  abilitiesList: null,
+  deptTree: null
 })
 
 const getters = {
   positionList: (state) => state.positionList,
   positionDetail: (state) => state.positionDetail,
   staffList: (state) => state.staffList,
-  abilitiesList: (state) => state.abilitiesList
+  abilitiesList: (state) => state.abilitiesList,
+  deptTree: (state) => state.deptTree
 }
 
 const mutations = {
@@ -33,7 +39,7 @@ const mutations = {
    * @author KarlHuang
    * @description 设置岗位列表
    * @param {*} state
-   * @param {*} positionList
+   * @param {*} deptTree
    */
   setDeptTree(state, deptTree) {
     state.DeptTree = deptTree
@@ -64,6 +70,15 @@ const mutations = {
    */
   setAbilitiesList(state, abilitiesList) {
     state.abilitiesList = abilitiesList
+  },
+  /**
+   * @author KarlHuang
+   * @description 设置岗位map
+   * @param {*} state
+   * @param {*} positionDetail
+   */
+  setPositionList(state, positionList) {
+    state.positionList = positionList
   }
 }
 
@@ -76,6 +91,14 @@ const actions = {
       callback && callback(res)
     } else {
       message.error('请求错误，请稍后重试')
+    }
+  },
+  // 获取岗位id和名称对应关系
+  async getPositionList({ commit }, callback) {
+    const res = await getPositionList()
+    if (res && res.code === 200) {
+      commit('setPositionList', res.data)
+      callback && callback(res)
     }
   },
   // 获取岗位详情
@@ -101,6 +124,24 @@ const actions = {
   // 添加员工
   async addStaff({ state }, body) {
     const res = await addStaff(body.data)
+    if (res) {
+      console.log(state.staffList)
+      body.callback && body.callback(res)
+    }
+  },
+  // 查询员工
+  async getStaff({ state }, body) {
+    const res = await getStaff(body.staffId)
+    if (res && res.code === 200) {
+      console.log(state.positionList)
+      body.callback && body.callback(res)
+    } else {
+      body.errCallback && body.errCallback(res)
+    }
+  },
+  // 编辑员工
+  async editStaff({ state }, body) {
+    const res = await editStaff(body.data)
     if (res && res.code === 200) {
       console.log(state.staffList)
       body.callback && body.callback(res)
@@ -109,11 +150,9 @@ const actions = {
   // 删除员工
   async deleteStaff({ state }, body) {
     const res = await deleteStaff(body.staffId)
-    if (res && res.code === 200) {
+    if (res) {
       console.log(state.positionList)
       body.callback && body.callback(res)
-    } else {
-      body.errCallback && body.errCallback(res)
     }
   },
   // 获取功能列表
@@ -129,6 +168,14 @@ const actions = {
   // 通过部门获取岗位列表
   async getListByDeptName({ state }, body) {
     const res = await getListByDeptName(body.deptName)
+    if (res && res.code === 200) {
+      body.callback && body.callback(res)
+    } else {
+      console.log(state.staffList)
+    }
+  },
+  async searchTeacherName({ state }, body) {
+    const res = await searchTeacherName(body.teacherName)
     if (res && res.code === 200) {
       body.callback && body.callback(res)
     } else {

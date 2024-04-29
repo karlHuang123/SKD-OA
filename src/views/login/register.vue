@@ -152,6 +152,13 @@
         this.$router.go(-1)
       },
       async handleSubmit() {
+        let information = ''
+        const back = this.form.email.split('@')[1]
+        if (back.includes('skdaedu')) {
+          information = `为了您的账号安全，请前往${this.form.username}进行验证`
+        } else {
+          information = `为了您的账号安全，请联系校区主管进行验证`
+        }
         await this.register({
           userInfo: this.form,
           callback: (res) => {
@@ -159,7 +166,7 @@
               this.$router.replace({
                 name: 'please-confirmed',
                 params: {
-                  info: `为了您的账号安全，请前往${this.form.email}进行验证`
+                  info: information
                 }
               })
             } else {

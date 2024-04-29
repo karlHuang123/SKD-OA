@@ -42,7 +42,8 @@ const setting = {
     '/please-confirmed',
     '/callback',
     '/404',
-    '/403'
+    '/403',
+    '/signature'
   ],
   //加载时显示文字
   loadingText: '正在加载中...',

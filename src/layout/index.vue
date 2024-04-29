@@ -28,6 +28,7 @@
           :rolePermission="rolePermission"
         />
       </a-menu>
+      <!-- <vab-avatar /> -->
     </a-layout-sider>
     <a-layout
       class="vab-layout"
@@ -54,6 +55,7 @@
       </a-layout-header>
       <vab-tabs />
       <vab-content />
+      <div class="hint">京ICP备16007760号-3</div>
     </a-layout>
   </a-layout>
 </template>
@@ -116,7 +118,7 @@
     },
     mounted() {
       this.handleLayouts()
-      this.rolePermission = store.getters['acl/role']
+      this.rolePermission = store.getters['acl/role'] // 获取用户权限
     },
     methods: {
       ...mapActions({
@@ -225,5 +227,9 @@
         }
       }
     }
+  }
+  .hint {
+    text-align: center;
+    margin-bottom: 5px;
   }
 </style>

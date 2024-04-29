@@ -2,31 +2,31 @@ const allInformation = {
   restDateOptions: [
     {
       label: '周一',
-      value: 0
-    },
-    {
-      label: '周二',
       value: 1
     },
     {
-      label: '周三',
+      label: '周二',
       value: 2
     },
     {
-      label: '周四',
+      label: '周三',
       value: 3
     },
     {
-      label: '周五',
+      label: '周四',
       value: 4
     },
     {
-      label: '周六',
+      label: '周五',
       value: 5
     },
     {
-      label: '周一日',
+      label: '周六',
       value: 6
+    },
+    {
+      label: '周日',
+      value: 0
     }
   ],
   positions: {
@@ -143,6 +143,12 @@ const allInformation = {
       filters: []
     },
     {
+      title: '老师名',
+      dataIndex: 'nickName',
+      key: 'nickName',
+      filters: []
+    },
+    {
       title: '部门',
       dataIndex: 'deptName',
       key: 'deptName'
@@ -154,6 +160,12 @@ const allInformation = {
       filters: []
     },
     {
+      title: '服务学生数',
+      dataIndex: 'studentCnt',
+      key: 'studentCnt',
+      filters: []
+    },
+    {
       title: '员工类型',
       dataIndex: 'userType',
       key: 'userType'
@@ -162,6 +174,11 @@ const allInformation = {
       title: '所属分公司',
       dataIndex: 'parentDeptName',
       key: 'parentDeptName'
+    },
+    {
+      title: '毕业院校',
+      dataIndex: 'graduatedCollege',
+      key: 'graduatedCollege'
     },
     {
       title: '操作',

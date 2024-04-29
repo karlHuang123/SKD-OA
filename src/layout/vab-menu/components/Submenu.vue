@@ -6,7 +6,6 @@
       </span>
       <span>{{ item.meta.title }}</span>
     </template>
-    <slot></slot>
   </a-sub-menu>
 </template>
 

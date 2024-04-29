@@ -34,23 +34,21 @@
             </a-menu-item>
           </a-menu>
         </template>
-        <a-button style="margin-left: 8px">
+        <!-- <a-button style="margin-left: 8px">
           更多
           <DownOutlined />
-        </a-button>
+        </a-button> -->
       </a-dropdown>
     </div>
   </div>
 </template>
 
 <script>
-  import { DownOutlined } from '@ant-design/icons-vue'
+  // import { DownOutlined } from '@ant-design/icons-vue'
   import { mapActions, mapGetters } from 'vuex'
   export default {
     name: 'VabTabs',
-    components: {
-      DownOutlined
-    },
+    components: {},
     data() {
       return {
         affixTabs: [],
@@ -113,7 +111,9 @@
         return tag.meta && tag.meta.affix
       },
       handleTabClick(tab) {
-        const route = this.visitedRoutes.filter((item) => item.path === tab)[0]
+        const route = this.visitedRoutes.filter(
+          (item) => item.path === tab.split('?')[0]
+        )[0]
         if (this.$route.fullPath !== route.fullPath) this.$router.push(route)
       },
       async handleTabRemove(fullPath) {

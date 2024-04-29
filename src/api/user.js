@@ -79,6 +79,13 @@ export function getUserInfo(accessToken) {
   })
 }
 
+export function getUserInfoNova() {
+  return request({
+    url: '/system/user/getUserInfo',
+    method: 'get'
+  })
+}
+
 export function getUserList(pageNum, pageSize) {
   return request({
     url: `/system/user/list?pageNum=${pageNum}&pageSize=${pageSize}`,
@@ -90,5 +97,79 @@ export function logout() {
   return request({
     url: '/logout',
     method: 'post'
+  })
+}
+
+export function getStudentDashboard(createBy) {
+  return request({
+    url: `/system/student/getStudentDashboard?createBy=${
+      createBy ? createBy : ''
+    }`,
+    method: 'get'
+  })
+}
+
+export function getUnScheduleStudentCount(createBy) {
+  return request({
+    url: `/system/student/getUnScheduleStudentCount?createBy=${
+      createBy ? createBy : ''
+    }`,
+    method: 'get'
+  })
+}
+
+export function getUnVisitStudentCount(createBy) {
+  return request({
+    url: `/system/student/getUnVisitStudentCount?createBy=${
+      createBy ? createBy : ''
+    }`,
+    method: 'get'
+  })
+}
+
+export function getOnScheduleStudentCount(createBy) {
+  return request({
+    url: `/system/student/getOnScheduleStudentCount?createBy=${
+      createBy ? createBy : ''
+    }`,
+    method: 'get'
+  })
+}
+
+export function getOnScheduleStudentCourses(createBy, date) {
+  return request({
+    url: `/system/student/getOnScheduleStudentCourses?dt=${date}&createBy=${
+      createBy ? createBy : ''
+    }`,
+    method: 'get'
+  })
+}
+
+export function getUnScheduleStudentList(listPara) {
+  return request({
+    url: `/system/student/getUnScheduleStudentList?pageNum=${
+      listPara.pageNum
+    }&pageSize=${listPara.pageSize}&createBy=${
+      listPara.createBy ? listPara.createBy : ''
+    }`,
+    method: 'get'
+  })
+}
+
+export function getUnVisitStudentList(listPara) {
+  return request({
+    url: `/system/student/getUnVisitStudentList?pageNum=${
+      listPara.pageNum
+    }&pageSize=${listPara.pageSize}&createBy=${
+      listPara.createBy ? listPara.createBy : ''
+    }`,
+    method: 'get'
+  })
+}
+
+export function getRegionUsers() {
+  return request({
+    url: '/system/user/getRegionUsers',
+    method: 'get'
   })
 }
